@@ -19,27 +19,11 @@
 CREATE DATABASE IF NOT EXISTS `forum_plateau` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `forum_plateau`;
 
--- Listage de la structure de table forum_plateau. category
-CREATE TABLE IF NOT EXISTS `category` (
-  `id_category` int NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_category`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Listage des données de la table forum_plateau.category : ~6 rows (environ)
-INSERT INTO `category` (`id_category`, `label`) VALUES
-	(1, 'Sport'),
-	(2, 'Video game'),
-	(3, 'Cooking'),
-	(4, 'Fish'),
-	(5, 'Dev'),
-	(6, 'Environment');
-
 -- Listage de la structure de table forum_plateau. message
 CREATE TABLE IF NOT EXISTS `message` (
   `id_message` int NOT NULL AUTO_INCREMENT,
   `text` varchar(255) NOT NULL,
-  `dateOfCreation` datetime NOT NULL,
+  `creationDate` datetime NOT NULL,
   `user_id` int NOT NULL,
   `topic_id` int NOT NULL,
   PRIMARY KEY (`id_message`),
@@ -49,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `message` (
   CONSTRAINT `FK_message_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum_plateau.message : ~15 rows (environ)
-INSERT INTO `message` (`id_message`, `text`, `dateOfCreation`, `user_id`, `topic_id`) VALUES
+-- Listage des données de la table forum_plateau.message : ~0 rows (environ)
+INSERT INTO `message` (`id_message`, `text`, `creationDate`, `user_id`, `topic_id`) VALUES
 	(1, 'Nothing is stopping you from doing it i guess..', '2023-11-09 09:34:21', 2, 1),
 	(2, 'I am coming to your house and taking that crab away from you.', '2023-11-09 09:40:51', 4, 1),
 	(3, 'What kind of degenerate would do that ?????', '2023-11-09 09:37:25', 4, 1),
@@ -67,23 +51,39 @@ INSERT INTO `message` (`id_message`, `text`, `dateOfCreation`, `user_id`, `topic
 	(14, 'HE JUST LOST HIS GOD GIVEN PRIVILEGE OF LIFE; I AM FRYING HIM ALIVE', '2023-11-10 09:54:59', 4, 6),
 	(15, 'Could i get a claw ? i heard fried crab is delicious', '2023-11-09 09:58:25', 4, 6);
 
+-- Listage de la structure de table forum_plateau. tag
+CREATE TABLE IF NOT EXISTS `tag` (
+  `id_tag` int NOT NULL AUTO_INCREMENT,
+  `label` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_tag`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table forum_plateau.tag : ~6 rows (environ)
+INSERT INTO `tag` (`id_tag`, `label`) VALUES
+	(1, 'Sport'),
+	(2, 'Video game'),
+	(3, 'Cooking'),
+	(4, 'Fish'),
+	(5, 'Dev'),
+	(6, 'Environment');
+
 -- Listage de la structure de table forum_plateau. topic
 CREATE TABLE IF NOT EXISTS `topic` (
   `id_topic` int NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) NOT NULL,
-  `dateOfCreation` datetime NOT NULL,
-  `category_id` int NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `creationDate` datetime NOT NULL,
+  `tag_id` int NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id_topic`),
-  KEY `FK_topic_category` (`category_id`),
   KEY `FK_topic_user` (`user_id`),
-  CONSTRAINT `FK_topic_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`),
+  KEY `FK_topic_category` (`tag_id`) USING BTREE,
+  CONSTRAINT `FK_topic_tag` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id_tag`),
   CONSTRAINT `FK_topic_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum_plateau.topic : ~6 rows (environ)
-INSERT INTO `topic` (`id_topic`, `label`, `dateOfCreation`, `category_id`, `user_id`) VALUES
-	(1, 'Can  boili an entire crab in pepsi ?', '2023-11-08 09:30:36', 3, 5),
+-- Listage des données de la table forum_plateau.topic : ~0 rows (environ)
+INSERT INTO `topic` (`id_topic`, `title`, `creationDate`, `tag_id`, `user_id`) VALUES
+	(1, 'Can i boil an entire crab in pepsi ?', '2023-11-08 09:30:36', 3, 5),
 	(2, 'Why is grass green ?', '2023-11-09 09:32:48', 6, 1),
 	(3, 'How to center a div ?', '2023-11-09 09:33:14', 5, 3),
 	(4, 'Why football ?', '2023-11-09 09:33:40', 1, 2),
@@ -96,14 +96,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `dateOfCreation` datetime NOT NULL,
+  `creationDate` datetime NOT NULL,
   `role` json DEFAULT NULL,
   `picture` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'default',
   PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum_plateau.user : ~6 rows (environ)
-INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `dateOfCreation`, `role`, `picture`) VALUES
+-- Listage des données de la table forum_plateau.user : ~0 rows (environ)
+INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `creationDate`, `role`, `picture`) VALUES
 	(1, 'john111', '123', 'mail@mail.com', '2023-11-09 09:24:11', NULL, 'default'),
 	(2, 'NotAUser', '123', 'mail@mail.com', '2023-11-09 09:25:11', NULL, 'default'),
 	(3, 'dog45', '123', 'mail@mail.com', '2023-11-09 09:26:51', NULL, 'default'),
