@@ -5,20 +5,20 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
+    use Model\Managers\TagManager;
     use Model\Managers\TopicManager;
     use Model\Managers\MessageManager;
-    use Model\Managers\TagManager;
     
-    class TopicController extends AbstractController implements ControllerInterface{
+    class TagController extends AbstractController implements ControllerInterface{
 
         public function index() {
           
-           $topicManager = new TopicManager();
+           $TagManager = new TagManager();
 
             return [
-                "view" => VIEW_DIR."topic/listTopics.php",
+                "view" => VIEW_DIR."tag/listTags.php",
                 "data" => [
-                    "topics" => $topicManager->findAll(["creationDate", "DESC"])
+                    "tags" => $TagManager->findAll(["id_tag", "ASC"])
                 ]
             ];
         

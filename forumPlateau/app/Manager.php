@@ -30,13 +30,39 @@
                 $this->className
             );
         }
+
+                /**
+         * get all the records of a table, sorted by optionnal field and order
+         * 
+         * @param array $order an array with field and order option
+         * @return Collection a collection of objects hydrated by DAO, which are results of the request sent
+         */
+        public function findByForeignId($id, $foreignKey) {
+
+            $sql = 
+                "SELECT 
+                    *
+                FROM 
+                    ".$this->tableName." a
+                WHERE 
+                    a.".$foreignKey."_id = :id
+                ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql, ['id' => $id]), 
+                $this->className
+            );
+        }
        
         public function findOneById($id){
 
-            $sql = "SELECT *
-                    FROM ".$this->tableName." a
-                    WHERE a.id_".$this->tableName." = :id
-                    ";
+            $sql = 
+            "SELECT *
+            FROM 
+                ".$this->tableName." a
+            WHERE 
+                a.id_".$this->tableName." = :id
+            ";
 
             return $this->getOneOrNullResult(
                 DAO::select($sql, ['id' => $id], false), 

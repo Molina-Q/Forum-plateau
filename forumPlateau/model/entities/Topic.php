@@ -12,8 +12,6 @@
         private $user;
         private $tag;
 
-        private $messages = [];
-
         public function __construct($data){         
             $this->hydrate($data);
         }

@@ -12,13 +12,19 @@
     
     class HomeController extends AbstractController implements ControllerInterface{
 
-        public function index(){
+        public function index() {
+            $topicManager = new TopicManager();
+            $topics = $topicManager->findAll();
+
             return [
-                "view" => VIEW_DIR."home.php"
+                "view" => VIEW_DIR."home.php",
+                "data" => [
+                    "topics" => $topics
+                ]
             ];
         }        
    
-        public function users(){
+        public function users() {
             $this->restrictTo("ROLE_USER");
 
             $manager = new UserManager();
@@ -32,7 +38,7 @@
             ];
         }
 
-        public function forumRules(){
+        public function forumRules() {
             
             return [
                 "view" => VIEW_DIR."rules.php"

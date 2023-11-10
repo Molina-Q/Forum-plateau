@@ -5,15 +5,14 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
-    use Model\Managers\TopicManager;
-    use Model\Managers\MessageManager;
-    use Model\Managers\TagManager;
+    use Model\Managers\UserManager;
+
     
-    class TopicController extends AbstractController implements ControllerInterface{
+    class UserController extends AbstractController implements ControllerInterface{
 
         public function index() {
           
-           $topicManager = new TopicManager();
+           $topicManager = new UserManager();
 
             return [
                 "view" => VIEW_DIR."topic/listTopics.php",

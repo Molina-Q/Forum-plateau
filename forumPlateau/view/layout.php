@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" /> -->
-    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href=".<?= PUBLIC_DIR ?>/css/style.css">
     <title>FORUM</title>
 </head>
 <body>
     <div id="wrapper"> 
        
-        <div id="mainpage">
+        <div id="mainPage">
             <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
             <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
             <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
@@ -20,33 +20,50 @@
                 <nav>
                     <div id="nav-left">
                         <a href="index.php">Home</a>
-                        <?php
+
+                        <form action="index.php?" method="post">
+                            <label for="search-bar" ></label>
+                            <input id="search-bar" type="text" name="search-bar">
+                            <button id="search-bar" type="submit">Search</button>
+                        </form>
+<?php
                         if(App\Session::isAdmin()){
-                            ?>
+?>
                             <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
-                            <?php
+<?php
                         }
-                        ?>
+?>
                     </div>
+
                     <div id="nav-right">
-                    <?php
-                        
-                        if(App\Session::getUser()){
-                            ?>
+<?php
+                        if(App\Session::getUser()) {
+?>
+                            <a href="index.php?ctrl=tag&action=listTags">List of tags</a>
                             <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                            <a href="/security/logout.html">Déconnexion</a>
-                            <?php
+                            <a href="/security/logout.html">Sign out</a>
+
+<?php
+                        } else {
+?>
+
+
+                            <a href="index.php?ctrl=tag&action=listTags">
+                                <p>List of tags</p>
+                            </a>
+
+                            <a href="./view/security/login.php">
+                                <p>Login</p>
+                            </a>
+
+                            <a href="/security/register.html">
+                                <p>Sign in</p>
+                            </a>   
+<?php
                         }
-                        else{
-                            ?>
-                            <a href="./view/security/login.php">Login</a>
-                            <a href="/security/register.html">Sign in</a>
-                            <a href="index.php?ctrl=topic&action=listTopics">List of topics</a>
-                        <?php
-                        }
-                   
-                        
-                    ?>
+?>
+                        <i class="fa-solid fa-bars"></i>             
+
                     </div>
                 </nav>
             </header>
@@ -54,9 +71,10 @@
             <main id="forum">
                 <?= $page ?>
             </main>
+
         </div>
         <footer>
-            <p>&copy; 2020 - Forum CDA - <a href="/home/forumRules.html">Règlement du forum</a> - <a href="">Mentions légales</a></p>
+            <p>&copy; 2023 - Forum CDA - <a href="/home/forumRules.html">Rules of the forum</a> - <a href="">Legal</a></p>
             <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
         </footer>
     </div>
