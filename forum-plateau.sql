@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   CONSTRAINT `FK_message_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum_plateau.message : ~0 rows (environ)
+-- Listage des données de la table forum_plateau.message : ~8 rows (environ)
 INSERT INTO `message` (`id_message`, `text`, `creationDate`, `user_id`, `topic_id`) VALUES
 	(1, 'Nothing is stopping you from doing it i guess..', '2023-11-09 09:34:21', 2, 1),
 	(2, 'I am coming to your house and taking that crab away from you.', '2023-11-09 09:40:51', 4, 1),
@@ -54,18 +54,20 @@ INSERT INTO `message` (`id_message`, `text`, `creationDate`, `user_id`, `topic_i
 -- Listage de la structure de table forum_plateau. tag
 CREATE TABLE IF NOT EXISTS `tag` (
   `id_tag` int NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) NOT NULL,
+  `label` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `icon` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '#000000',
+  `description` varchar(255) DEFAULT 'tag',
   PRIMARY KEY (`id_tag`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table forum_plateau.tag : ~6 rows (environ)
-INSERT INTO `tag` (`id_tag`, `label`) VALUES
-	(1, 'Sport'),
-	(2, 'Video game'),
-	(3, 'Cooking'),
-	(4, 'Fish'),
-	(5, 'Dev'),
-	(6, 'Environment');
+INSERT INTO `tag` (`id_tag`, `label`, `icon`, `description`) VALUES
+	(1, 'Sport', '#0029FF', 'Sport oriented topics (event, match, etc...)'),
+	(2, 'Video game', '#A225EE', 'Video games oriented topics (review, news, etc...)'),
+	(3, 'Cooking', '#F69400', 'Cooking oriented topics (sharing recipes, pictures, etc...)'),
+	(4, 'Fish', '#00E8F6', 'Art oriented topics (pictures, advice, contest, etc...)'),
+	(5, 'Dev', '#FF0000', 'Dev oriented topics (questions, news, etc...)'),
+	(6, 'Environment', '#1E8A2F', 'Evironnement oriented topics (questions, advice, etc...)');
 
 -- Listage de la structure de table forum_plateau. topic
 CREATE TABLE IF NOT EXISTS `topic` (
@@ -81,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `topic` (
   CONSTRAINT `FK_topic_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum_plateau.topic : ~0 rows (environ)
+-- Listage des données de la table forum_plateau.topic : ~6 rows (environ)
 INSERT INTO `topic` (`id_topic`, `title`, `creationDate`, `tag_id`, `user_id`) VALUES
 	(1, 'Can i boil an entire crab in pepsi ?', '2023-11-08 09:30:36', 3, 5),
 	(2, 'Why is grass green ?', '2023-11-09 09:32:48', 6, 1),
@@ -102,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id_user`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table forum_plateau.user : ~0 rows (environ)
+-- Listage des données de la table forum_plateau.user : ~6 rows (environ)
 INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `creationDate`, `role`, `picture`) VALUES
 	(1, 'john111', '123', 'mail@mail.com', '2023-11-09 09:24:11', NULL, 'default'),
 	(2, 'NotAUser', '123', 'mail@mail.com', '2023-11-09 09:25:11', NULL, 'default'),
