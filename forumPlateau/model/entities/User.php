@@ -5,6 +5,7 @@
 
     final class User extends Entity {
 
+        // attributs originaly present in the database
         private $id;
         private $username;
         private $password;
@@ -13,8 +14,8 @@
         private $role;
         private $picture;
 
-        private $topics = [];
-        private $messages = [];
+        // attributs calculated in custom request and not present in the table
+
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -28,17 +29,17 @@
             return $this->id;
         }
 
-        // /**
-        //  * Set the value of id
-        //  *
-        //  * @return  self
-        //  */ 
-        // public function setId($id)
-        // {
-        //     $this->id = $id;
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
+        {
+            $this->id = $id;
 
-        //     return $this;
-        // }
+            return $this;
+        }
 
         /**
          * Get the value of username
@@ -127,16 +128,6 @@
 
         public function setCreationDate($date){
             $this->creationDate = new \DateTime($date);
-            return $this;
-        }
-
-        public function addTopics($topicEntity) {
-            $this->topics[] = $topicEntity;
-            return $this;
-        }
-
-        public function addMessages($messageEntity) {
-            $this->messages[] = $messageEntity;
             return $this;
         }
 

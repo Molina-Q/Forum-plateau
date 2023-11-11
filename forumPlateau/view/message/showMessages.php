@@ -4,20 +4,32 @@ $topic = $result["data"]["topic"];
     
 ?>
 
-<h1>Every messages from a topic</h1>
+<!-- <h1>Every messages from a topic</h1> -->
 
 <?php
 if($topic) {
 ?>
-    <h2>Topic is: <?= $topic->getTitle() ?> </h2>
+    <div id="detailsTopicHeader">
+        <div id="detailsTopicAuthor">
+            <p><?= $topic->getUser()->getUsername() ?></p>
+            <p><?= $topic->convertDate() ?></p>
+        </div>
+
+        <div id="detailsTopicContent">
+            <h1><?= $topic->getTitle() ?></h1> <!-- this as h1 because this seems like the most interesting part to be found with google search -->
+            <p><?= $topic->getMessageAuthor() ?></p>
+        </div>
+    </div>
+
 <?php
 }
 ?>
 <table>
     <thead>
         <tr>
-        <th colspan="2">Responses</th>
-        <th>Dates</th>
+            <th>Author</th>
+            <th>Responses</th>
+            <th>Dates</th>
         </tr>
     </thead>
 

@@ -21,21 +21,21 @@ foreach($tags as $tag){
 ?>
     <tr>
         <td>
-            <a href="index.php?ctrl=message&action=showMessages&id=<?= $tag->getId() ?>">
+            <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
                 <?= $tag->getLabel() ?>
             </a>
         </td>
 
         <td>
-            <i class="fa-solid fa-circle" style="color:<?= $tag->getIcon() ?>;"></i>
+            <?= $tag->showIcon() ?>
         </td>
 
         <td>
-            <?= $tag->getDescription() ?>
+            <?= $tag->getDesc() ?>
         </td>
 
         <td>
-            nb Topics
+            <?= $tag->getNbtopics() ?>
         </td>
 
     </tr>

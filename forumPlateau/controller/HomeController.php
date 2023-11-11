@@ -14,15 +14,14 @@
 
         public function index() {
             $topicManager = new TopicManager();
-            $topics = $topicManager->findAll();
-
+            
             return [
                 "view" => VIEW_DIR."home.php",
                 "data" => [
-                    "topics" => $topics
+                    "topics" => $topicManager->popularTopics()
                 ]
             ];
-        }        
+        }       
    
         public function users() {
             $this->restrictTo("ROLE_USER");

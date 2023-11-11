@@ -20,7 +20,7 @@
     //et on intègre la classe Session qui prend la main sur les messages en session
     use App\Session as Session;
 
-//-----------REQUETE HTTP INTERCEPTEE-----------
+//---------REQUETE HTTP INTERCEPTEE-----------
     $ctrlname = DEFAULT_CTRL;//on prend le controller par défaut
 
     //ex : index.php?ctrl=home
@@ -50,16 +50,18 @@
     if(isset($_GET['id'])){
         $id = $_GET['id'];
     }
+
     else $id = null;
     //ex : HomeController->users(null)
 
     $result = $ctrl->$action($id);
     
     /*--------CHARGEMENT PAGE--------*/
+    
     if($action == "ajax"){//si l'action était ajax
         echo $result;//on affiche directement le return du contrôleur (càd la réponse HTTP sera uniquement celle-ci)
-
-    } else {
+    }
+    else{
         ob_start();//démarre un buffer (tampon de sortie)
         /*la vue s'insère dans le buffer qui devra être vidé au milieu du layout*/
         include($result['view']);
@@ -69,6 +71,5 @@
         ob_end_clean();
         /*j'affiche le template principal (layout)*/
         include VIEW_DIR."layout.php";
-
     }
     

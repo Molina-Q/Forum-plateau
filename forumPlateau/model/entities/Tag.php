@@ -4,13 +4,14 @@
     use App\Entity;
 
     final class Tag extends Entity {
-
+        // attributs originaly present in the database
         private $id;
         private $label;
-        private $description;
+        private $desc;
         private $icon;
 
-        private $topics = [];
+        // attributs calculated in custom request and not present in the table
+        private $nbtopics;
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -39,9 +40,9 @@
         /**
          * Get the value of description
          */ 
-        public function getDescription()
+        public function getDesc()
         {
-                return $this->description;
+                return $this->desc;
         }
 
         /**
@@ -49,9 +50,9 @@
          *
          * @return  self
          */ 
-        public function setDescription($description)
+        public function setDesc($desc)
         {
-                $this->description = $description;
+                $this->desc = $desc;
 
                 return $this;
         }
@@ -94,5 +95,30 @@
                 $this->icon = $icon;
 
                 return $this;
-        }  
+        } 
+        
+        /**
+         * Get the value of the number of topics
+         */ 
+        public function getNbtopics()
+        {
+                return $this->nbtopics;
+        }
+
+        /**
+         * Set the value of the number of topics
+         *
+         * @return  self
+         */ 
+        public function setNbtopics($nbtopics)
+        {
+                $this->nbtopics = $nbtopics;
+
+                return $this;
+        }
+
+        public function showIcon() {
+                $colorIcon = $this->getIcon();
+                echo "<i class='fa-solid fa-circle' style='color:$colorIcon' ></i>";
+        }
     }

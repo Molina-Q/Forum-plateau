@@ -5,12 +5,16 @@
 
     final class Message extends Entity {
 
+        // attributs originaly present in the database
         private $id;
         private $text;
         private $creationDate;
         private $user;
         private $topic;
 
+        // attributs calculated in custom request and not present in the table
+
+        
         public function __construct($data){         
             $this->hydrate($data);        
         }

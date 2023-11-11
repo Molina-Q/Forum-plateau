@@ -14,24 +14,47 @@
             parent::connect();
         }
 
+        public function headerTopic($id) {
+            $sql = 
+            "SELECT 
+                t.*,
+                m.text AS messageAuthor
+            FROM 
+                topic t
+            INNER JOIN 
+                message m ON t.id_topic = m.topic_id
+            WHERE 
+                t.id_topic = :id
+            ORDER BY 
+                m.creationDate ASC
+            LIMIT 1
+            ";
+
+            return $this->getOneOrNullResult(
+                DAO::select($sql, ['id' => $id], false), 
+                $this->className
+            );
+        }
+
         public function popularTopics() {
 
             $sql = 
             "SELECT 
                 t.id_topic,
                 t.title,
-                ta.label,
-                COUNT(m.topic_id) AS nb_messages
+                t.creationDate,
+                t.tag_id,
+                t.user_id,
+                COUNT(m.topic_id) AS nbmessages
             FROM 
                 topic t
-            INNER JOIN 
-                tag ta ON t.tag_id = ta.id_tag
             INNER JOIN 
                 message m ON t.id_topic= m.topic_id
             GROUP BY 
                 t.id_topic
             ORDER BY 
-                nb_messages DESC
+                nbmessages DESC
+            LIMIT 5
             ";
 
             return $this->getMultipleResults(

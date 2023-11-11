@@ -14,13 +14,28 @@
         public function index() {
           
            $TagManager = new TagManager();
-
+           
             return [
                 "view" => VIEW_DIR."tag/listTags.php",
                 "data" => [
-                    "tags" => $TagManager->findAll(["id_tag", "ASC"])
+                    "tags" => $TagManager->infoTags()
+                    // "tags" => $TagManager->findAll(["id_tag", "ASC"])
                 ]
             ];
         
         }
+
+        public function listTags() {
+          
+            $TagManager = new TagManager();
+            
+             return [
+                 "view" => VIEW_DIR."tag/listTags.php",
+                 "data" => [
+                     "tags" => $TagManager->infoTags()
+                     // "tags" => $TagManager->findAll(["id_tag", "ASC"])
+                 ]
+             ];
+         
+         }
     }

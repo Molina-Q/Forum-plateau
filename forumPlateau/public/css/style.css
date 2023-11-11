@@ -18,7 +18,7 @@
 }
 
 body {
-    font-family: 'Franklin Gothic';
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #wrapper {
@@ -87,9 +87,27 @@ main {
 
 
 /******************** showMessages ********************/
-.blocMsgsFromTopic tr {
+#detailsTopicHeader {
+    margin: 10px 0;
+    padding: 10px 25px;
+
+    background-color: var(--primary-color);
+
+    display: flex;
+    flex-direction: row;
+}
+
+#detailsTopicAuthor {
+    align-self: center;
+    padding-right: 25px;
+}
+
+#detailsTopicContent {
 
 }
+
+
+
 
 /******************** table ********************/
 table {
