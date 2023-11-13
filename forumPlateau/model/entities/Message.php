@@ -13,6 +13,7 @@
         private $topic;
 
         // attributs calculated in custom request and not present in the table
+        private $countIteration;
 
         
         public function __construct($data){         
@@ -100,12 +101,37 @@
         }
 
         public function getCreationDate(){
-            $formattedDate = $this->creationDate->format("d/m/Y, H:i:s");
+            $formattedDate = $this->creationDate;
             return $formattedDate;
+        }
+
+        public function getFormattedDate($format) {
+            return $this->creationDate->format($format);
         }
 
         public function setCreationDate($date){
             $this->creationDate = new \DateTime($date);
             return $this;
         }
+
+        /**
+         * Get the value of countMessage
+         */ 
+        public function getCountIteration()
+        {
+            return $this->countIteration;
+        }
+
+        /**
+         * Set the value of countMessage
+         *
+         * @return  self
+         */ 
+        public function setCountIteration($countIteration)
+        {
+            $this->countIteration = $countIteration;
+
+            return $this;
+        }
+
     }

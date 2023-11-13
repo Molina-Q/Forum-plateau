@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<?= $meta_description ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -11,7 +12,6 @@
 </head>
 <body>
     <div id="wrapper"> 
-       
         <div id="mainPage">
             <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
             <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
@@ -26,28 +26,19 @@
                             <input id="search-bar" type="text" name="search-bar">
                             <button id="search-bar" type="submit">Search</button>
                         </form>
-<?php
-                        if(App\Session::isAdmin()){
-?>
+
+                        <?php if(App\Session::isAdmin()){ ?>
                             <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
-<?php
-                        }
-?>
+                        <?php } ?>
                     </div>
 
                     <div id="nav-right">
-<?php
-                        if(App\Session::getUser()) {
-?>
+
+                        <?php if(App\Session::getUser()) { ?>
                             <a href="index.php?ctrl=tag&action=listTags">List of tags</a>
                             <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
                             <a href="/security/logout.html">Sign out</a>
-
-<?php
-                        } else {
-?>
-
-
+                        <?php } else { ?>
                             <a href="index.php?ctrl=tag&action=listTags">
                                 <p>List of tags</p>
                             </a>
@@ -59,11 +50,8 @@
                             <a href="/security/register.html">
                                 <p>Sign in</p>
                             </a>   
-<?php
-                        }
-?>
-                        <i class="fa-solid fa-bars"></i>             
-
+                        <?php } ?>
+                        <i class="fa-solid fa-bars"></i>
                     </div>
                 </nav>
             </header>
@@ -111,8 +99,6 @@
                 content_css: '//www.tiny.cloud/css/codepen.min.css'
             });
         })
-
-        
 
         /*
         $("#ajaxbtn").on("click", function(){

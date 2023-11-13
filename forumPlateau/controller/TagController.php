@@ -32,10 +32,28 @@
              return [
                  "view" => VIEW_DIR."tag/listTags.php",
                  "data" => [
-                     "tags" => $TagManager->infoTags()
-                     // "tags" => $TagManager->findAll(["id_tag", "ASC"])
+                        "tags" => $TagManager->infoTags()
+                        // "tags" => $TagManager->findAll(["id_tag", "ASC"])
                  ]
              ];
          
-         }
+        }
+
+        public function detailsTag($id) {
+
+            $tagManager = new TagManager();
+            $topicManager = new TopicManager();
+
+            return [
+                "view" => VIEW_DIR."tag/detailsTag.php",
+                "data" => [
+                    "tag" => $tagManager->findOneById($id),
+                    "topics" => $topicManager->topicsByTag($id)
+                ]
+            ];
+        }
+
+        
+
+
     }

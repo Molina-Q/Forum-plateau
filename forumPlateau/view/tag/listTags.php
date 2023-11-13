@@ -4,7 +4,7 @@ $tags = $result["data"]['tags'];
     
 ?>
 
-<h1>Every Tags</h1>
+<h1>List of Tags</h1>
 <table>
     <thead>
         <tr>

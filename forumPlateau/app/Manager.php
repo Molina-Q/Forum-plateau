@@ -37,7 +37,8 @@
          * @param array $order an array with field and order option
          * @return Collection a collection of objects hydrated by DAO, which are results of the request sent
          */
-        public function findByForeignId($id, $foreignKey) {
+        public function findByForeignId($id, $foreignKey, $order = null) {
+            $orderQuery = ($order) ? "ORDER BY ".$order[0]. " ".$order[1] : "";
 
             $sql = 
                 "SELECT 
@@ -46,7 +47,8 @@
                     ".$this->tableName." a
                 WHERE 
                     a.".$foreignKey."_id = :id
-                ";
+                ".$orderQuery
+                ;
 
             return $this->getMultipleResults(
                 DAO::select($sql, ['id' => $id]), 
@@ -66,6 +68,20 @@
 
             return $this->getOneOrNullResult(
                 DAO::select($sql, ['id' => $id], false), 
+                $this->className
+            );
+        }
+
+        public function countElem() {
+            $sql = 
+            "SELECT
+                COUNT(a.id_".$this->tableName.") AS countIteration
+            FROM 
+                ".$this->tableName." a
+            ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql), 
                 $this->className
             );
         }
@@ -133,5 +149,8 @@
             }
             return false;
         }
+
+
+
     
     }

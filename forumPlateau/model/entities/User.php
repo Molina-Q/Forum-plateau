@@ -15,7 +15,8 @@
         private $picture;
 
         // attributs calculated in custom request and not present in the table
-
+        private $nbUser;
+        private $countUser;
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -128,6 +129,46 @@
 
         public function setCreationDate($date){
             $this->creationDate = new \DateTime($date);
+            return $this;
+        }
+
+        /**
+         * Get the value of nbUser
+         */ 
+        public function getNbUser()
+        {
+            return $this->nbUser;
+        }
+
+        /**
+         * Set the value of nbUser
+         *
+         * @return  self
+         */ 
+        public function setNbUser($nbUser)
+        {
+            $this->nbUser = $nbUser;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of countUser
+         */ 
+        public function getCountUser()
+        {
+            return $this->countUser;
+        }
+
+        /**
+         * Set the value of countUser
+         *
+         * @return  self
+         */ 
+        public function setCountUser($countUser)
+        {
+            $this->countUser = $countUser;
+
             return $this;
         }
 

@@ -100,7 +100,7 @@
         /**
          * Get the value of the number of topics
          */ 
-        public function getNbtopics()
+        public function getNbTopics()
         {
                 return $this->nbtopics;
         }
@@ -110,7 +110,7 @@
          *
          * @return  self
          */ 
-        public function setNbtopics($nbtopics)
+        public function setNbTopics($nbtopics)
         {
                 $this->nbtopics = $nbtopics;
 

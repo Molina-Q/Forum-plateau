@@ -3,7 +3,7 @@
     
     use App\Manager;
     use App\DAO;
-    // use Model\Managers\TagManager;
+    use Model\Managers\TagManager;
 
     class TagManager extends Manager{
 
@@ -30,6 +30,29 @@
                 ta.id_tag
             ORDER BY 
                 ta.label ASC 
+            ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql), 
+                $this->className
+            );
+        }
+
+        public function popularTags() {
+
+            $sql = 
+            "SELECT 
+                ta.*,
+                COUNT(t.id_topic) AS nbtopics
+            FROM 
+                tag ta
+            INNER JOIN 
+                topic t ON ta.id_tag = t.tag_id
+            GROUP BY 
+                ta.id_tag
+            ORDER BY 
+                nbtopics DESC
+            LIMIT 5
             ";
 
             return $this->getMultipleResults(

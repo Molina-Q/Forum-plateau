@@ -3,7 +3,7 @@
     
     use App\Manager;
     use App\DAO;
-    // use Model\Managers\TopicManager;
+    use Model\Managers\TopicManager;
 
     class TopicManager extends Manager{
 
@@ -36,6 +36,34 @@
             );
         }
 
+        public function topicsByTag($id) {
+
+            $sql = 
+            "SELECT 
+                t.id_topic,
+                t.title,
+                t.creationDate,
+                t.tag_id,
+                t.user_id,
+                COUNT(m.topic_id) AS nbmessages
+            FROM 
+                topic t
+            INNER JOIN 
+                message m ON t.id_topic = m.topic_id
+            WHERE 
+                t.tag_id = :id
+            GROUP BY 
+                t.id_topic
+            ORDER BY
+                nbmessages DESC
+            ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql, ['id' => $id]), 
+                $this->className
+            );
+        }
+
         public function popularTopics() {
 
             $sql = 
@@ -56,6 +84,25 @@
                 nbmessages DESC
             LIMIT 5
             ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql), 
+                $this->className
+            );
+        }
+
+        public function recentTopics() {
+            $sql = 
+            "SELECT
+                t.title,
+                t.creationDate,
+                t.user_id,
+                t.tag_id
+            FROM 
+                topic t
+            ORDER BY 
+                t.creationDate DESC
+            LIMIT 5";
 
             return $this->getMultipleResults(
                 DAO::select($sql), 

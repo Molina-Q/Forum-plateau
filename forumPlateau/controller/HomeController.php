@@ -14,11 +14,19 @@
 
         public function index() {
             $topicManager = new TopicManager();
+            $tagManager = new TagManager();
+            $userManager = new UserManager();
+            $messageManager = new MessageManager();
             
             return [
                 "view" => VIEW_DIR."home.php",
                 "data" => [
-                    "topics" => $topicManager->popularTopics()
+                    "topics" => $topicManager->popularTopics(),
+                    "tags" => $tagManager->popularTags(),
+                    // "statUsers" => $userManager->count(),
+                    "statTopics" => $topicManager->countElem(),
+                    "statMessages" => $messageManager->countElem(),
+                    "recents" => $topicManager->recentTopics()
                 ]
             ];
         }       

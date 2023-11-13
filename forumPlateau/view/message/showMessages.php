@@ -1,18 +1,18 @@
 <?php
+
+use Service\ConvertDate;
+
 $messages = $result["data"]['messages'];
 $topic = $result["data"]["topic"];
-    
 ?>
 
 <!-- <h1>Every messages from a topic</h1> -->
 
-<?php
-if($topic) {
-?>
+<?php if($topic) { ?>
     <div id="detailsTopicHeader">
         <div id="detailsTopicAuthor">
             <p><?= $topic->getUser()->getUsername() ?></p>
-            <p><?= $topic->convertDate() ?></p>
+            <p class="timeInterval"><?= ConvertDate::convertDate($topic->getCreationDate()) ?></p>
         </div>
 
         <div id="detailsTopicContent">
@@ -20,10 +20,8 @@ if($topic) {
             <p><?= $topic->getMessageAuthor() ?></p>
         </div>
     </div>
+<?php } ?>
 
-<?php
-}
-?>
 <table>
     <thead>
         <tr>
@@ -34,17 +32,13 @@ if($topic) {
     </thead>
 
     <tbody class="blocMsgsFromTopic">
-<?php
-foreach($messages as $message){
-?>
+<?php foreach($messages as $message) { ?>
     <tr>
         <td><?= $message->getUser()->getUsername() ?></td>
         <td><?= $message->getText() ?></td>
-        <td><?= $message->getCreationDate() ?></td>
+        <td><?= $message->getFormattedDate("d-m-Y, H:i") ?></td>
     </tr>
-<?php
-}
-?>
+<?php } ?>
     </tbody>
 </table>
 

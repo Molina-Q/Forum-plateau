@@ -1,5 +1,5 @@
 <?php
-
+use Model\ConvertDate;
 $topics = $result["data"]['topics'];
     
 ?>
@@ -37,8 +37,8 @@ foreach($topics as $topic){
             </a>
         </td>
 
-        <td>
-            <?= $topic->getCreationDate() ?>
+        <td class="timeInterval">
+            <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
         </td>
     </tr>
 <?php

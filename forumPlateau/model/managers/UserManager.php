@@ -3,7 +3,7 @@
     
     use App\Manager;
     use App\DAO;
-    // use Model\Managers\UserManager;
+    use Model\Managers\UserManager;
 
     class UserManager extends Manager{
 

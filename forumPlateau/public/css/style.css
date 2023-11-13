@@ -19,6 +19,7 @@
 
 body {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
 }
 
 #wrapper {
@@ -26,7 +27,7 @@ body {
 }
 
 #mainPage {
-
+    min-height: calc(100vh - 75px );
 }
 
 footer a, header a {
@@ -35,11 +36,25 @@ footer a, header a {
     
 }
 
+.timeInterval {
+    color: var(--secondary-text);
+}
+
+h1 { /* applies to all of my h1 title  */
+    padding: 25px 0;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+thead { /* color of every table's head */
+    color: var(--secondary-color);
+}
+
 /******************** header ********************/
 header {
     width: 100%;
     height: 80px;
-    padding: 0 5%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
+    padding: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
     background-color: var(--primary-color); 
 }
 
@@ -69,9 +84,58 @@ nav {
     align-items: center;
 }
 
+/******************** homePageContent ********************/
+#homePageContent {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+/********** leftPart **********/
+#homePage-left {
+ padding-right: 15px ;
+}
+
+#popularTopics {
+   padding-bottom:25px ;
+}
+
+#popularTopics table {
+    
+}
+
+#popularTags table {
+   width: 100%;
+}
+
+/********** rightPart **********/
+#homePage-right {
+
+}
+
+#statistics {
+    padding-bottom: 25px;
+}
+
+#statistics table {
+    width: 350px;
+
+}
+
+#recentTopics {
+   width: 350px;
+}
+
+/* .grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 15px;
+    row-gap: 30px;
+} */
+
 /******************** main ********************/
 main {
-    margin: 0 5%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
+    margin: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
 
 }
 
@@ -145,7 +209,7 @@ tbody tr:nth-child(odd) {
 
 /******************** footer ********************/
 footer {
-    padding: 0 5%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
+    padding: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
     background-color: var(--background-color-footer);
     color: var(--secondary-color);
 

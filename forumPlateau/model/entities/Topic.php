@@ -17,6 +17,7 @@ use DateTime;
         // attributs calculated in custom request and not present in the table
         private $nbMessages; // the number a topic has
         private $messageAuthor; // the message that the author write while creating the topic
+        private $countIteration;
 
 
         public function __construct($data){         
@@ -104,8 +105,12 @@ use DateTime;
         }
 
         public function getCreationDate(){
-            $formattedDate = $this->creationDate->format("d/m/Y, H:i:s");
-            return $formattedDate;
+                $formattedDate = $this->creationDate;
+                return $formattedDate;
+            }
+    
+        public function getFormattedDate($format) {
+                return $this->creationDate->format($format);
         }
 
         public function setCreationDate($date){
@@ -154,70 +159,25 @@ use DateTime;
         }
 
         /**
-         * Convert the creationDate var to a formated version
-         * 
-         * @return  string
+         * Get the value of countIteration
          */ 
-        public function convertDate() {
-                $dateTimeCreation = $this->creationDate; // creationDate
-                $currentDate = new \DateTime("now"); // the actual time 
-                $timeInterval = date_diff($dateTimeCreation, $currentDate); // the interval between the date of creation and now
-                $EndString = " ago";
-
-                // will be used to check the first one to not be empty
-                $formatInterval = [
-                        "%Y" => "year",
-                        "%m" => "month",
-                        "%d" => "day"
-                ];
-
-                foreach($formatInterval as $properties => $stringFormat) {
-                        $timeFormat = $timeInterval->format($properties);
-
-                        if($stringFormat == "day" && $timeFormat >= "7") { // check if the interval is in days and if its longer than 7 days(a week)
-                                $formatedTime = floor($timeFormat / 7); // is used to check how many week(s) it is by rounding down the division
-
-                                if($formatedTime > "1") { // if that's longuer than a day there will be an "s" at the end
-                                        $EndString = "s ago";
-                                }
-
-                                $formatedDateString = $formatedTime." week".$EndString;
-                                return $formatedDateString;
-
-                        } else if($timeFormat > "0") { // format the date as long as the the timeInterval isn't zero
-                                if($timeInterval->format($properties) > "1") {
-                                        $EndString = "s ago";
-                                }
-
-                                $formatedDateString = $timeInterval->format($properties." ".$stringFormat.$EndString);
-                                return $formatedDateString;
-                        }
-                }
-
-                // switch ($timeInterval->format("%a")) {
-                //         case 'value':
-                //                 # code...
-                //                 break;
-                                
-                //         case 'value':
-                //                 # code...
-                //                 break;   
-
-                //         case 'value':
-                //                 # code...
-                //                 break; 
-
-                //         case 'value':
-                //                 # code...
-                //                 break;        
-
-                //         default:
-                //                 # code...
-                //                 break;
-                // }
-
-                // return $this->getCreationDate();
+        public function getCountIteration()
+        {
+            return $this->countIteration;
         }
+
+        /**
+         * Set the value of countIteration
+         *
+         * @return  self
+         */ 
+        public function setCountIteration($countIteration)
+        {
+            $this->countIteration = $countIteration;
+
+            return $this;
+        }
+
 
         // /**
         //  * Get the value of closed

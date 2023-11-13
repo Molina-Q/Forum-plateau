@@ -15,25 +15,28 @@
             $MessageManager = new MessageManager();
             $TopicManager = new TopicManager();
 
+            $topic = $TopicManager->findOneById($id);
             return [
                 "view" => VIEW_DIR."message/showMessages.php",
                 "data" => [
                     "messages" => $MessageManager->findByForeignId($id, "topic"),
-                    "topic" => $TopicManager->findOneById($id)
-                ] 
+                    "topic" => $topic,
+                ], 
             ];
         }
-
+        
         public function showMessages($id) {
             $MessageManager = new MessageManager();
             $TopicManager = new TopicManager();
-
+            
+            $topic = $TopicManager->headerTopic($id);
             return [
                 "view" => VIEW_DIR."message/showMessages.php",
                 "data" => [
-                    "messages" => $MessageManager->findByForeignId($id, "topic"), // return every messages from the topic
+                    "messages" => $MessageManager->findByForeignId($id, "topic", ["creationDate", "ASC"]), // return every messages from the topic
                     "topic" => $TopicManager->headerTopic($id) // return the topic title and the first message that goes with it
-                ] 
+                ], 
+                "meta" => "Liste des messages du topic ".$topic->getTitle()
             ];
         }
     }
