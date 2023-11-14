@@ -37,10 +37,10 @@
 
             //the data sent from the form with post method
             $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL); // or FILTER_SANITIZE_EMAIL
-            $confirmEmail = filter_input(INPUT_POST, "confirmEmail", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL); // only used to confirm the mail
+            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
+            $confirmEmail = filter_input(INPUT_POST, "confirmEmail", FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_VALIDATE_EMAIL); 
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_FULL_SPECIAL_CHARS); //only used to confirm the password
+            $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_FULL_SPECIAL_CHARS); 
 
             //variables
             $currentDate = new \DateTime("now"); //for the creationDate of the account
@@ -96,7 +96,6 @@
                 ];
                 
             } else { // mistake(s) were made in some of the input 
-                // $this->register($formData, $formErrors); !! demander pk ça fonctionne pas !!
 
                 $fieldData = [ // used to show the data already written in the fields
                     "username" => $username,
@@ -116,9 +115,61 @@
 
         public function login() {
 
-                return [
-                    "view" => VIEW_DIR."security/login.php",
-                ];
+            return [
+                "view" => VIEW_DIR."security/login.php",
+            ];
             
+        }
+
+        // the function that connects (or not) the user once he enters and submits his mail and password
+        public function loginUser() {
+            $userManager = new UserManager;
+
+            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
+            $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // check if the fields are empty
+            if(empty($email)) {
+                $formErrors["email"] = "this field is mandatory";
             }
+            
+            if(empty($password)) {
+                $formErrors["password"] = "this field is mandatory";
+            }
+
+            //check if the var return true or false
+            if(!$email) {
+                $formErrors["email"] = "This field is invalid";
+            }
+
+            if(!$password) {
+                $formErrors["password"] = "This field is invalid";
+            }
+
+            // if any of the check get triggered nothing happens
+            if(empty($formErrors)) {
+                // we get the user class by searching it by email in an SQL request (email are unique)
+                $user = $userManager->findUser($email);
+
+                // we check if the request turned good
+                if($user) {
+                    // we get the hashed password 
+                    $hashPassword = $user->getPassword();
+                    // and we verify if the hashed password and what was put in the fields match
+                    if (password_verify($password, $hashPassword)) {
+                        //we create the user session
+                        $_SESSION["user"] = $user;
+
+                        header("Location: index.php?ctrl=security");
+                    }
+                }
+            }
+          
+        
+
+            return [
+                "view" => VIEW_DIR."security/login.php",
+            ];
+            
+        }
     }
