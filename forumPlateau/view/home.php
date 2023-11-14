@@ -4,7 +4,7 @@ use Service\ConvertDate;
 
 $topics = $result["data"]["topics"];
 $tags = $result["data"]["tags"];
-// $statUsers = $result["data"]["statUsers"];    
+$statUsers = $result["data"]["statUsers"];    
 $statMessages = $result["data"]["statMessages"];    
 $statTopics = $result["data"]["statTopics"];
 $recentsTopic = $result["data"]["recents"];    
@@ -115,7 +115,9 @@ $recentsTopic = $result["data"]["recents"];
                         </td>
 
                         <td>
-                            WIP
+                            <?php foreach($statUsers as $stat) { 
+                                echo $stat->getCountIteration();
+                            } ?>
                         </td>
                     </tr>
 
@@ -125,8 +127,8 @@ $recentsTopic = $result["data"]["recents"];
                         </td>
 
                         <td>
-                        <?php foreach($statMessages as $statM) { 
-                            echo $statM->getCountIteration();
+                        <?php foreach($statTopics as $stat) { 
+                            echo $stat->getCountIteration();
                         } ?>
                         </td>
                     </tr>
@@ -137,8 +139,8 @@ $recentsTopic = $result["data"]["recents"];
                         </td>
                         
                         <td>
-                        <?php foreach($statTopics as $statT) {
-                            echo $statT->getCountIteration();
+                        <?php foreach($statMessages as $stat) {
+                            echo $stat->getCountIteration();
                         } ?>
                         </td>
                     </tr>

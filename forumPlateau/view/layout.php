@@ -43,13 +43,13 @@
                                 <p>List of tags</p>
                             </a>
 
-                            <a href="./view/security/login.php">
-                                <p>Login</p>
-                            </a>
-
-                            <a href="/security/register.html">
+                            <a href="index.php?ctrl=security&action=register">
                                 <p>Sign in</p>
                             </a>   
+
+                            <a href="index.php?ctrl=security&action=login">
+                                <p>Login</p>
+                            </a>
                         <?php } ?>
                         <i class="fa-solid fa-bars"></i>
                     </div>

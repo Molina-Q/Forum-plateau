@@ -9,6 +9,8 @@
     --secondary-text: #5B5B5B ;
 
     --background-color-footer: #252525;
+
+    --title-font-size: 32px;
 }
 /******************** general ********************/
 * {
@@ -44,10 +46,15 @@ h1 { /* applies to all of my h1 title  */
     padding: 25px 0;
     color: var(--primary-color);
     text-transform: uppercase;
+    font-size: var(--title-font-size);
 }
 
 thead { /* color of every table's head */
     color: var(--secondary-color);
+}
+
+.error {
+    color: red;
 }
 
 /******************** header ********************/
@@ -89,6 +96,7 @@ nav {
     width: 100%;
     display: flex;
     flex-direction: row;
+
 }
 
 /********** leftPart **********/
@@ -100,12 +108,14 @@ nav {
    padding-bottom:25px ;
 }
 
-#popularTopics table {
-    
+#popularTopics {
+    width: 100%;
+    height: auto;
+    box-shadow: 10px, 5px, 5px, black;
 }
 
 #popularTags table {
-   width: 100%;
+    width: 100%;
 }
 
 /********** rightPart **********/
@@ -133,6 +143,53 @@ nav {
     row-gap: 30px;
 } */
 
+/******************** register ********************/
+#form-register-container {
+    padding: 25px 0;
+}
+
+#form-register-header {
+    background-color: var(--primary-color);
+    padding: 0 25px;
+}
+
+#form-register-header h1 {
+   color: var(--secondary-color);
+   font-size: calc(var(--title-font-size) - 5px);
+   padding: 14px 0;
+}
+
+#form-register {
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+/******************** login ********************/
+#form-login-container {
+    padding: 25px 0;
+}
+
+#form-login-header {
+    background-color: var(--primary-color);
+    padding: 0 25px;
+}
+
+#form-login-header h1 {
+   color: var(--secondary-color);
+   font-size: calc(var(--title-font-size) - 5px);
+   padding: 14px 0;
+}
+
+#form-login {
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
 /******************** main ********************/
 main {
     margin: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
@@ -166,8 +223,8 @@ main {
     padding-right: 25px;
 }
 
-#detailsTopicContent {
-
+#detailsTopicContent, #detailsTopicContent h1, #detailsTopicAuthor, #detailsTopicAuthor p {
+    color: var(--secondary-color);
 }
 
 

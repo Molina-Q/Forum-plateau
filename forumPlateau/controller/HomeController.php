@@ -23,10 +23,11 @@
                 "data" => [
                     "topics" => $topicManager->popularTopics(),
                     "tags" => $tagManager->popularTags(),
-                    // "statUsers" => $userManager->count(),
+                    "recents" => $topicManager->recentTopics(),
+                    // related to the "statistics" div on the homePage
+                    "statUsers" => $userManager->countElem(),
                     "statTopics" => $topicManager->countElem(),
-                    "statMessages" => $messageManager->countElem(),
-                    "recents" => $topicManager->recentTopics()
+                    "statMessages" => $messageManager->countElem()
                 ]
             ];
         }       

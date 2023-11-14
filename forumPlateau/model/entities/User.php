@@ -16,7 +16,7 @@
 
         // attributs calculated in custom request and not present in the table
         private $nbUser;
-        private $countUser;
+        private $countIteration;
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -153,21 +153,21 @@
         }
 
         /**
-         * Get the value of countUser
+         * Get the value of countIteration
          */ 
-        public function getCountUser()
+        public function getCountIteration()
         {
-            return $this->countUser;
+            return $this->countIteration;
         }
 
         /**
-         * Set the value of countUser
+         * Set the value of countIteration
          *
          * @return  self
          */ 
-        public function setCountUser($countUser)
+        public function setCountIteration($countIteration)
         {
-            $this->countUser = $countUser;
+            $this->countIteration = $countIteration;
 
             return $this;
         }

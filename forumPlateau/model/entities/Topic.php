@@ -2,7 +2,7 @@
     namespace Model\Entities;
 
     use App\Entity;
-use DateTime;
+    use DateTime;
 
     final class Topic extends Entity {
 
