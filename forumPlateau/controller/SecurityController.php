@@ -13,8 +13,6 @@
     class SecurityController extends AbstractController implements ControllerInterface{
 
         public function index() {
-          
-        //    $topicManager = new SecurityManager();
 
             return [
                 "view" => VIEW_DIR."security/register.php",
@@ -22,13 +20,13 @@
         
         }
 
-        public function register($formData = [], $formErrors = []) {
+        public function register($fieldData = [], $formErrors = []) {
     
-                return [
-                    "view" => VIEW_DIR."security/register.php",
-                ];
+            return [
+                "view" => VIEW_DIR."security/register.php",
+            ];
             
-            }
+        }
 
         // function used to register a user in the database (or not if there is any mistakes) 
         public function registerUser() {
@@ -77,7 +75,21 @@
                 $formErrors["confirmPassword"] = "The passwords are not the same";
             }
 
-          
+            // check if username and email aren't already used (both are unique)
+            $usernames = $userManager->findUsername();
+            $emails = $userManager->findEmail();
+            foreach($usernames as $everyUsername) {
+                if($everyUsername->getUsername() === $username) {
+                    $formErrors["username"] = "Username is invalid or already in use";
+                }
+            }
+
+            foreach($emails as $everyEmail) {
+                if($everyEmail->getEmail() === $email) {
+                    $formErrors["email"] = "Email is invalid or already in use";
+                }
+            }
+
             // if there is no mistakes 
             if (empty($formErrors)) {  
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // password_default utilise l'algorithme considéré comme le plus efficace par php
@@ -91,9 +103,8 @@
 
                 $userManager->add($formData); // add all of those data the user table (via the userManager)
                 
-                return [
-                    "view" => VIEW_DIR."security/login.php" // send the user to the login page
-                ];
+                $this->redirectTo("security", "login"); // send the user to the login page
+                
                 
             } else { // mistake(s) were made in some of the input 
 
@@ -123,6 +134,8 @@
 
         // the function that connects (or not) the user once he enters and submits his mail and password
         public function loginUser() {
+            session_start();
+
             $userManager = new UserManager;
 
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
@@ -148,28 +161,32 @@
 
             // if any of the check get triggered nothing happens
             if(empty($formErrors)) {
-                // we get the user class by searching it by email in an SQL request (email are unique)
+                // we get the user class by filtering it by email in an SQL request (emails are unique)
                 $user = $userManager->findUser($email);
 
                 // we check if the request turned good
                 if($user) {
-                    // we get the hashed password 
+                    // we get hash the password 
                     $hashPassword = $user->getPassword();
+
                     // and we verify if the hashed password and what was put in the fields match
                     if (password_verify($password, $hashPassword)) {
                         //we create the user session
-                        $_SESSION["user"] = $user;
-
-                        header("Location: index.php?ctrl=security");
+                        Session::setUser($user);
+                        
+                        $this->redirectTo("home", "index");
                     }
                 }
             }
-          
-        
-
-            return [
-                "view" => VIEW_DIR."security/login.php",
-            ];
+            // if any of my conditions fails it will end here
+            $this->redirectTo("security", "login");
             
+        }
+
+        public function logout() {
+            // get [user] out of SESSION, disconnecting him
+            unset($_SESSION["user"]);
+
+            $this->redirectTo("home", "index");
         }
     }

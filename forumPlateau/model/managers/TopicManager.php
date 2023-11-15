@@ -94,6 +94,7 @@
         public function recentTopics() {
             $sql = 
             "SELECT
+                t.id_topic,
                 t.title,
                 t.creationDate,
                 t.user_id,

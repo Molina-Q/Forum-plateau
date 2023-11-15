@@ -30,4 +30,32 @@
             );
         }
 
+        public function findEmail() {
+            $sql = 
+            "SELECT 
+                email
+            FROM
+                user 
+            ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql), 
+                $this->className
+            );
+        }
+
+        public function findUsername() {
+            $sql = 
+            "SELECT 
+                username
+            FROM
+                user
+            ";
+
+            return $this->getMultipleResults(
+                DAO::select($sql), 
+                $this->className
+            );
+        }
+
     }

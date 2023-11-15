@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href=".<?= PUBLIC_DIR ?>/css/style.css">
     <title>FORUM</title>
+
 </head>
 <body>
     <div id="wrapper"> 
@@ -28,7 +29,7 @@
                         </form>
 
                         <?php if(App\Session::isAdmin()){ ?>
-                            <a href="index.php?ctrl=home&action=users">Voir la liste des gens</a>
+                            <a href="index.php?ctrl=home&action=users">List users</a>
                         <?php } ?>
                     </div>
 
@@ -36,8 +37,8 @@
 
                         <?php if(App\Session::getUser()) { ?>
                             <a href="index.php?ctrl=tag&action=listTags">List of tags</a>
-                            <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                            <a href="/security/logout.html">Sign out</a>
+                            <a href="index.php?ctrl=user&action=profile"><i class="fas fa-user"></i>&nbsp;<?= App\Session::getUser() ?></a>
+                            <a href="index.php?ctrl=security&action=logout">Sign out</a>
                         <?php } else { ?>
                             <a href="index.php?ctrl=tag&action=listTags">
                                 <p>List of tags</p>
@@ -51,7 +52,9 @@
                                 <p>Login</p>
                             </a>
                         <?php } ?>
-                        <i class="fa-solid fa-bars"></i>
+                        <div id="blocBurger">
+                            <i class="fa-solid fa-bars" id="iconBurger"></i>
+                        </div>
                     </div>
                 </nav>
             </header>
@@ -113,5 +116,6 @@
             )
         })*/
     </script> -->
+    <script src=".<?= PUBLIC_DIR ?>/app/app.js"></script>
 </body>
 </html>

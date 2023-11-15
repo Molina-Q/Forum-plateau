@@ -30,11 +30,12 @@
             $TopicManager = new TopicManager();
             
             $topic = $TopicManager->headerTopic($id);
+            $message = $MessageManager->messagesResponse($id);
             return [
                 "view" => VIEW_DIR."message/showMessages.php",
                 "data" => [
-                    "messages" => $MessageManager->findByForeignId($id, "topic", ["creationDate", "ASC"]), // return every messages from the topic
-                    "topic" => $TopicManager->headerTopic($id) // return the topic title and the first message that goes with it
+                    "messages" => $message, // return every messages from the topic ecxept the first one from the author
+                    "topic" => $topic // return the topic title and the first message that goes with it
                 ], 
                 "meta" => "Liste des messages du topic ".$topic->getTitle()
             ];

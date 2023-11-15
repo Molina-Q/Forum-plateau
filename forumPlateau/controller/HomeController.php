@@ -33,10 +33,10 @@
         }       
    
         public function users() {
-            $this->restrictTo("ROLE_USER");
+            $this->restrictTo("ROLE_ADMIN");
 
-            $manager = new UserManager();
-            $users = $manager->findAll(['creationDate', 'DESC']);
+            $userManager = new UserManager();
+            $users = $userManager->findAll(['creationDate', 'DESC']);
 
             return [
                 "view" => VIEW_DIR."security/users.php",

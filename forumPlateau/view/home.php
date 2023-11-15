@@ -10,8 +10,14 @@ $statTopics = $result["data"]["statTopics"];
 $recentsTopic = $result["data"]["recents"];    
 
 ?>
+<?php if(App\Session::isAdmin()){ ?>
+    <h1>Welcome ADMIN-<?= $_SESSION["user"]->getUsername() ?></h1>
+<?php } else if(App\Session::getUser()) { ?>
+    <h1>Welcome <?= $_SESSION["user"]->getUsername() ?></h1>
+<?php } else { ?>
+    <h1>Welcome to this forum!</h1>
+<?php } ?>
 
-<h1>Welcome on this forum!</h1>
 
 <div id="homePageContent" class="grid-container">
     <div id="homePage-left">
@@ -158,10 +164,22 @@ $recentsTopic = $result["data"]["recents"];
                 </thead>
 
                 <tbody class="blocListRecent">
-                    <?php foreach($recentsTopic as $recent) { ?>
+                    <?php foreach($recentsTopic as $topic) { ?>
                         <tr>
-                            <td><?= $recent->getTag()->showIcon() ?></td>
-                            <td><?= $recent->getTitle() ?> <span class="timeInterval"><?= ConvertDate::convertDate($recent->getCreationDate()) ?></span></td>
+                            <td>
+                                <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>">
+                                    <?= $topic->getTag()->showIcon() ?>
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId() ?>">
+                                    <?= $topic->getTitle() ?>
+                                </a>
+                                <span class="timeInterval">
+                                    <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
+                                </span>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

@@ -22,4 +22,12 @@
             ];
         
         }
+
+        public function profile() {
+            $this->restrictTo("ROLE_USER");
+
+            return [
+                "view" => VIEW_DIR."user/profile.php"
+            ];
+        }
     }

@@ -192,6 +192,25 @@
             return $this;
         }
 
+        public function __toString()
+        {
+            return $this->getUsername();
+        }
+
+
+        /**
+        * check the role of the users
+        *
+        * @return  self
+        */ 
+        public function hasRole($role) {
+            if ($this->getRole() === $role) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         // /**
         //  * Get the value of closed
         //  */ 

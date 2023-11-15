@@ -91,12 +91,37 @@ nav {
     align-items: center;
 }
 
+
+
 /******************** homePageContent ********************/
 #homePageContent {
     width: 100%;
     display: flex;
     flex-direction: row;
 
+}
+
+/******************** menuBurger ********************/
+#blocBurger { /* div that group the icon and menu burger*/
+    position: relative;
+}
+
+.menuBurger { /* div menu burger */
+    width: 335px;
+    height: 200px;
+
+    position: absolute;
+    top: 20px;
+    right: 0px;
+
+    background-color: white;
+    display: none;
+
+    box-shadow: -2px 2px 8px gray;
+}
+
+.menuBurgerItem {
+    color: black;
 }
 
 /********** leftPart **********/

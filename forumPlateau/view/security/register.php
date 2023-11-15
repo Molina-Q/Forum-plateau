@@ -27,17 +27,17 @@ if(isset($result["data"])) { // initialize the variables only if they are set
         <!-- confirmEmail -->
         <label for="confirmEmail">Confirm email</label>
         <input type="email" name="confirmEmail" id="confirmEmail">
-        <?= isset($formErrors) ? FieldError::fieldError($formErrors["confirmEmail"]) : "" ?>
+        <?= isset($formErrors["confirmEmail"]) ? FieldError::fieldError($formErrors["confirmEmail"]) : "" ?>
 
         <!-- password -->
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
-        <?= isset($formErrors) ? FieldError::fieldError($formErrors["password"]) : "" ?>
+        <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?>
 
         <!-- confirmPassword -->
         <label for="confirmPassword">Confirm password</label>
         <input type="password" name="confirmPassword" id="confirmPassword">
-        <?= isset($formErrors) ? FieldError::fieldError($formErrors["confirmPassword"]) : "" ?>
+        <?= isset($formErrors["confirmPassword"]) ? FieldError::fieldError($formErrors["confirmPassword"]) : "" ?>
 
         <button type="submit">Register</button>
     </form>
