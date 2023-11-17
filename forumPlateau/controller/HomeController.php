@@ -36,7 +36,7 @@
             $this->restrictTo("ROLE_ADMIN");
 
             $userManager = new UserManager();
-            $users = $userManager->findAll(['creationDate', 'DESC']);
+            $users = $userManager->findAll(['creationDate', 'ASC']);
 
             return [
                 "view" => VIEW_DIR."security/users.php",

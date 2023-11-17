@@ -8,12 +8,12 @@ if(isset($result["data"])) { // initialize the variables only if they are set
 
 ?>
 
-<div id="form-register-container">
-    <div id="form-register-header">
+<div id="form-container">
+    <div id="form-header">
         <h1>Sign in</h1>
     </div>
 
-    <form id="form-register" action="index.php?ctrl=security&action=registerUser" method="post">
+    <form id="form-content" action="index.php?ctrl=security&action=registerUser" method="post">
         <!-- username -->
         <label for="username">Username</label>
         <input id="username" type="text" name="username" value=<?= isset($fieldData) ? $fieldData["username"] : ""//ternary in value to show data previously written ?>>

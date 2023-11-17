@@ -5,7 +5,7 @@
 
         public function index(){}
         
-        public function redirectTo($ctrl = null, $action = null, $id = null){
+        public function redirectTo($ctrl = null, $action = null, $id = null) {
             $url = "index.php?";
             $url.= $ctrl ? "ctrl=".$ctrl : "";
             $url.= $action ? "&action=".$action : "";
@@ -15,8 +15,16 @@
             die();
         }
 
-        public function restrictTo($role){
-            
+        public function restrictToRegistered() {
+
+            if(!Session::getUser()) {
+                $this->redirectTo("home", "index");
+            }
+            return;
+        }
+
+        public function restrictTo($role) {
+        
             if(!Session::getUser() || !Session::getUser()->hasRole($role)){
                 $this->redirectTo("home", "index");
             }

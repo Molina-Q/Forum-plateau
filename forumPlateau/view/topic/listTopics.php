@@ -1,14 +1,15 @@
 <?php
-use Model\ConvertDate;
+use Service\ConvertDate;
 $topics = $result["data"]['topics'];
     
 ?>
 
-<h1>Every Topics</h1>
+<h1>Posted Topics</h1>
 <table>
     <thead>
         <tr>
-            <th colspan="2">Topics</th>
+            <th>Author</th>
+            <th>Topics</th>
             <th>Tag</th>
             <th>Date</th>
         </tr>
@@ -20,7 +21,7 @@ foreach($topics as $topic){
 ?>
     <tr>
         <td>
-            <a href="index.php?ctrl=user&action=">
+            <a>
                 <?= $topic->getUser()->getUsername() ?>
             </a>
         </td>
@@ -33,7 +34,7 @@ foreach($topics as $topic){
 
         <td>
             <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>">
-                <?= $topic->getTag()->getLabel() ?>
+                <?= $topic->getTag()->showIcon() ?><?= $topic->getTag()->getLabel() ?>
             </a>
         </td>
 

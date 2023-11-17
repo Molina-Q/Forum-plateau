@@ -3,12 +3,12 @@
 
 ?>
 
-<div id="form-login-container">
-    <div id="form-login-header">
+<div id="form-container">
+    <div id="form-header">
         <h1>Login</h1>
     </div>
 
-    <form id="form-login" action="index.php?ctrl=security&action=loginUser" method="post">
+    <form id="form-content" action="index.php?ctrl=security&action=loginUser" method="post">
         <label for="email">Email</label>
         <input type="email" name="email" id="email">
 

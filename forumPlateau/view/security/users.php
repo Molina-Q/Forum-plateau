@@ -1,5 +1,5 @@
 <?php
-use Model\ConvertDate;
+use Service\ConvertDate;
 $users = $result["data"]['users'];
     
 ?>
@@ -33,7 +33,7 @@ foreach($users as $user){
         </td>
 
         <td>
-            <?= $user->getCreationDate() ?>
+            <?= $user->getFormattedDate("Y/m/d, H:i:s") ?>(<?= ConvertDate::convertDate($user->getCreationDate()) ?>)
         </td>
 
     </tr>

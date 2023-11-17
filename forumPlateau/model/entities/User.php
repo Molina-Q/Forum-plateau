@@ -143,8 +143,12 @@
         }
 
         public function getCreationDate(){
-            $formattedDate = $this->creationDate->format("d/m/Y, H:i:s");
+            $formattedDate = $this->creationDate;
             return $formattedDate;
+        }
+
+        public function getFormattedDate($format) {
+            return $this->creationDate->format($format);
         }
 
         public function setCreationDate($date){

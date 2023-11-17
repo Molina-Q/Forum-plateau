@@ -30,6 +30,9 @@
 
         // function used to register a user in the database (or not if there is any mistakes) 
         public function registerUser() {
+            if(isset($_SESSION["user"])) {
+                $this->restrictTo("ROLE_ADMIN");
+            }
 
             $userManager = new UserManager;
 
@@ -105,7 +108,6 @@
                 
                 $this->redirectTo("security", "login"); // send the user to the login page
                 
-                
             } else { // mistake(s) were made in some of the input 
 
                 $fieldData = [ // used to show the data already written in the fields
@@ -125,6 +127,9 @@
         }
 
         public function login() {
+            if(isset($_SESSION["user"])) {
+                $this->restrictTo("ROLE_ADMIN");
+            }
 
             return [
                 "view" => VIEW_DIR."security/login.php",
@@ -134,7 +139,6 @@
 
         // the function that connects (or not) the user once he enters and submits his mail and password
         public function loginUser() {
-            session_start();
 
             $userManager = new UserManager;
 
