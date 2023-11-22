@@ -21,7 +21,11 @@
         }
 
         public function register($fieldData = [], $formErrors = []) {
-    
+            // if the user is already connected he cannot access this method
+            if (Session::getUser()) {
+                $this->redirectTo("home", "index");
+            }
+            
             return [
                 "view" => VIEW_DIR."security/register.php",
             ];
@@ -30,9 +34,6 @@
 
         // function used to register a user in the database (or not if there is any mistakes) 
         public function registerUser() {
-            if(isset($_SESSION["user"])) {
-                $this->restrictTo("ROLE_ADMIN");
-            }
 
             $userManager = new UserManager;
 
@@ -81,6 +82,7 @@
             // check if username and email aren't already used (both are unique)
             $usernames = $userManager->findUsername();
             $emails = $userManager->findEmail();
+
             foreach($usernames as $everyUsername) {
                 if($everyUsername->getUsername() === $username) {
                     $formErrors["username"] = "Username is invalid or already in use";
@@ -127,8 +129,9 @@
         }
 
         public function login() {
-            if(isset($_SESSION["user"])) {
-                $this->restrictTo("ROLE_ADMIN");
+            // if the user i already connected he cannot access this method
+            if (Session::getUser()) {
+                $this->redirectTo("home", "index");
             }
 
             return [
@@ -137,7 +140,7 @@
             
         }
 
-        // the function that connects (or not) the user once he enters and submits his mail and password
+        // the function that connects (or not) the user once he enters and submits his email and password
         public function loginUser() {
 
             $userManager = new UserManager;

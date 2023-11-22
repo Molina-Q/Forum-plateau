@@ -8,7 +8,7 @@ $users = $result["data"]['users'];
 <table>
     <thead>
         <tr>
-            <th>Username</th>
+            <th colspan="2">Username</th>
             <th>Email</th>
             <th>Role</th>
             <th>Date of creation</th>
@@ -16,29 +16,29 @@ $users = $result["data"]['users'];
     </thead>
 
     <tbody class="blocListTopics">
-<?php
-foreach($users as $user){
-?>
-    <tr>
-        <td>
-            <?= $user->getUsername() ?>
-        </td>
+        <?php foreach($users as $user) { ?>
+            <tr>
+                <td>
+                    <?= $user->showPicture() ?>
+                </td>
 
-        <td>
-            <?= $user->getEmail() ?>
-        </td>
+                <td>
+                    <?= $user->getUsername() ?>
+                </td>
 
-        <td>
-            <?= $user->getRole() ?>
-        </td>
+                <td>
+                    <?= $user->getEmail() ?>
+                </td>
 
-        <td>
-            <?= $user->getFormattedDate("Y/m/d, H:i:s") ?>(<?= ConvertDate::convertDate($user->getCreationDate()) ?>)
-        </td>
+                <td>
+                    <?= $user->getRole() ?>
+                </td>
 
-    </tr>
-<?php
-}
-?>
+                <td>
+                    <?= $user->getFormattedDate("Y/m/d, H:i:s") ?>(<?= ConvertDate::convertDate($user->getCreationDate()) ?>)
+                </td>
+
+            </tr>
+        <?php } ?>
     </tbody>
 </table>

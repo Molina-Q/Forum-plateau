@@ -18,7 +18,7 @@ if($tag) { ?>
 <table>
     <thead>
         <tr>
-            <th>Author</th>
+            <th class="author">Author</th>
             <th>Topics</th>
             <th>Date</th>
             <th>Messages</th>
@@ -29,8 +29,8 @@ if($tag) { ?>
 
 <?php foreach($topics as $topic) { ?>
     <tr>
-        <td>
-            <?= $topic->getUser()->getUsername() ?>
+        <td class="authorTopic">
+            <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
         </td>
 
         <td>

@@ -29,14 +29,13 @@
           
             $TagManager = new TagManager();
             
-             return [
-                 "view" => VIEW_DIR."tag/listTags.php",
-                 "data" => [
-                        "tags" => $TagManager->infoTags()
-                        // "tags" => $TagManager->findAll(["id_tag", "ASC"])
-                 ]
-             ];
-         
+            return [
+                "view" => VIEW_DIR."tag/listTags.php",
+                "data" => [
+                    "tags" => $TagManager->infoTags()
+                    // "tags" => $TagManager->findAll(["id_tag", "ASC"])
+                ]
+            ];
         }
 
         public function detailsTag($id) {

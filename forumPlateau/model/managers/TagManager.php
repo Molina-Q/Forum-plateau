@@ -14,6 +14,9 @@
             parent::connect();
         }
 
+        /**
+         * return every row from tag and the number of topics for each tag
+         */
         public function infoTags() {
             $sql = 
             "SELECT 
@@ -38,6 +41,9 @@
             );
         }
 
+        /**
+         * return the 5 tags with the most topics
+         */
         public function popularTags() {
 
             $sql = 

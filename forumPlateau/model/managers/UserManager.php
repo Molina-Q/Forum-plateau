@@ -14,6 +14,9 @@
             parent::connect();
         }
 
+        /**
+         * return every row from a user using an email (they are unique)
+         */
         public function findUser($email) {
             $sql = 
             "SELECT 
@@ -30,6 +33,9 @@
             );
         }
 
+        /**
+         * return every email in the database, is used during the registration to be sure that the email isn't already used
+         */
         public function findEmail() {
             $sql = 
             "SELECT 
@@ -44,6 +50,9 @@
             );
         }
 
+        /**
+         * return every username in the database, used for the same reason as above (username are also unique)
+         */
         public function findUsername() {
             $sql = 
             "SELECT 
@@ -57,5 +66,6 @@
                 $this->className
             );
         }
+
 
     }

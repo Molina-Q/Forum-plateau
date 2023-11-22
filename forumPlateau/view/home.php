@@ -25,23 +25,31 @@ $recentsTopic = $result["data"]["recents"];
             <table>
                 <thead>
                     <tr>
-                        <th>Popular topics</th>
-                        <th>Messages</th>
-                        <th>Tags</th>
-                        <th>Author</th>
+                        <th class="author">Author</th>
+                        <th>Popular topic</th>
                         <th>Date</th>
+                        <th>Post</th>
+                        <th>Tag</th>
                     </tr>
                 </thead>
 
                 <tbody class="blocListPopular">
                     <?php foreach($topics as $topic) { ?>
                         <tr>
+                            <td class="authorTopic">
+                                <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
+                            </td>
+
                             <td>
                                 <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId()?>">
                                     <?= $topic->getTitle() ?>
                                 </a>
                             </td>
 
+                            <td class="timeInterval">
+                                <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
+                            </td>
+        
                             <td>
                                 <?= $topic->getNbMessages() ?> 
                             </td>
@@ -51,14 +59,8 @@ $recentsTopic = $result["data"]["recents"];
                                     <?= $topic->getTag()->showIcon() ?><?= $topic->getTag()->getLabel() ?>
                                 </a>
                             </td>
+                            
 
-                            <td>
-                                <?= $topic->getUser()->getUsername() ?>
-                            </td>
-
-                            <td class="timeInterval">
-                                <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
-                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -177,7 +179,7 @@ $recentsTopic = $result["data"]["recents"];
                                     <?= $topic->getTitle() ?>
                                 </a>
                                 <span class="timeInterval">
-                                    <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
+                                    - <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
                                 </span>
                             </td>
                         </tr>

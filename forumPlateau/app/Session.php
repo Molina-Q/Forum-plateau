@@ -44,4 +44,23 @@
             return false;
         }
 
+        /**
+         * check if the user is registered
+         * & if he is an admin
+         * or if he has the same id as the userId given in parameter
+         * used to confirm that the user accessing the method is the author or an admin
+         */
+        public static function isAuthorOrAdmin($idAuthor) {
+            if(self::getUser() && self::isAdmin()) {
+                return true;
+
+            } else if(self::getUser()->getId() == $idAuthor) {
+                return true;
+
+            } else {
+                return false;
+
+            }
+        }
+
     }

@@ -14,6 +14,10 @@
             parent::connect();
         }
 
+        /**
+         * return every messages from a specfic topic, except the message that was created at the exact same time has the topic
+         * (the message the author wrote)
+         */
         public function messagesResponse($id) {
 
             $sql = 
@@ -28,12 +32,26 @@
             AND NOT 
                 t.creationDate = m.creationDate
             ORDER BY 
-	            m.creationDate ASC
+	            m.creationDate
             ";
 
             return $this->getMultipleResults(
                 DAO::select($sql, ["id" => $id]), 
                 $this->className
             );
+        }
+
+        /**
+         * delete every message from a topic
+         */
+        public function deleteMessages($idTopic) {
+            $sql =
+            "DELETE FROM 
+                message
+            WHERE 
+                topic_id = :id 
+            ";
+
+            return DAO::delete($sql, ['id' => $idTopic]); 
         }
     }

@@ -13,7 +13,7 @@
         private $topic;
 
         // attributs calculated in custom request and not present in the table
-        private $countIteration;
+        private $countIteration; // the number of this entity in the database
 
         
         public function __construct($data){         

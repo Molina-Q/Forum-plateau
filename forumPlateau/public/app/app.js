@@ -22,6 +22,12 @@ const navRight = document.getElementById("nav-right"); // right half of my nav
 const blocBurger = document.getElementById("blocBurger"); // div that covers the whole menu burger
 const iconBurger = document.getElementById("iconBurger"); // the burger menu icon
 
+// clickable icons used to delete entities
+const deleteIcon = document.getElementsByClassName("deleteIcon"); 
+
+// val used to store the result of confirm() from the the deleteIcon 
+let checkConfirm = true;
+
 const listItems = [
     { // List topics
         label: "List of topics",
@@ -68,3 +74,24 @@ iconBurger.addEventListener("click", () => menuToggle(menuBurger));
 //     }
 // });
 
+// confirm delete //
+for (let i = 0; i < deleteIcon.length; i++) {
+    const openDelete = deleteIcon[i]; // openDelete is the <a href="" class="deleteIcon"> element i clicked
+    
+    openDelete.addEventListener("click", function() {
+        // i store the string in his href
+        let initialHref = openDelete.href; 
+
+        // function that give the <a> element his initial href
+        function updateHref() { 
+            openDelete.href = initialHref;
+        }
+
+        checkConfirm = confirm("do you want to delete this ?");
+        // if check is false the href is changed and the delete() method isn't called, if true the delete() function will be called 
+        if(!checkConfirm) {
+            openDelete.href = "#";
+            setTimeout(updateHref, 2000); // write the initial href back after 2 seconds
+        }
+    })
+}

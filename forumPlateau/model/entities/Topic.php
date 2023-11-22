@@ -16,8 +16,9 @@
 
         // attributs calculated in custom request and not present in the table
         private $nbMessages; // the number a topic has
+        private $idMessageAuthor; //the id of the message that the author write while creating the topic
         private $messageAuthor; // the message that the author write while creating the topic
-        private $countIteration;
+        private $countIteration; // the number of this entity in the database
 
 
         public function __construct($data){         
@@ -109,7 +110,7 @@
                 return $formattedDate;
             }
     
-        public function getFormattedDate($format) {
+        public function getFormattedDate($format = "Y-m-d H:i:s") {
                 return $this->creationDate->format($format);
         }
 
@@ -139,6 +140,26 @@
         }
 
         /**
+         * Get the value of idMessageAuthor
+         */ 
+        public function getidMessageAuthor()
+        {
+                return $this->idMessageAuthor;
+        }
+
+        /**
+         * Set the value of idmessageAuthor
+         *
+         * @return  self
+         */ 
+        public function setIdMessageAuthor($idMessageAuthor)
+        {
+                $this->idMessageAuthor = $idMessageAuthor;
+
+                return $this;
+        }
+
+                /**
          * Get the value of messageAuthor
          */ 
         public function getMessageAuthor()

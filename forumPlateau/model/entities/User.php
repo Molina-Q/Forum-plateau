@@ -16,7 +16,7 @@
 
         // attributs calculated in custom request and not present in the table
         private $nbUser;
-        private $countIteration;
+        private $countIteration; // the number of this entity in the database
 
         public function __construct($data){         
             $this->hydrate($data);        
@@ -213,6 +213,26 @@
             } else {
                 return false;
             }
+        }
+
+        public function showPicture() {
+            $picture = $this->getPicture();
+            $role = $this->getRole();
+            switch ($role) {
+                case 'ROLE_ADMIN':
+                    $classPic = "pictureAdmin";
+                    break;
+                case 'ROLE_USER':
+                    $classPic = "pictureUser";
+                    break;                
+                default:
+                    $classPic = "pictureUser";
+                    break;
+            }
+            
+            echo "<figure class='$classPic'>
+                    <img src='./public/img/uploads/$picture' alt='$picture'></img>
+                </figure>";
         }
 
         // /**

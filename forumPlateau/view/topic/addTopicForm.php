@@ -31,7 +31,7 @@ $idTag = $result["data"]["idTag"];
 
         <!-- text -->
         <label for="text">Topic's content</label>
-        <textarea name="text" id="text" cols="30" rows="10"></textarea>
+        <textarea name="text" id="text" cols="60" rows="5"></textarea>
         <?= isset($formErrors["text"]) ? FieldError::fieldError($formErrors["text"]) : "" ?>
 
 

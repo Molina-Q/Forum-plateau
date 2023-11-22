@@ -31,12 +31,12 @@
             );
         }
 
-                /**
-         * get all the records of a table, sorted by optionnal field and order
-         * 
-         * @param array $order an array with field and order option
-         * @return Collection a collection of objects hydrated by DAO, which are results of the request sent
-         */
+        /**
+        * get all the records of a table, sorted by optionnal field and order
+        * 
+        * @param array $order an array with field and order option
+        * @return Collection a collection of objects hydrated by DAO, which are results of the request sent
+        */
         public function findByForeignId($id, $foreignKey, $order = null) {
             $orderQuery = ($order) ? "ORDER BY ".$order[0]. " ".$order[1] : "";
 
@@ -102,16 +102,52 @@
             /*
                 INSERT INTO user (username,password,email) VALUES ('Squalli', 'dfsyfshfbzeifbqefbq', 'sql@gmail.com') 
             */
-            try{
+            try {
                 return DAO::insert($sql);
+            } catch(\PDOException $e) {
+                echo $e->getMessage();
+                die();
             }
-            catch(\PDOException $e){
+        }
+
+        // update the field(s) of the table that call this method
+        public function update($data) {
+
+            $separator = ", ";
+            $fieldUpdated = "";
+            $countLoop = 2; // start at two because the first argument of the array do not count in the loop
+            $dataLoop = count($data);
+
+            // separator and dataLoop so that the comma isn't written on the last updated row
+            foreach ($data as $key => $value) {
+                if($dataLoop == $countLoop) {
+                    $separator = "";
+                }
+                // username = :username, email = :email, etc... / doesn't accept id because there is no circumstance where i will modify an id
+                if($key !== "id") {
+                    $fieldUpdated .= "$key = :$key $separator";
+                    $countLoop++;
+                }
+            }
+
+            $sql = 
+                "UPDATE 
+                    ".$this->tableName."
+                SET
+                    ".$fieldUpdated."
+                WHERE
+                    id_".$this->tableName." = :id
+            ";
+
+            try {
+                return DAO::update($sql, $data);
+            } catch(\PDOException $e) {
                 echo $e->getMessage();
                 die();
             }
         }
         
-        public function delete($id){
+        public function delete($id) {
             $sql = "DELETE FROM ".$this->tableName."
                     WHERE id_".$this->tableName." = :id
                     ";

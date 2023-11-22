@@ -8,7 +8,7 @@ $topics = $result["data"]['topics'];
 <table>
     <thead>
         <tr>
-            <th>Author</th>
+            <th class="author">Author</th>
             <th>Topics</th>
             <th>Tag</th>
             <th>Date</th>
@@ -22,7 +22,7 @@ foreach($topics as $topic){
     <tr>
         <td>
             <a>
-                <?= $topic->getUser()->getUsername() ?>
+                <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
             </a>
         </td>
 

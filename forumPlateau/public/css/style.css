@@ -1,6 +1,6 @@
 :root {
     --primary-color: #2979A6;
-    --secondary-color: #FFFFFF;
+    --secondary-color: #FFFFFF; /* used for background, and text */
     --tertiary-color: #E9E9E9; /* background color for the whole site*/
 
     --table-highlight-color: #D9D9D9;
@@ -11,6 +11,8 @@
     --background-color-footer: #252525;
 
     --title-font-size: 32px;
+
+    --size-user-picture: 50px;
 }
 /******************** general ********************/
 * {
@@ -35,10 +37,9 @@ body {
 footer a, header a {
     color: white;
     text-decoration: none;
-    
 }
 
-.timeInterval {
+.timeInterval { /* applies to every date interval */
     color: var(--secondary-text);
 }
 
@@ -53,12 +54,30 @@ thead { /* color of every table's head */
     color: var(--secondary-color);
 }
 
-.error {
+.error { /* applies to all of the errors tied to formErrors */
     color: red;
 }
 
-#forum table {
+#forum table { /* applies to all of my table */
     width: 100%;
+}
+
+a:has(> i) { /* :has(), css selector: target every <a> elements that has <i> has a child !!not native to firefox */
+    text-decoration: none;
+}
+
+textarea {
+    /* width: 100%; */
+    min-height: 80px;
+
+    padding: 15px;
+
+    border: 0;
+    border-radius: 4px;
+    background-color: var(--table-highlight-color) ;
+    font-size: 16px;
+    resize: none;
+    outline: none;
 }
 
 /******************** header ********************/
@@ -79,6 +98,7 @@ nav {
     height: 100%;
 
     width: 45%;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -127,17 +147,15 @@ nav {
 
 /********** leftPart **********/
 #homePage-left {
- padding-right: 15px ;
-}
-
-#popularTopics {
-   padding-bottom:25px ;
+    padding-right: 15px ;
+    flex: 3;
 }
 
 #popularTopics {
     width: 100%;
     height: auto;
     box-shadow: 10px, 5px, 5px, black;
+    padding-bottom:25px ;
 }
 
 #popularTags table {
@@ -146,23 +164,19 @@ nav {
 
 /********** rightPart **********/
 #homePage-right {
-
+    flex: 1;
 }
 
 #statistics {
     padding-bottom: 25px;
-}
-
-#statistics table {
-    width: 350px;
-
+    width: 100%;
 }
 
 #recentTopics {
-   width: 350px;
+    width: 100%;
 }
 
-/******************** register ********************/
+/******************** form ********************/
 #form-container {
     padding: 25px 0;
 }
@@ -187,39 +201,78 @@ nav {
 }
 
 /******************** login ********************/
-#form-container {
-    padding: 25px 0;
+
+/******************** User profile ********************/
+[class*='picture'] {
+    width: var(--size-user-picture);
+    height: var(--size-user-picture);
+    margin-bottom: 5px;
 }
 
-#form-header {
-    background-color: var(--primary-color);
-    padding: 0 25px;
-}
-
-#form-header h1 {
-   color: var(--secondary-color);
-   font-size: calc(var(--title-font-size) - 5px);
-   padding: 14px 0;
-}
-
-#form-content {
+#form-content-profile {
+    margin: 25px 0;
+    padding: 15px 0;
     background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
     align-content: center;
     align-items: center;
 }
+
+#profile-header {
+    height: 280px;
+
+    margin-bottom: 25px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: var(--primary-color);
+}
+
+#profile-header p  {
+    color: var(--secondary-color);
+    font-size: 20px;
+}
+
+#profile-header figure {
+    width: calc(var(--size-user-picture) + 50px);
+    height: calc(var(--size-user-picture) + 50px);
+}
+
+/********** pictureUser **********/
+.pictureUser { /* user pic is round */
+    outline: 5px solid var(--primary-color);
+    border-radius: 50%;
+}
+
+.pictureUser img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+
+    border-radius: 50%;
+}
+
+/********** pictureAdmin **********/
+.pictureAdmin { /* admin pic is a square */
+    outline: 5px solid var(--primary-color);
+    border-radius: 0%;
+}
+
+.pictureAdmin img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
 /******************** main ********************/
 main {
     margin: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
 
 }
 
-/******************** Sign in ********************/
-
-/******************** Login ********************/
-
-/******************** User profile ********************/
 
 /******************** HomePage ********************/
 
@@ -240,18 +293,70 @@ main {
 #detailsTopicAuthor {
     align-self: center;
     padding-right: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex: 1;
+}
+
+#detailsTopicContent {
+    flex: 5;
+}
+
+#detailsTopicContent h1 {
+    font-size: 32px;
+    padding: 15px 0;
 }
 
 #detailsTopicContent, #detailsTopicContent h1, #detailsTopicAuthor, #detailsTopicAuthor p {
     color: var(--secondary-color);
 }
 
+.fa-pen {
+    color: var(--secondary-color);
+    font-size: 20px;
+}
 
+.fa-trash-can {
+    color: var(--secondary-color);
+    font-size: 20px;
+}
 
+.blocMsgsFromTopic i {
+    color: var(--primary-color);
+}
+
+/******************** addMessage ********************/
+#form-add-message {
+    padding: 5px;
+    margin-bottom: 10px ;
+
+    background-color: var(--primary-color);
+
+    display: flex;
+    flex-direction: column;
+}
+
+#form-add-message label {
+    color: var(--secondary-color);
+}
+
+#form-add-message textarea {
+
+}
+
+.replaceFormMessage {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+
+    padding: 10px;
+    margin-bottom: 10px;
+}
 
 /******************** table ********************/
 table {
-    /* border-bottom: 1px solid black;  */
     border-collapse: collapse;
 }
 
@@ -260,8 +365,6 @@ thead {
 }
 
 th {
-    /* border-bottom: 1px solid rgb(163, 163, 163);  */
-    /* width:200px; */
     text-transform:uppercase; 
     font-weight:bold; 
     padding: 10px; 
@@ -272,7 +375,10 @@ td {
     /* border-bottom: 1px solid rgb(163, 163, 163);  */
     padding: 15px; 
     text-align:left;
-    height: 1px;
+}
+
+.author { /* <tr> */
+    text-align: center;
 }
 
 tr:nth-child(even) {
@@ -281,6 +387,13 @@ tr:nth-child(even) {
 
 tbody tr:nth-child(odd) {
     background-color: white;
+}
+
+/********** authorPicture **********/
+.authorTopic { /* target the <td> that contains the username and picture */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /******************** footer ********************/
@@ -312,6 +425,9 @@ and (max-device-width : 1200px) {
     main {
         margin: 0 5%;
     }
+
+/******************** showMessages ********************/
+
 /******************** footer ********************/
     footer {
         padding: 0 5%;
@@ -323,14 +439,17 @@ and (max-device-width : 1200px) {
 @media only screen
 and (max-device-width : 645px) {
 
-/******************** footer ********************/
+/******************** header ********************/
     header {
         padding: 0;
     }
-/******************** footer ********************/
+/******************** main ********************/
     main {
         margin: 0;
     }
+
+/******************** showMessages ********************/
+ 
 /******************** footer ********************/
     footer {
         padding: 0;

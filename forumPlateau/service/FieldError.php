@@ -5,7 +5,7 @@ namespace Service;
 abstract class FieldError {
 
     public static function fieldError($errors) { ?> 
-    <p class="error"><?= $errors ?></p> <?php      
-
-    }
+    <p class="error"><?= $errors ?></p> 
+    
+    <?php }
 }
