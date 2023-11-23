@@ -16,32 +16,28 @@ $tags = $result["data"]['tags'];
     </thead>
 
     <tbody class="blocListTags">
-<?php
-foreach($tags as $tag){
-?>
-    <tr>
-        <td>
-            <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
-                <?= $tag->getLabel() ?>
-            </a>
-        </td>
+        <?php foreach($tags as $tag) { ?>
+            <tr>
+                <td>
+                    <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
+                        <?= $tag->getLabel() ?>
+                    </a>
+                </td>
 
-        <td>
-            <?= $tag->showIcon() ?>
-        </td>
+                <td>
+                    <?= $tag->showIcon() ?>
+                </td>
 
-        <td>
-            <?= $tag->getDesc() ?>
-        </td>
+                <td>
+                    <?= $tag->getDesc() ?>
+                </td>
 
-        <td>
-            <?= $tag->getNbtopics() ?>
-        </td>
+                <td>
+                    <?= $tag->getNbtopics() ?>
+                </td>
 
-    </tr>
-<?php
-}
-?>
+            </tr>
+        <?php } ?>
     </tbody>
 </table>
 

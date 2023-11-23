@@ -21,6 +21,7 @@
             return [
                 "view" => VIEW_DIR."home.php",
                 "data" => [
+                    "title" => "Home",
                     "topics" => $topicManager->popularTopics(),
                     "tags" => $tagManager->popularTags(),
                     "recents" => $topicManager->recentTopics(),
@@ -41,7 +42,8 @@
             return [
                 "view" => VIEW_DIR."security/users.php",
                 "data" => [
-                    "users" => $users
+                    "users" => $users,
+                    "title" => "List of users"
                 ]
             ];
         }

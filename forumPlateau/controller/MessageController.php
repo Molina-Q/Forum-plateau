@@ -28,15 +28,17 @@
         public function showMessages($idTopic) {
             $messageManager = new MessageManager();
             $topicManager = new TopicManager();
-            
+            $formErrors = [];
             $message = $messageManager->messagesResponse($idTopic);
             $topic = $topicManager->headerTopic($idTopic);
 
             return [
                 "view" => VIEW_DIR."message/showMessages.php",
                 "data" => [
+                    "title" => "topic details",
                     "messages" => $message, // return every messages from the topic ecxept the first one from the author
-                    "topic" => $topic // return the topic title and the first message that goes with it
+                    "topic" => $topic, // return the topic title and the first message that goes with it
+                    "formErrors" => $formErrors
                 ], 
                 "meta" => "Liste des messages du topic ".$topic->getTitle()
             ];
@@ -48,9 +50,14 @@
             if(!Session::getUser()) {
                 $this->redirectTo("home", "index");
             }
-
+            $topicManager = new TopicManager();
             $messageManager = new MessageManager();
             $currentDate = new \DateTime("now");
+
+            $formErrors = [];
+
+            $message = $messageManager->messagesResponse($idTopic);
+            $topic = $topicManager->headerTopic($idTopic);
 
             $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // if the field is empty
@@ -63,19 +70,29 @@
 
                 if($userId) {
                     $dataMessage = [
+                        "title" => "Message form",
                         "text" => $text,
                         "creationDate" => $currentDate->format("Y-m-d H:i:s"),
                         "topic_id" => $idTopic,
                         "user_id" => $userId
                     ];
-                }
 
-                $messageManager->add($dataMessage);
+                    $messageManager->add($dataMessage);
+                }
 
                 $this->redirectTo("message", "showMessages", $idTopic);
 
             } else {
-                $this->redirectTo("message", "showMessages", $idTopic);
+                return [
+                    "view" => VIEW_DIR."message/showMessages.php",
+                    "data" => [
+                        "title" => "topic details",
+                        "messages" => $message, // return every messages from the topic ecxept the first one from the author
+                        "topic" => $topic, // return the topic title and the first message that goes with it
+                        "formErrors" => $formErrors
+                    ], 
+                    "meta" => "Liste des messages du topic ".$topic->getTitle()
+                ];
             }
 
         }
@@ -90,10 +107,10 @@
                 $this->redirectTo("home", "index");
             }
 
-
             return [
                 "view" => VIEW_DIR."message/updateMessage.php",
                 "data" => [
+                    "title" => "Message form",
                     "message" => $message
                 ]
             ];

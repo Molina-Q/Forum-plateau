@@ -18,6 +18,7 @@
             return [
                 "view" => VIEW_DIR."topic/listTopics.php",
                 "data" => [
+                    "title" => "List of topics",
                     "topics" => $topicManager->findAll(["creationDate", "DESC"])
                 ]
             ];
@@ -36,6 +37,7 @@
             return [
                 "view" => VIEW_DIR."topic/addTopicForm.php",
                 "data" => [
+                    "title" => "Topic creation",
                     "idTag" => $idTag,
                     "tags" => $tags
                 ]
@@ -102,6 +104,7 @@
             return [
                 "view" => VIEW_DIR."topic/updateTopicForm.php",
                 "data" => [
+                    "title" => "Topic update",
                     "topic" => $topic
                 ]
             ];
@@ -152,7 +155,6 @@
             if(!Session::isAuthorOrAdmin($topic->getUser()->getId())) {
                 $this->redirectTo("home", "index");
             }
-
 
             $messageManager->deleteMessages($idTopic);
             $topicManager->delete($idTopic);

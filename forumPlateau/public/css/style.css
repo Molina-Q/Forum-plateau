@@ -131,8 +131,10 @@ nav {
     width: 335px;
     height: 200px;
 
+    padding: 15px 20px;
+
     position: absolute;
-    top: 20px;
+    top: 30px;
     right: 0px;
 
     background-color: white;
@@ -224,7 +226,7 @@ nav {
 
     margin-bottom: 25px ;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 
@@ -237,10 +239,69 @@ nav {
 }
 
 #profile-header figure {
-    width: calc(var(--size-user-picture) + 50px);
-    height: calc(var(--size-user-picture) + 50px);
+    width: calc(var(--size-user-picture) + 180px);
+    height: calc(var(--size-user-picture) + 180px);
+    margin-bottom: 0;
 }
 
+.profile-pic {
+    padding-left: 25px ;
+    flex: 1;
+}
+
+.profile-info {
+    flex: 2;
+}
+
+#profile-header .username {
+    width: 200px;
+    padding: 3px 5px;
+    color: var(--primary-color);
+    background-color: var(--table-highlight-color);
+}
+
+#profile-header .email {
+    width: 200px;
+    padding: 3px 5px;
+    color: var(--primary-color);
+    background-color: var(--table-highlight-color);
+}
+
+#profile-header form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#profile-header form label {
+    color: var(--secondary-color);
+    font-size: 20px;
+    padding-right: 10px ;
+}
+
+#profile-header form select {
+    width: 200px ; 
+    height: 37px;
+    
+    padding: 3px 5px;
+    margin-bottom: 10px;
+    
+    font-size: 15px;
+    color: var(--primary-color);
+    background-color: var(--table-highlight-color);
+    border: 0;
+}
+
+#profile-header form button {
+    width: 70px;
+    height: 30px;
+
+    color: var(--primary-color);
+    background-color: var(--table-highlight-color);
+
+    border-radius: 5px;
+    border: 0;
+}
 /********** pictureUser **********/
 .pictureUser { /* user pic is round */
     outline: 5px solid var(--primary-color);
@@ -288,6 +349,7 @@ main {
 
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 #detailsTopicAuthor {
@@ -316,18 +378,30 @@ main {
 
 .fa-pen {
     color: var(--secondary-color);
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .fa-trash-can {
     color: var(--secondary-color);
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .blocMsgsFromTopic i {
     color: var(--primary-color);
 }
 
+.icons {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
 /******************** addMessage ********************/
 #form-add-message {
     padding: 5px;
@@ -358,6 +432,7 @@ main {
 /******************** table ********************/
 table {
     border-collapse: collapse;
+    margin-bottom: 15px ;
 }
 
 thead {

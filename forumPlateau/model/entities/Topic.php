@@ -105,15 +105,24 @@
                 return $this;
         }
 
+        /**
+         * get the creation Data as a DateTime object
+         */
         public function getCreationDate(){
                 $formattedDate = $this->creationDate;
                 return $formattedDate;
-            }
+        }
     
+        /**
+         * get the creationData formatted using the string given 
+         */
         public function getFormattedDate($format = "Y-m-d H:i:s") {
                 return $this->creationDate->format($format);
         }
 
+        /**
+         * set the creationdDate
+         */
         public function setCreationDate($date){
             $this->creationDate = new \DateTime($date);
             return $this;

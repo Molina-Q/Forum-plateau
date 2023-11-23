@@ -13,11 +13,7 @@
     class SecurityController extends AbstractController implements ControllerInterface{
 
         public function index() {
-
-            return [
-                "view" => VIEW_DIR."security/register.php",
-            ];
-        
+            $this->redirectTo("home", "index");
         }
 
         public function register($fieldData = [], $formErrors = []) {
@@ -28,6 +24,9 @@
             
             return [
                 "view" => VIEW_DIR."security/register.php",
+                "data" => [
+                    "title" => "Register"
+                ]
             ];
             
         }
@@ -48,6 +47,9 @@
             $currentDate = new \DateTime("now"); //for the creationDate of the account
             $formErrors = [];
             $formData = [];
+            // regex: need at least 1 capital, 1 small, 1 number, 1 special char and 4 characters in total 
+            //(the CNIL advise around 12 to be actually safe)
+            $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{4,}$/";
 
             // check that all inputs were completed
             if(empty($username)) {
@@ -68,6 +70,11 @@
 
             if(empty($confirmPassword)) {
                 $formErrors["confirmPassword"] = "This field is mandatory!";
+            }
+
+            //check regex password
+            if(!preg_match($password_regex, $password)) {
+                $formErrors["password"] = "the password isn't safe";
             }
 
             // check if the email and password are the same as their confirm counterpart
@@ -120,6 +127,7 @@
                 return [
                     "view" => VIEW_DIR."security/register.php",
                     "data" => [
+                        "title" => "Register",
                         "fieldData" => $fieldData,
                         "formErrors" => $formErrors // used to show all the error messages
                     ]
@@ -136,6 +144,9 @@
 
             return [
                 "view" => VIEW_DIR."security/login.php",
+                "data" => [
+                    "title" => "Login"
+                ]
             ];
             
         }
@@ -195,5 +206,66 @@
             unset($_SESSION["user"]);
 
             $this->redirectTo("home", "index");
+        }
+
+        public function changePassword() {
+
+            return [
+                "view" => VIEW_DIR."security/changePassword.php",
+                "data" => [
+                    "title" => "Change password"
+                ]
+            ];
+        }
+
+        public function changePasswordUser() { 
+
+            $userManager = new UserManager;
+
+            $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
+            $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            if(empty($email)) {
+                $formErrors["email"] = "this field is mandatory";
+            }
+
+            if(empty($password)) {
+                $formErrors["password"] = "this field is mandatory";
+            }
+
+            if(empty($confirmPassword)) {
+                $formErrors["confirmPassword"] = "this field is mandatory";
+            }
+
+            if(!$email) {
+                $formErrors["email"] = "there was a mistake";
+            }
+            
+            if(!$user = $userManager->findUser($email)) {
+                $formErrors["email"] = "there was a mistake";
+            }
+
+            if($password != $confirmPassword) {
+                $formErrors["password"] = "the passwords are not the same";
+            }
+
+            if(empty($formErrors)) {
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                $user->setPassword($hashedPassword);
+
+                $dataUser = [
+                    "id" => $user->getId(),
+                    "password" => $hashedPassword
+                ];
+
+                $userManager->update($dataUser);
+
+                $this->redirectTo("security", "login");
+            }
+
+            $this->redirectTo("security", "changePassword");
+
         }
     }

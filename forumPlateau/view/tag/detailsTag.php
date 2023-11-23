@@ -2,8 +2,9 @@
 use Service\ConvertDate;
 $topics = $result['data']['topics'];
 $tag = $result['data']['tag'];
-    
-if($tag) { ?>
+?>   
+
+<?php if($tag) { ?>
 
     <h1><?= $tag->getLabel() ?></h1>
     <?php if(isset($_SESSION["user"])) { ?>
@@ -26,26 +27,25 @@ if($tag) { ?>
     </thead>
     
     <tbody class="blocListTags">
+        <?php foreach($topics as $topic) { ?>
+            <tr>
+                <td class="authorTopic">
+                    <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
+                </td>
 
-<?php foreach($topics as $topic) { ?>
-    <tr>
-        <td class="authorTopic">
-            <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
-        </td>
+                <td>
+                    <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId() ?>"> <?= $topic->getTitle() ?> </a>
+                </td>
 
-        <td>
-            <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId() ?>"> <?= $topic->getTitle() ?> </a>
-        </td>
+                <td class="timeInterval">
+                    <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
+                </td>
 
-        <td class="timeInterval">
-            <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
-        </td>
+                <td>
+                    <?= $topic->getNbMessages() ?>
+                </td>
 
-        <td>
-            <?= $topic->getNbMessages() ?>
-        </td>
-
-    </tr>
-<?php } ?>
+            </tr>
+        <?php } ?>
     </tbody>
 </table>

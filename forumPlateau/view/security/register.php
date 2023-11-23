@@ -1,7 +1,7 @@
 <?php 
 use Service\FieldError;
 
-if(isset($result["data"])) { // initialize the variables only if they are set
+if(isset($result["data"]["fieldData"]) && isset($result["data"]["formErrors"])) { // initialize the variables only if they are set
     $fieldData = $result["data"]["fieldData"];
     $formErrors = $result["data"]["formErrors"];
 }
@@ -30,7 +30,7 @@ if(isset($result["data"])) { // initialize the variables only if they are set
         <?= isset($formErrors["confirmEmail"]) ? FieldError::fieldError($formErrors["confirmEmail"]) : "" ?>
 
         <!-- password -->
-        <label for="password">Password</label>
+        <label for="password">Password*</label>
         <input type="password" name="password" id="password">
         <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?>
 
@@ -40,5 +40,7 @@ if(isset($result["data"])) { // initialize the variables only if they are set
         <?= isset($formErrors["confirmPassword"]) ? FieldError::fieldError($formErrors["confirmPassword"]) : "" ?>
 
         <button type="submit">Register</button>
+
+        <small>*Password must have at least 1 Capital - 1 lowercase - 1 number - 1 special char - minimum 4 chars</small>
     </form>
 </div>

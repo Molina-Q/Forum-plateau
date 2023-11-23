@@ -48,7 +48,10 @@
 
             $sql = 
             "SELECT 
-                ta.*,
+                ta.id_tag,
+                ta.label,
+                ta.icon,
+                ta.`desc`,
                 COUNT(t.id_topic) AS nbtopics
             FROM 
                 tag ta

@@ -1,11 +1,23 @@
 <?php 
 use Service\FieldError;
+use App\Session;
 
+$userRole = "";
 $topics = $result["data"]["topics"];
+$isAdmin = null;
+$isUser = null;
+$current = "(CURRENT ROLE)";
+
 if(isset($formErrors)) {
     $formErrors = $result["data"]["formErrors"];
-    var_dump($formErrors);die;
 }
+
+if(Session::isAdmin()) {
+    $isAdmin = "selected";
+} else {
+    $isUser = "selected";
+}
+
 ?>
 
 <div id="form-register-container">
@@ -15,11 +27,31 @@ if(isset($formErrors)) {
 
     <div id="profile">
         <div id="profile-header">
-            <div class="profilePic"><?= $_SESSION["user"]->showPicture() ?></div>
-            <p class="username"><?= $_SESSION["user"]->getUsername() ?></p>
-            <p class="email"><?= $_SESSION["user"]->getEmail() ?></p>
-            <p class="role"><?= $_SESSION["user"]->getRole() ?></p>
+            <div class="profile-pic">
+                <?= $_SESSION["user"]->showPicture() ?>
+            </div>
+
+            <div class="profile-info">
+                <p>Username</p>
+                <p class="username"><?= $_SESSION["user"]->getUsername() ?></p>
+
+                <p>Email</p>
+                <p class="email"><?= $_SESSION["user"]->getEmail() ?></p>
+
+                <?php if(Session::isAdmin()) { ?>
+                    <form action="index.php?ctrl=user&action=updateUser" method="post">
+                        <label for="role">Role</label>
+                        <select name="role" id="role">
+                            <option value="ROLE_ADMIN" <?= $isAdmin ?> >ADMIN <?= isset($isAdmin) ? $current : "" ?></option>
+                            <option value="ROLE_USER" <?= $isUser ?> >USER <?= isset($isUser) ? $current : "" ?></option>
+                        </select>
+
+                        <button type="submit">Change</button>
+                    </form>
+                <?php } ?> 
+            </div>
         </div>
+
         <table>
             <thead>
                 <tr>
@@ -31,33 +63,42 @@ if(isset($formErrors)) {
             </thead>
 
             <?php if(isset($topics)) { ?>
-            <tbody>
-                <?php foreach($topics as $topic) { ?>
-                    <tr>
-                        <td><?= $topic->getTitle() ?></td>
-                        <td><?= $topic->getTag()->showIcon() ?><?= $topic->getTag()->getLabel() ?></td>
-                        <td><?= $topic->getNbMessages() ?></td>
-                        <td><?= $topic->getFormattedDate("d-m-Y") ?></td>
-                    </tr>
-                <?php } ?>
-            </tbody>
+
+                <tbody>
+                    <?php foreach($topics as $topic) { ?>
+                        <tr>
+                            <td>
+                                <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId() ?>">
+                                    <?= $topic->getTitle() ?>
+                                </a>
+                            </td>
+                            
+                            <td>
+                                <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId() ?>">
+                                    <?= $topic->getTag()->showIcon() ?><?= $topic->getTag()->getLabel() ?>
+                                </a>
+                            </td>
+
+                            <td><?= $topic->getNbMessages() ?></td>
+                            <td><?= $topic->getFormattedDate("Y-m-d") ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+
+            <?php } else { ?>
+                <p>You haven't posted any topics</p>
+            <?php } ?>
+
         </table>
-
-        <?php } else { ?>
-            <li>You haven't posted any topics</li>
-
-        <?php } ?>
         
         <form id="form-content-profile" action="index.php?ctrl=user&action=updateUser" enctype="multipart/form-data" method="post">
             <label for="picture">Upload a picture for your profile!</label>
-            <input type="hidden" name="MAX_FILE_SIZE" value="100000"/>
+            <input type="hidden" name="MAX_FILE_SIZE" value="10000"/>
             <input type="file" name="picture" id="picture">
             <?= isset($formErrors["picture"]) ? FieldError::fieldError($formErrors["picture"]) : "" ?>
             <button type="submit">Upload</button>
         </form>
 
-
     </div>
-
 
 </div>

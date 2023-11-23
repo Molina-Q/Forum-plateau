@@ -1,15 +1,34 @@
 <?php
 use App\Session;
 use Service\ConvertDate;
+use Service\FieldError;
 
 $messages = $result["data"]['messages'];
 $topic = $result["data"]["topic"];
+$user = Session::getUser();
+
+if(isset($result["data"]["formErrors"])) {
+    $formErrors = $result["data"]["formErrors"];
+    // var_dump($formErrors);die;
+}
 ?>
 
-
 <?php if($topic) { ?>
-
     <div id="detailsTopicHeader">
+
+        <?php if($user) { ?>
+            <?php if($user->getId() == $topic->getUser()->getId() || Session::isAdmin()) { ?>
+                <div class="icons">
+                    <a href="index.php?ctrl=topic&action=updateTopicForm&id=<?= $topic->getId() ?>">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <a class="deleteIcon" href="index.php?ctrl=topic&action=deleteTopic&id=<?= $topic->getId() ?>">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
+                </div>
+            <?php } ?>
+        <?php } ?>
+
         <div id="detailsTopicAuthor">
             <?= $topic->getUser()->showPicture() ?>
             <p><?= $topic->getUser()->getUsername() ?></p>
@@ -19,18 +38,6 @@ $topic = $result["data"]["topic"];
         <div id="detailsTopicContent">
             <h1><?= $topic->getTitle() ?></h1> <!-- this as h1 because this seems like the most interesting part to be found with google search -->
             <p><?= $topic->getMessageAuthor() ?></p>
-
-            <?php if(isset($_SESSION["user"])) { 
-                if($_SESSION["user"]->getId() == $topic->getUser()->getId() || App\Session::isAdmin()) { ?>
-                    <a href="index.php?ctrl=topic&action=updateTopicForm&id=<?= $topic->getId() ?>">
-                        <i class="fa-solid fa-pen"></i>
-                    </a>
-                    <a class="deleteIcon" href="index.php?ctrl=topic&action=deleteTopic&id=<?= $topic->getId() ?>">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </a>
-                    
-                <?php }
-            } ?>
         </div>
 
     </div>
@@ -43,6 +50,7 @@ $topic = $result["data"]["topic"];
         <label for="text">Say something</label>
         <textarea name="text" id="text" cols="15" rows="1" placeholder="Write something..."></textarea>
         <button type="submit">Send</button>
+        <?= isset($formErrors["text"]) ? FieldError::fieldError($formErrors["text"]) : "" ?>
     </form>
 
 <?php } else { ?>
@@ -67,10 +75,10 @@ $topic = $result["data"]["topic"];
                 <tr>
                     <td class="authorTopic"><?= $message->getUser()->showPicture() ?><?= $message->getUser()->getUsername() ?></td>
                     <td><?= $message->getText() ?></td>
-                    <td><?= $message->getFormattedDate("d-m-Y, H:i") ?></td>
+                    <td><?= ConvertDate::convertDate($message->getCreationDate()) ?></td>
 
-                    <?php if((isset($_SESSION["user"])&&($_SESSION["user"]->getId() == $message->getUser()->getId()) || App\Session::isAdmin())) { ?>
-                        <td>
+                    <td>
+                        <?php if((isset($_SESSION["user"])&&($_SESSION["user"]->getId() == $message->getUser()->getId()) || App\Session::isAdmin())) { ?>
                             <a href="index.php?ctrl=message&action=updateMessageForm&id=<?= $message->getId() ?>">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
@@ -78,8 +86,8 @@ $topic = $result["data"]["topic"];
                             <a class="deleteIcon" href="index.php?ctrl=message&action=deleteMessage&id=<?= $message->getId() ?>">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
-                        </td>
-                    <?php } ?>
+                        <?php } ?>
+                    </td>
                 </tr>
 
             <?php } ?>

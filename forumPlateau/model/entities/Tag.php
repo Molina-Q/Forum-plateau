@@ -116,7 +116,9 @@
 
                 return $this;
         }
-
+        /**
+         * create an <i> elements with the color present in getIcon()
+         */
         public function showIcon() {
                 $colorIcon = $this->getIcon();
                 echo "<i class='fa-solid fa-circle' style='color:$colorIcon' ></i>";

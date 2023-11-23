@@ -66,6 +66,7 @@
         include($result['view']);
         /*je mets cet affichage dans une variable*/
         $page = ob_get_contents();
+        $title = $result['data']['title'];
         $meta_description = $result['meta'];
         /*j'efface le tampon*/
         ob_end_clean();

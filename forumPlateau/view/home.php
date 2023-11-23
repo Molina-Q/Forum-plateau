@@ -1,23 +1,31 @@
 <?php
 
 use Service\ConvertDate;
+use App\Session;
 
 $topics = $result["data"]["topics"];
 $tags = $result["data"]["tags"];
+
 $statUsers = $result["data"]["statUsers"];    
 $statMessages = $result["data"]["statMessages"];    
 $statTopics = $result["data"]["statTopics"];
+
 $recentsTopic = $result["data"]["recents"];    
-
 ?>
-<?php if(App\Session::isAdmin()){ ?>
-    <h1>Welcome ADMIN-<?= $_SESSION["user"]->getUsername() ?></h1>
-<?php } else if(App\Session::getUser()) { ?>
-    <h1>Welcome <?= $_SESSION["user"]->getUsername() ?></h1>
-<?php } else { ?>
-    <h1>Welcome to this forum!</h1>
-<?php } ?>
 
+<?php if(Session::isAdmin()) { ?>
+
+    <h1>Welcome ADMIN-<?= $_SESSION["user"]->getUsername() ?></h1>
+
+<?php } else if(Session::getUser()) { ?>
+
+    <h1>Welcome <?= $_SESSION["user"]->getUsername() ?></h1>
+
+<?php } else { ?>
+
+    <h1>Welcome to this forum!</h1>
+
+<?php } ?>
 
 <div id="homePageContent" class="grid-container">
     <div id="homePage-left">
@@ -60,7 +68,6 @@ $recentsTopic = $result["data"]["recents"];
                                 </a>
                             </td>
                             
-
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -106,7 +113,6 @@ $recentsTopic = $result["data"]["recents"];
         </div>
     </div>
 
-
     <div id="homePage-right">
         <div id="statistics" class="grid-item">
             <table>
@@ -118,9 +124,7 @@ $recentsTopic = $result["data"]["recents"];
 
                 <tbody class="blocListStat">
                     <tr>
-                        <td>
-                            Registered User
-                        </td>
+                        <td>Registered User</td>
 
                         <td>
                             <?php foreach($statUsers as $stat) { 
@@ -130,32 +134,27 @@ $recentsTopic = $result["data"]["recents"];
                     </tr>
 
                     <tr>
-                        <td>
-                            Topics Written
-                        </td>
+                        <td>Topics Written</td>
 
                         <td>
-                        <?php foreach($statTopics as $stat) { 
-                            echo $stat->getCountIteration();
-                        } ?>
+                            <?php foreach($statTopics as $stat) { 
+                                echo $stat->getCountIteration();
+                            } ?>
                         </td>
                     </tr>
 
                     <tr>
-                        <td>
-                            Messages Sent
-                        </td>
+                        <td>Messages Sent</td>
                         
                         <td>
-                        <?php foreach($statMessages as $stat) {
-                            echo $stat->getCountIteration();
-                        } ?>
+                            <?php foreach($statMessages as $stat) {
+                                echo $stat->getCountIteration();
+                            } ?>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
 
         <div id="recentTopics" class="grid-item">
             <table>

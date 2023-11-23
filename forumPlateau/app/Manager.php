@@ -112,7 +112,7 @@
 
         // update the field(s) of the table that call this method
         public function update($data) {
-
+            $keyParam = [];
             $separator = ", ";
             $fieldUpdated = "";
             $countLoop = 2; // start at two because the first argument of the array do not count in the loop
@@ -129,12 +129,19 @@
                     $countLoop++;
                 }
             }
-
+            
+            $setClause = array_keys($data);
+            foreach ($setClause as $key) {
+                $keyParam[] = $key." = :".$key;
+            }
+            // keys []
+            // pr chq elt remplacer par -> "key = :key"
+            // ds la req dirctmt -> implode(", ", $setClause)
             $sql = 
                 "UPDATE 
                     ".$this->tableName."
                 SET
-                    ".$fieldUpdated."
+                    ".implode(', ',$keyParam)."
                 WHERE
                     id_".$this->tableName." = :id
             ";

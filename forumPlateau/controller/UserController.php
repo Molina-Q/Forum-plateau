@@ -13,19 +13,16 @@
 
         public function index() {
           
-           $topicManager = new UserManager();
-
-            return [
-                "view" => VIEW_DIR."topic/listTopics.php",
-                "data" => [
-                    "topics" => $topicManager->findAll(["creationDate", "DESC"])
-                ]
-            ];
-        
+            $topicManager = new UserManager();
+            $this->redirectTo("home", "index");
         }
 
         public function profile() {
-            $topicManager = new TopicManager;
+            // only a connected user can acces call this method via get
+            if(!Session::getUser()) { 
+                $this->redirectTo("home", "index");
+            }
+            $topicManager = new TopicManager();
 
             $userId = $_SESSION["user"]->getId();
 
@@ -34,22 +31,26 @@
             return [
                 "view" => VIEW_DIR."user/profile.php",
                 "data" => [
+                    "title" => "User profile",
                     "topics" => $topics
                 ]
             ];
         }
 
         public function updateUser() {
-            $userManager = new UserManager;
-            $topicManager = new TopicManager;
+            if(empty($_FILES["picture"])) {
+                $this->redirectTo("user", "profile");
+            }
+
+            $userManager = new UserManager();
+            $topicManager = new TopicManager();
 
             $_FILES["picture"]["name"] = filter_var($_FILES["picture"]["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $_FILES["picture"]["tmp_name"] = filter_var($_FILES["picture"]["tmp_name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            // this is the directory where it will be uploaded
-            $uploadDir = "./public/img/uploads/";
-            // $uploadDir = ".".PUBLIC_DIR."/img/uploads/";
-            $pathFile = $uploadDir . basename($_FILES["picture"]["name"]); // the path to the picture
+            // this is the directory where the file will be uploaded
+            $uploadDir = ".".PUBLIC_DIR."/img/uploads/";
+            $pathFile = $uploadDir . basename($_FILES["picture"]["name"]); // the path to the file
 
             $newFileName = "";
             $formErrors = [];
@@ -60,7 +61,7 @@
 
             // file upload vulnerabilities to cover
             // the size of the file
-            if($_FILES["picture"]["size"] > 100000 ) { // i limit the size to 10 MegaBytes (10000 KiloBytes)
+            if($_FILES["picture"]["size"] > 10000 ) { // i limit the size to 10 MegaBytes (10000 KiloBytes)
                 $formErrors["picture"] = "File is too big";
             }
             
@@ -94,6 +95,7 @@
                     return [
                         "view" => VIEW_DIR."user/profile.php",
                         "data" => [
+                            "title" => "User profile",
                             "topics" => $topics,
                             "formErrors" => $formErrors
                         ]
@@ -113,6 +115,7 @@
             return [
                 "view" => VIEW_DIR."user/profile.php",
                 "data" => [
+                    "title" => "User profile",
                     "topics" => $topics,
                     "formErrors" => $formErrors
                 ]

@@ -18,6 +18,7 @@
             return [
                 "view" => VIEW_DIR."tag/listTags.php",
                 "data" => [
+                    "title" => "List of tags",
                     "tags" => $TagManager->infoTags()
                     // "tags" => $TagManager->findAll(["id_tag", "ASC"])
                 ]
@@ -32,6 +33,7 @@
             return [
                 "view" => VIEW_DIR."tag/listTags.php",
                 "data" => [
+                    "title" => "List of tags",
                     "tags" => $TagManager->infoTags()
                     // "tags" => $TagManager->findAll(["id_tag", "ASC"])
                 ]
@@ -46,6 +48,7 @@
             return [
                 "view" => VIEW_DIR."tag/detailsTag.php",
                 "data" => [
+                    "title" => "Details of a tag",
                     "tag" => $tagManager->findOneById($id),
                     "topics" => $topicManager->topicsByTag($id)
                 ]

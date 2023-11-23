@@ -215,6 +215,9 @@
             }
         }
 
+        /**
+         * create a <figure><img> elements with the link to the picture of the user then apply a class depending of the role of the user
+         */
         public function showPicture() {
             $picture = $this->getPicture();
             $role = $this->getRole();
@@ -230,9 +233,11 @@
                     break;
             }
             
-            echo "<figure class='$classPic'>
-                    <img src='./public/img/uploads/$picture' alt='$picture'></img>
-                </figure>";
+            echo "
+            <figure class='$classPic'>
+                <img src='./public/img/uploads/$picture' alt='$picture'></img>
+            </figure>
+            ";
         }
 
         // /**
