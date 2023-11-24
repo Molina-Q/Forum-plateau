@@ -13,7 +13,7 @@
     --title-font-size: 32px;
     --p-font-size: 16px;
 
-    --size-user-picture: 50px;
+    --size-user-picture: 60px;
 }
 /******************** general ********************/
 * {
@@ -81,6 +81,12 @@ textarea {
     outline: none;
 }
 
+.blocListTopics tr td a:has(> figure){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /******************** header ********************/
 header {
     width: 100%;
@@ -124,6 +130,11 @@ nav {
 }
 
 /******************** menuBurger ********************/
+#iconBurger {
+    color: var(--secondary-color);
+    font-size: 20px;
+}
+
 #blocBurger { /* div that group the icon and menu burger*/
     position: relative;
 }
@@ -196,6 +207,7 @@ nav {
 }
 
 #form-content {
+    padding: 15px 0;
     background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
@@ -203,7 +215,130 @@ nav {
     align-items: center;
 }
 
-/******************** login ********************/
+#form-content input:focus-visible { /* nativ outline */
+    outline-style:none;
+}
+
+#form-content input {
+    width: 250px;
+    padding: 8px 10px;
+
+    background-color: var(--table-highlight-color);
+    border: 0;
+    font-size: 18px;
+}
+
+#form-content #username, #form-content #text {
+    margin-bottom: 20px ;
+}
+
+#form-content #confirmEmail {
+    margin-bottom: 20px ;
+}
+
+#form-content #confirmPassword {
+    margin-bottom: 15px ;
+}
+
+form #password {
+    padding: 8px 30px 8px 10px;
+}
+
+#eyeCon {
+    cursor: pointer;
+}
+
+/* this make it so that the eye stay fixed when it is toggled from eye to eye-slash */
+#form-content .fa-eye-slash { 
+    right: 6px;
+}
+
+#form-content input[type=file] {
+    
+}
+
+.form-password {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+}
+
+.form-password i {
+    position: absolute;
+    bottom: 10px;
+    right: 7px;
+}
+
+#form-content button {
+    width: 130px;
+    height: 45px;
+    margin: 15px 0;
+
+    font-size: 18px;
+    color: var(--secondary-color);
+
+    background-color: var(--primary-color);
+    border: 0 ;
+    border-radius: 5px;
+}
+
+#form-content-profile button {
+    width: 80px;
+    height: 30px;
+
+    margin-top: 15px;
+
+    font-size: 15px;
+    color: var(--secondary-color);
+
+    background-color: var(--primary-color);
+    border: 0 ;
+    border-radius: 5px;
+}
+
+#form-content-profile input {
+    margin-top: 10px;
+}
+
+.passForgot {
+    margin-top: 10px ;
+}
+
+#form-search {
+    display: flex;
+    flex-direction: row;
+
+}
+
+#form-search input  {
+    width: 250px;
+    height: 35px;
+    padding: 0 5px;
+
+    font-size: 16px;
+    border: 0;
+}
+
+#form-search input:focus-visible { /* nativ outline */
+    outline-style:none;
+}
+
+#form-search button  {
+    width: 70px;
+    height: 35px;
+    font-size: 15px;
+    border: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+form button {
+    cursor: pointer;
+}
 
 /******************** User profile ********************/
 [class*='picture'] {
@@ -305,7 +440,7 @@ nav {
 }
 /********** pictureUser **********/
 .pictureUser { /* user pic is round */
-    outline: 5px solid var(--primary-color);
+    border: 5px solid var(--primary-color);
     border-radius: 50%;
 }
 
@@ -313,13 +448,12 @@ nav {
     width: 100%;
     height: 100%;
     object-fit:cover;
-
     border-radius: 50%;
 }
 
 /********** pictureAdmin **********/
 .pictureAdmin { /* admin pic is a square */
-    outline: 5px solid var(--primary-color);
+    border: 5px solid var(--primary-color);
     border-radius: 0%;
 }
 
@@ -448,8 +582,7 @@ th {
 }
 
 td {
-    /* border-bottom: 1px solid rgb(163, 163, 163);  */
-    padding: 15px; 
+    padding: 12px; 
     text-align:left;
 }
 

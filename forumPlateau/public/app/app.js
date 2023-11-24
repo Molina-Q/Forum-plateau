@@ -1,4 +1,5 @@
 /* var */
+// chack if the menu is open or closed
 function menuState(menu) {
 
     if(currentStyle.getPropertyValue("display") == "none") {
@@ -7,14 +8,32 @@ function menuState(menu) {
         menuToggle(menu);
     }
 }
-
+/**
+ *  close or open the menu depending of his current state
+ * @param {HTMLElement} menu 
+ */
 function menuToggle(menu) {
-    
 
     if(currentStyle.getPropertyValue("display") == "none") {
         menu.style.display = "initial";
     } else {
         menu.style.display = "none";
+    }
+}
+    
+/**
+ * show or hide the password depending of his current state
+ * @param {HTMLElement} passwordElement
+ */
+function togglePassword(passwordElement) {
+    if(passwordElement.type == "password") {
+        passwordElement.type = "text";
+        eyeCon.classList.remove("fa-eye");
+        eyeCon.classList.add("fa-eye-slash");
+    } else {
+        passwordElement.type = "password";
+        eyeCon.classList.remove("fa-eye-slash");
+        eyeCon.classList.add("fa-eye");
     }
 }
 
@@ -28,16 +47,21 @@ const deleteIcon = document.getElementsByClassName("deleteIcon");
 // val used to store the result of confirm() from the the deleteIcon 
 let checkConfirm = true;
 
+// array of the items present in the burger dropdown menu, makes it easier and faster to add items to the list
 const listItems = [
     { // List topics
         label: "List of topics",
         ctrl: "topic",
         action: "listTopics" 
     }
-
 ]
 
-// menuBurger //
+// id eye icon
+const eyeCon = document.getElementById("eyeCon");
+
+const passwordInput = document.getElementById("password");
+
+// menuBurger
 const menuBurger = document.createElement("DIV");
 menuBurger.classList.add("menuBurger");
 blocBurger.appendChild(menuBurger);
@@ -74,7 +98,7 @@ iconBurger.addEventListener("click", () => menuToggle(menuBurger));
 //     }
 // });
 
-// confirm delete //
+//// confirm delete ////
 for (let i = 0; i < deleteIcon.length; i++) {
     const openDelete = deleteIcon[i]; // openDelete is the <a href="" class="deleteIcon"> element i clicked
     
@@ -95,3 +119,6 @@ for (let i = 0; i < deleteIcon.length; i++) {
         }
     })
 }
+
+//// showPassword //// 
+eyeCon.addEventListener("click", () => togglePassword(passwordInput));

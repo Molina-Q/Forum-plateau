@@ -16,12 +16,12 @@ if(isset($result["data"]["fieldData"]) && isset($result["data"]["formErrors"])) 
     <form id="form-content" action="index.php?ctrl=security&action=registerUser" method="post">
         <!-- username -->
         <label for="username">Username</label>
-        <input id="username" type="text" name="username" value=<?= isset($fieldData) ? $fieldData["username"] : ""//ternary in value to show data previously written ?>>
+        <input type="text" name="username"  id="username" value=<?= isset($fieldData) ? $fieldData["username"] : ""//ternary in value to show data previously written ?>>
         <?= isset($formErrors["username"]) ? FieldError::fieldError($formErrors["username"]) : "" //ternary to verify if an error is set than shows it ?>
 
         <!-- email -->
         <label for="email">Email</label>
-        <input id="email" type="email" name="email" value=<?= isset($fieldData["email"]) ? $fieldData["email"] : "" ?> >
+        <input type="email" name="email" id="email" value=<?= isset($fieldData["email"]) ? $fieldData["email"] : "" ?> >
         <?= isset($formErrors["email"]) ? FieldError::fieldError($formErrors["email"]) : "" ?>
 
         <!-- confirmEmail -->
@@ -30,9 +30,13 @@ if(isset($result["data"]["fieldData"]) && isset($result["data"]["formErrors"])) 
         <?= isset($formErrors["confirmEmail"]) ? FieldError::fieldError($formErrors["confirmEmail"]) : "" ?>
 
         <!-- password -->
-        <label for="password">Password*</label>
-        <input type="password" name="password" id="password">
-        <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?>
+        <div class="form-password">
+            <label for="password">Password*</label>
+            <input type="password" name="password" id="password">
+            <i class="fa-solid fa-eye" id="eyeCon"></i>
+            <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?>
+        </div>
+
 
         <!-- confirmPassword -->
         <label for="confirmPassword">Confirm password</label>
