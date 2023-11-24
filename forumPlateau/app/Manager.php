@@ -113,30 +113,14 @@
         // update the field(s) of the table that call this method
         public function update($data) {
             $keyParam = [];
-            $separator = ", ";
-            $fieldUpdated = "";
-            $countLoop = 2; // start at two because the first argument of the array do not count in the loop
-            $dataLoop = count($data);
-
-            // separator and dataLoop so that the comma isn't written on the last updated row
-            foreach ($data as $key => $value) {
-                if($dataLoop == $countLoop) {
-                    $separator = "";
-                }
-                // username = :username, email = :email, etc... / doesn't accept id because there is no circumstance where i will modify an id
-                if($key !== "id") {
-                    $fieldUpdated .= "$key = :$key $separator";
-                    $countLoop++;
-                }
-            }
-            
+          
             $setClause = array_keys($data);
-            foreach ($setClause as $key) {
-                $keyParam[] = $key." = :".$key;
+            foreach($setClause as $key) {
+                if($key !== "id") { // under no circumstances will i modify an id (and the $data var will always have one)
+                    $keyParam[] = $key." = :".$key; 
+                }
             }
-            // keys []
-            // pr chq elt remplacer par -> "key = :key"
-            // ds la req dirctmt -> implode(", ", $setClause)
+
             $sql = 
                 "UPDATE 
                     ".$this->tableName."
