@@ -20,7 +20,7 @@ if(isset($result["data"]["formErrors"])) {
             <?php if($user->getId() == $topic->getUser()->getId() || Session::isAdmin()) { ?>
                 <div class="icons">
                     <a href="index.php?ctrl=topic&action=updateTopicForm&id=<?= $topic->getId() ?>">
-                        <i class="fa-solid fa-pen"></i>
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </a>
                     <a class="deleteIcon" href="index.php?ctrl=topic&action=deleteTopic&id=<?= $topic->getId() ?>">
                         <i class="fa-solid fa-trash-can"></i>
@@ -80,7 +80,7 @@ if(isset($result["data"]["formErrors"])) {
                     <td>
                         <?php if((isset($_SESSION["user"])&&($_SESSION["user"]->getId() == $message->getUser()->getId()) || App\Session::isAdmin())) { ?>
                             <a href="index.php?ctrl=message&action=updateMessageForm&id=<?= $message->getId() ?>">
-                                <i class="fa-solid fa-pen"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
 
                             <a class="deleteIcon" href="index.php?ctrl=message&action=deleteMessage&id=<?= $message->getId() ?>">

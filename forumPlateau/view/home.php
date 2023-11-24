@@ -35,9 +35,9 @@ $recentsTopic = $result["data"]["recents"];
                     <tr>
                         <th class="author">Author</th>
                         <th>Popular topic</th>
-                        <th>Date</th>
                         <th>Post</th>
                         <th>Tag</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
 
@@ -54,18 +54,19 @@ $recentsTopic = $result["data"]["recents"];
                                 </a>
                             </td>
 
-                            <td class="timeInterval">
-                                <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
-                            </td>
-        
+                            
                             <td>
                                 <?= $topic->getNbMessages() ?> 
                             </td>
-
+                            
                             <td>
                                 <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>">
                                     <?= $topic->getTag()->showIcon() ?><?= $topic->getTag()->getLabel() ?>
                                 </a>
+                            </td>
+                            
+                            <td class="timeInterval">
+                                <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
                             </td>
                             
                         </tr>

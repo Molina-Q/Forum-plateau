@@ -28,7 +28,6 @@
                     "title" => "Register"
                 ]
             ];
-            
         }
 
         // function used to register a user in the database (or not if there is any mistakes) 
@@ -72,7 +71,7 @@
                 $formErrors["confirmPassword"] = "This field is mandatory!";
             }
 
-            //check regex password
+            // check regex password
             if(!preg_match($password_regex, $password)) {
                 $formErrors["password"] = "the password isn't safe";
             }
@@ -168,7 +167,7 @@
                 $formErrors["password"] = "this field is mandatory";
             }
 
-            //check if the var return true or false
+            //check if the var are valid
             if(!$email) {
                 $formErrors["email"] = "This field is invalid";
             }
@@ -208,12 +207,13 @@
             $this->redirectTo("home", "index");
         }
 
-        public function changePassword() {
+        public function changePassword($formErrors = []) {
 
             return [
                 "view" => VIEW_DIR."security/changePassword.php",
                 "data" => [
-                    "title" => "Change password"
+                    "title" => "Change password",
+                    "formErrors" => $formErrors
                 ]
             ];
         }
@@ -225,7 +225,10 @@
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{4,}$/";
             
+            // check if empty
             if(empty($email)) {
                 $formErrors["email"] = "this field is mandatory";
             }
@@ -233,21 +236,28 @@
             if(empty($password)) {
                 $formErrors["password"] = "this field is mandatory";
             }
-
+            
             if(empty($confirmPassword)) {
                 $formErrors["confirmPassword"] = "this field is mandatory";
             }
 
+            // check if it is non-null
             if(!$email) {
                 $formErrors["email"] = "there was a mistake";
             }
             
+            //  check if email isn't already in the database
             if(!$user = $userManager->findUser($email)) {
-                $formErrors["email"] = "there was a mistake";
+                $formErrors["email"] = "Email is invalid or already used";
             }
 
             if($password != $confirmPassword) {
                 $formErrors["password"] = "the passwords are not the same";
+            }
+
+            // check regex password
+            if(!preg_match($password_regex, $password)) {
+                $formErrors["password"] = "the password isn't safe";
             }
 
             if(empty($formErrors)) {

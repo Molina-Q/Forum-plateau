@@ -117,7 +117,7 @@
             $setClause = array_keys($data);
             foreach($setClause as $key) {
                 if($key !== "id") { // under no circumstances will i modify an id (and the $data var will always have one)
-                    $keyParam[] = $key." = :".$key; 
+                    $keyParams[] = "$key = :$key"; 
                 }
             }
 

@@ -34,8 +34,8 @@ if(isset($result["data"]["fieldData"]) && isset($result["data"]["formErrors"])) 
             <label for="password">Password*</label>
             <input type="password" name="password" id="password">
             <i class="fa-solid fa-eye" id="eyeCon"></i>
-            <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?>
         </div>
+        <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?>
 
 
         <!-- confirmPassword -->

@@ -159,7 +159,7 @@
             $messageManager->deleteMessages($idTopic);
             $topicManager->delete($idTopic);
 
-            $this->redirectTo("tag", "listTags");
+            $this->redirectTo("home", "index");
         }
 
     }

@@ -42,8 +42,8 @@ if(Session::isAdmin()) {
                     <form action="index.php?ctrl=user&action=updateUser" method="post">
                         <label for="role">Role</label>
                         <select name="role" id="role">
-                            <option value="ROLE_ADMIN" <?= $isAdmin ?> >ADMIN <?= isset($isAdmin) ? $current : "" ?></option>
-                            <option value="ROLE_USER" <?= $isUser ?> >USER <?= isset($isUser) ? $current : "" ?></option>
+                            <option value="ROLE_ADMIN" <?= $isAdmin ?>>ADMIN <?= isset($isAdmin) ? $current : "" ?></option>
+                            <option value="ROLE_USER" <?= $isUser ?>>USER <?= isset($isUser) ? $current : "" ?></option>
                         </select>
 
                         <button type="submit">Change</button>
@@ -65,7 +65,9 @@ if(Session::isAdmin()) {
             <?php if(isset($topics)) { ?>
 
                 <tbody>
+
                     <?php foreach($topics as $topic) { ?>
+
                         <tr>
                             <td>
                                 <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId() ?>">
@@ -82,7 +84,9 @@ if(Session::isAdmin()) {
                             <td><?= $topic->getNbMessages() ?></td>
                             <td><?= $topic->getFormattedDate("Y-m-d") ?></td>
                         </tr>
+
                     <?php } ?>
+
                 </tbody>
 
             <?php } else { ?>
@@ -96,6 +100,7 @@ if(Session::isAdmin()) {
             <input type="hidden" name="MAX_FILE_SIZE" value="10000"/>
             <input type="file" name="picture" id="picture">
             <?= isset($formErrors["picture"]) ? FieldError::fieldError($formErrors["picture"]) : "" ?>
+
             <button type="submit">Upload</button>
         </form>
 

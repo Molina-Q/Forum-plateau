@@ -22,7 +22,7 @@
                     <div id="nav-left">
                         <a href="index.php">Home</a>
 
-                        <form action="index.php?" method="post">
+                        <form id="form-search" action="index.php?" method="post">
                             <label for="search-bar" ></label>
                             <input id="search-bar" type="text" name="search-bar">
                             <button id="search-bar" type="submit">Search</button>

@@ -42,6 +42,7 @@
             if(!Session::getUser()) {
                 $this->redirectTo("home", "index");
             }
+
             $topicManager = new TopicManager();
             $messageManager = new MessageManager();
             $currentDate = new \DateTime("now");
@@ -51,6 +52,15 @@
 
             $message = $messageManager->messagesResponse($idTopic);
             $topic = $topicManager->headerTopic($idTopic);
+
+            // if(!$message && !$topic) {
+            //     return [
+            //         "view" => VIEW_DIR."security/error.php",
+            //         "data" => [
+            //             "Errors" => $smth,
+            //         ]
+            //     ];
+            // }
 
             $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // if the field is empty
@@ -68,9 +78,12 @@
                         "user_id" => $userId
                     ];
 
+                } else {
+                    $this->redirectTo("message", "showMessages", $idTopic);
                 }
-                $messageManager->add($dataMessage);
                 
+                $messageManager->add($dataMessage);
+
                 $this->redirectTo("message", "showMessages", $idTopic);
 
             } else {

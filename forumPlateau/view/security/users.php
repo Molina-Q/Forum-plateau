@@ -15,7 +15,7 @@ $users = $result["data"]['users'];
         </tr>
     </thead>
 
-    <tbody class="blocListTopics">
+    <tbody class="blocListUser">
         <?php foreach($users as $user) { ?>
             <tr>
                 <td>
@@ -35,7 +35,7 @@ $users = $result["data"]['users'];
                 </td>
 
                 <td>
-                    <?= $user->getFormattedDate("Y/m/d, H:i:s") ?>(<?= ConvertDate::convertDate($user->getCreationDate()) ?>)
+                    <?= $user->getFormattedDate("Y/m/d, H:i:s") ?> - <span class="timeInterval"><?= ConvertDate::convertDate($user->getCreationDate()) ?></span>
                 </td>
 
             </tr>
