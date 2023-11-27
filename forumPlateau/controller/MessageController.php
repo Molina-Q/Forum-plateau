@@ -18,10 +18,13 @@
         public function showMessages($idTopic) {
             $messageManager = new MessageManager();
             $topicManager = new TopicManager();
-
+            
+            $this->existInDatabase($idTopic, $topicManager);
+            
             $message = $messageManager->messagesResponse($idTopic); // the message posted on a topic (except the one the author wrote)
             $topic = $topicManager->headerTopic($idTopic); // all the information displayed on the header of a topic
-            
+            $closed = $topicManager->closed($idTopic);
+
             $formErrors = [];
 
             return [
@@ -30,9 +33,10 @@
                     "title" => "Topic details",
                     "messages" => $message, // return every messages from the topic ecxept the first one from the author
                     "topic" => $topic, // return the topic title and the first message that goes with it
+                    "closed" => $closed,
                     "formErrors" => $formErrors
                 ], 
-                "meta" => "Liste des messages du topic ".$topic->getTitle()
+                "meta" => "List of messages from a topic ".$topic->getTitle()
             ];
         }
 
@@ -42,25 +46,22 @@
             if(!Session::getUser()) {
                 $this->redirectTo("home", "index");
             }
-
+            
             $topicManager = new TopicManager();
             $messageManager = new MessageManager();
             $currentDate = new \DateTime("now");
             $userId = $_SESSION["user"]->getId();
-
+            
+            $this->existInDatabase($idTopic, $topicManager);
+            
             $formErrors = [];
-
+            
             $message = $messageManager->messagesResponse($idTopic);
             $topic = $topicManager->headerTopic($idTopic);
-
-            // if(!$message && !$topic) {
-            //     return [
-            //         "view" => VIEW_DIR."security/error.php",
-            //         "data" => [
-            //             "Errors" => $smth,
-            //         ]
-            //     ];
-            // }
+            
+            if(!$message || !$topic) {
+                $this->redirectTo("security", "index");
+            }
 
             $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // if the field is empty
@@ -111,6 +112,8 @@
                 $this->redirectTo("home", "index");
             }
 
+            $this->existInDatabase($idMessage, $messageManager);
+
             return [
                 "view" => VIEW_DIR."message/updateMessage.php",
                 "data" => [
@@ -129,6 +132,8 @@
             if(!Session::isAuthorOrAdmin($message->getUser()->getId())) {
                 $this->redirectTo("home", "index");
             }
+
+            $this->existInDatabase($idMessage, $messageManager);
 
             $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
@@ -151,6 +156,8 @@
             if(!Session::isAuthorOrAdmin($message->getUser()->getId())) {
                 $this->redirectTo("home", "index");
             }
+
+            $this->existInDatabase($idMessage, $messageManager);
 
             $messageManager->delete($idMessage);
 

@@ -23,6 +23,7 @@
                 t.id_topic,
                 t.title,
                 t.creationDate,
+                t.closed,
                 t.tag_id,
                 t.user_id,
                 m.id_message AS idMessageAuthor,
@@ -54,6 +55,7 @@
                 t.id_topic,
                 t.title,
                 t.creationDate,
+                t.closed,
                 t.tag_id,
                 t.user_id,
                 COUNT(m.topic_id) AS nbmessages
@@ -85,6 +87,7 @@
                 t.id_topic,
                 t.title,
                 t.creationDate,
+                t.closed,
                 t.tag_id,
                 t.user_id,
                 COUNT(m.topic_id) AS nbmessages
@@ -115,6 +118,7 @@
                 t.id_topic,
                 t.title,
                 t.creationDate,
+                t.closed,
                 t.tag_id,
                 t.user_id,
                 COUNT(m.topic_id) AS nbmessages
@@ -145,6 +149,7 @@
                 t.id_topic,
                 t.title,
                 t.creationDate,
+                t.closed,
                 t.user_id,
                 t.tag_id
             FROM 
@@ -155,6 +160,26 @@
 
             return $this->getMultipleResults(
                 DAO::select($sql), 
+                $this->className
+            );
+        }
+        
+        /**
+         * return the "closed" attribut of the topic
+         */
+        public function closed($id) {
+            $sql = 
+            "SELECT 
+                t.id_topic,
+                t.closed
+            FROM 
+                topic t
+            WHERE 
+                t.id_topic = :id
+            ";
+
+            return $this->getOneOrNullResult(
+                DAO::select($sql, ['id' => $id], false), 
                 $this->className
             );
         }

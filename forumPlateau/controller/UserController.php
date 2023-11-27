@@ -12,8 +12,6 @@
     class UserController extends AbstractController implements ControllerInterface{
 
         public function index() {
-          
-            $topicManager = new UserManager();
             $this->redirectTo("home", "index");
         }
 
@@ -45,6 +43,7 @@
             $userManager = new UserManager();
             $topicManager = new TopicManager();
 
+            // i sanitize the file name and path name
             $_FILES["picture"]["name"] = filter_var($_FILES["picture"]["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $_FILES["picture"]["tmp_name"] = filter_var($_FILES["picture"]["tmp_name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 

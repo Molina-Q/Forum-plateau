@@ -13,10 +13,16 @@
     class SecurityController extends AbstractController implements ControllerInterface{
 
         public function index() {
-            $this->redirectTo("home", "index");
+            $title = "This page doesn't exist";
+            return [
+                "view" => VIEW_DIR."/security/error.php",
+                "data" => [
+                    "title" => $title
+                ]
+            ];
         }
 
-        public function register($fieldData = [], $formErrors = []) {
+        public function register() {
             // if the user is already connected he cannot access this method
             if (Session::getUser()) {
                 $this->redirectTo("home", "index");
@@ -46,6 +52,7 @@
             $currentDate = new \DateTime("now"); //for the creationDate of the account
             $formErrors = [];
             $formData = [];
+            
             // regex: need at least 1 capital, 1 small, 1 number, 1 special char and 4 characters in total 
             //(the CNIL advise around 12 to be actually safe)
             $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{4,}$/";
@@ -127,8 +134,8 @@
                     "view" => VIEW_DIR."security/register.php",
                     "data" => [
                         "title" => "Register",
-                        "fieldData" => $fieldData,
-                        "formErrors" => $formErrors // used to show all the error messages
+                        "fieldData" => $fieldData, // used to put the previously written data in the inputs when there is an error 
+                        "formErrors" => $formErrors // used to show error messages
                     ]
                 ];
             }

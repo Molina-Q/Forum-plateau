@@ -56,6 +56,9 @@
             );
         }
        
+        /**
+         * find one row with a given id
+         */
         public function findOneById($id){
 
             $sql = 
@@ -72,6 +75,10 @@
             );
         }
 
+        /**
+         * count the number of entities
+         * i.e. the number of existings topics if called by topicManager, etc...
+         */
         public function countElem() {
             $sql = 
             "SELECT
@@ -87,7 +94,9 @@
         }
 
         //$data = ['username' => 'Squalli', 'password' => 'dfsyfshfbzeifbqefbq', 'email' => 'sql@gmail.com'];
-
+        /**
+         * add a row to the database by giving an array with all of the values needed
+         */
         public function add($data){
             //$keys = ['username' , 'password', 'email']
             $keys = array_keys($data);
@@ -110,13 +119,15 @@
             }
         }
 
-        // update the field(s) of the table that call this method
+        /**
+         * update the field(s) of the table that call this method 
+         */ 
         public function update($data) {
-            $keyParam = [];
+            $keyParams = [];
           
             $setClause = array_keys($data);
             foreach($setClause as $key) {
-                if($key !== "id") { // under no circumstances will i modify an id (and the $data var will always have one)
+                if($key !== "id") { // under no circumstances will i modify an id (and $data will always have one)
                     $keyParams[] = "$key = :$key"; 
                 }
             }
@@ -125,7 +136,7 @@
                 "UPDATE 
                     ".$this->tableName."
                 SET
-                    ".implode(', ',$keyParam)."
+                    ".implode(', ',$keyParams)."
                 WHERE
                     id_".$this->tableName." = :id
             ";

@@ -10,7 +10,7 @@
         private $id;
         private $title;
         private $creationDate;
-        // private $closed;
+        private $closed;
         private $user;
         private $tag;
 
@@ -209,23 +209,23 @@
         }
 
 
-        // /**
-        //  * Get the value of closed
-        //  */ 
-        // public function getClosed()
-        // {
-        //         return $this->closed;
-        // }
+        /**
+         * Get the value of closed
+         */ 
+        public function getClosed()
+        {
+                return $this->closed;
+        }
 
-        // /**
-        //  * Set the value of closed
-        //  *
-        //  * @return  self
-        //  */ 
-        // public function setClosed($closed)
-        // {
-        //         $this->closed = $closed;
+        /**
+         * Set the value of closed
+         *
+         * @return  self
+         */ 
+        public function setClosed($closed)
+        {
+                $this->closed = $closed;
 
-        //         return $this;
-        // }
+                return $this;
+        }
     }

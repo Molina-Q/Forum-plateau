@@ -2,4 +2,4 @@
 
 ?>
 
-<h1>Sorry but this page doesn't exist</h1>
+<p>There was a mistake this page doesn't exist</p>

@@ -511,12 +511,35 @@ main {
     color: var(--secondary-color);
 }
 
-.fa-pen-to-square {
+/***** icons *****/
+.icons {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+.fa-pen-to-square { /* update icon */
     color: var(--secondary-color);
     font-size: 17px;
 }
 
-.fa-trash-can {
+.fa-trash-can { /* delete icon */
+    color: var(--secondary-color);
+    font-size: 17px;
+}
+
+.fa-lock { /* closed icon */
+    color: var(--secondary-color);
+    font-size: 17px;
+}
+
+.fa-lock-open { /* open icon */
     color: var(--secondary-color);
     font-size: 17px;
 }
@@ -525,18 +548,6 @@ main {
     color: var(--primary-color);
 }
 
-.icons {
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-
-
-    position: absolute;
-    top: 0;
-    right: 20px;
-}
 /******************** addMessage ********************/
 #form-add-message {
     padding: 5px;

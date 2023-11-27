@@ -25,7 +25,7 @@
         
         }
 
-        public function addTopicForm($idTag, $formErrors = [], $fieldData = []) { 
+        public function addTopicForm($tagId) { 
             //in case someone who isn't registered try to manipulate the url he cannot access the page
             if(!Session::getUser()) { 
                 $this->redirectTo("home", "index");
@@ -34,11 +34,13 @@
             $tagManager = new TagManager();
             $tags = $tagManager->findAll();
 
+            $this->existInDatabase($tagId, $tagManager);
+
             return [
                 "view" => VIEW_DIR."topic/addTopicForm.php",
                 "data" => [
                     "title" => "Topic creation",
-                    "idTag" => $idTag,
+                    "idTag" => $tagId,
                     "tags" => $tags
                 ]
             ];
@@ -100,6 +102,7 @@
                 $this->redirectTo("home", "index");
             }
 
+            $this->existInDatabase($idTopic, $topicManager);
 
             return [
                 "view" => VIEW_DIR."topic/updateTopicForm.php",
@@ -114,6 +117,9 @@
             $topicManager = new TopicManager;
             $messageManager = new MessageManager;
 
+            $this->existInDatabase($idTopic, $topicManager);
+
+            // this is only used to check if the user is indeed the author or an admin, so it can be overwritten later
             $topic = $topicManager->findOneById($idTopic);
 
             // if the user isn't an admin or the author of the message he cannot access this method
@@ -148,6 +154,8 @@
             $topicManager = new TopicManager;
             $messageManager = new MessageManager;
 
+            $this->existInDatabase($idTopic, $topicManager);
+
             $topic = $topicManager->findOneById($idTopic);
 
             // if the user isn't an admin or the author of the message he cannot access this method
@@ -160,6 +168,29 @@
             $topicManager->delete($idTopic);
 
             $this->redirectTo("home", "index");
+        }
+
+        /**
+         * closes a topic by changing the 'closed' attribut to true
+         */
+        public function closeTopic($idTopic) {
+            $topicManager = new TopicManager;
+
+            $this->existInDatabase($idTopic, $topicManager);
+
+            $dataTopic = [
+                "id" => $idTopic,
+                "closed" => "true"
+            ];
+
+            if ($topicManager->update($dataTopic)) {
+                $this->redirectTo("message", "showMessages", $idTopic);
+            } else {
+                $this->redirectTo("topic", "listTopics");
+                
+            }
+
+
         }
 
     }

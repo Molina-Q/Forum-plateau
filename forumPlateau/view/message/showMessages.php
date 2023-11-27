@@ -5,7 +5,14 @@ use Service\FieldError;
 
 $messages = $result["data"]['messages'];
 $topic = $result["data"]["topic"];
-$user = Session::getUser();
+$userSession = Session::getUser();
+$closedData = $result["data"]["closed"];
+
+if ($closedData->getClosed()) {
+    $closed = true;
+} else {
+    $closed = false;
+}
 
 if(isset($result["data"]["formErrors"])) {
     $formErrors = $result["data"]["formErrors"];
@@ -14,37 +21,65 @@ if(isset($result["data"]["formErrors"])) {
 ?>
 
 <?php if($topic) { ?>
+
     <div id="detailsTopicHeader">
 
-        <?php if($user) { ?>
-            <?php if($user->getId() == $topic->getUser()->getId() || Session::isAdmin()) { ?>
+        <?php if($userSession) { ?>
+
+            <?php if(($userSession->getId() == $topic->getUser()->getId() && !$closed) || Session::isAdmin()) { ?>
+
                 <div class="icons">
+
                     <a href="index.php?ctrl=topic&action=updateTopicForm&id=<?= $topic->getId() ?>">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>
+
                     <a class="deleteIcon" href="index.php?ctrl=topic&action=deleteTopic&id=<?= $topic->getId() ?>">
                         <i class="fa-solid fa-trash-can"></i>
                     </a>
+
+                    <?php if(Session::isAdmin() && !$closed) { ?>
+                        <a href="index.php?ctrl=topic&action=closeTopic&id=<?= $topic->getId() ?>">
+                            <i class="fa-solid fa-lock"></i>
+                        </a>
+                    <?php } ?>
+
+                    <?php if(Session::isAdmin() && $closed) { ?>
+                        <a href="index.php?ctrl=topic&action=openTopic&id=<?= $topic->getId() ?>">
+                            <i class="fa-solid fa-lock-open"></i>
+                        </a>
+                    <?php } ?>
+        
                 </div>
+
             <?php } ?>
+
         <?php } ?>
 
         <div id="detailsTopicAuthor">
+
             <?= $topic->getUser()->showPicture() ?>
             <p><?= $topic->getUser()->getUsername() ?></p>
             <p class="timeInterval"><?= ConvertDate::convertDate($topic->getCreationDate()) ?></p>
+
         </div>
 
         <div id="detailsTopicContent">
+
+            <?php if($closed) { ?>
+                <strong>This topic is locked</strong>
+            <?php } ?>
+
             <h1><?= $topic->getTitle() ?></h1> <!-- this as h1 because this seems like the most interesting part to be found with google search -->
             <p><?= $topic->getMessageAuthor() ?></p>
+
         </div>
 
     </div>
 
 <?php } ?>
 
-<?php if(isset($_SESSION["user"])) { ?>
+<?php if(Session::getUser() && !$closed) { ?>
 <!-- form to create a message -->
     <form id="form-add-message" action="index.php?ctrl=message&action=addMessage&id=<?= $topic->getId() ?>" method="post">
         <label for="text">Say something</label>
@@ -53,9 +88,14 @@ if(isset($result["data"]["formErrors"])) {
         <?= isset($formErrors["text"]) ? FieldError::fieldError($formErrors["text"]) : "" ?>
     </form>
 
+<?php } else if($closed) { ?>
+
+    <p class="replaceFormMessage">This topic has been locked, you cannot comment.</p>
+
+
 <?php } else { ?>
 
-    <p class="replaceFormMessage">You need to be registered in order to comment a topic</p>
+    <p class="replaceFormMessage">You need to be registered in order to comment a topic.</p>
 
 <?php } ?>
 
@@ -78,7 +118,7 @@ if(isset($result["data"]["formErrors"])) {
                     <td><?= ConvertDate::convertDate($message->getCreationDate()) ?></td>
 
                     <td>
-                        <?php if((isset($_SESSION["user"])&&($_SESSION["user"]->getId() == $message->getUser()->getId()) || App\Session::isAdmin())) { ?>
+                        <?php if((isset($_SESSION["user"])&&($_SESSION["user"]->getId() == $message->getUser()->getId()) || Session::isAdmin())) { ?>
                             <a href="index.php?ctrl=message&action=updateMessageForm&id=<?= $message->getId() ?>">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
@@ -94,7 +134,7 @@ if(isset($result["data"]["formErrors"])) {
 
         <?php } else { ?> 
             <tr>
-                <td colspan="3">There is no responses yet</td>
+                <td colspan="3">There are no responses yet</td>
             </tr> 
         <?php } ?>
 

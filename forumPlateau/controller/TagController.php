@@ -40,17 +40,19 @@
             ];
         }
 
-        public function detailsTag($id) {
+        public function detailsTag($tagId) {
 
             $tagManager = new TagManager();
             $topicManager = new TopicManager();
+
+            $this->existInDatabase($tagId, $tagManager);
 
             return [
                 "view" => VIEW_DIR."tag/detailsTag.php",
                 "data" => [
                     "title" => "Details of a tag",
-                    "tag" => $tagManager->findOneById($id),
-                    "topics" => $topicManager->topicsByTag($id)
+                    "tag" => $tagManager->findOneById($tagId),
+                    "topics" => $topicManager->topicsByTag($tagId)
                 ]
             ];
         }

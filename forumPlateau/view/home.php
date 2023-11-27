@@ -51,6 +51,7 @@ $recentsTopic = $result["data"]["recents"];
                             <td>
                                 <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId()?>">
                                     <?= $topic->getTitle() ?>
+                                    <?= $topic->getClosed() == "true" ? "(Locked)" : "" ?>
                                 </a>
                             </td>
 
