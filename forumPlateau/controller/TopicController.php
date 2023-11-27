@@ -189,8 +189,27 @@
                 $this->redirectTo("topic", "listTopics");
                 
             }
+        }
 
+        /**
+         * open a topic by changing the 'closed' attribut to false
+         */
+        public function openTopic($idTopic) {
+            $topicManager = new TopicManager;
 
+            $this->existInDatabase($idTopic, $topicManager);
+
+            $dataTopic = [
+                "id" => $idTopic,
+                "closed" => "false"
+            ];
+
+            if ($topicManager->update($dataTopic)) {
+                $this->redirectTo("message", "showMessages", $idTopic);
+            } else {
+                $this->redirectTo("topic", "listTopics");
+                
+            }
         }
 
     }

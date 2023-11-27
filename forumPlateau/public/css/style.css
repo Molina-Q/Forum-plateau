@@ -87,6 +87,10 @@ textarea {
     align-items: center;
 }
 
+strong {
+    font-size: 20px;
+}
+
 /******************** header ********************/
 header {
     width: 100%;
@@ -499,6 +503,7 @@ main {
 }
 
 #detailsTopicContent {
+    margin-right: 20px;
     flex: 5;
 }
 

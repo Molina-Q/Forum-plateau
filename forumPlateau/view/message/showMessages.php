@@ -8,7 +8,7 @@ $topic = $result["data"]["topic"];
 $userSession = Session::getUser();
 $closedData = $result["data"]["closed"];
 
-if ($closedData->getClosed()) {
+if ($closedData->getClosed() == "true") {
     $closed = true;
 } else {
     $closed = false;
