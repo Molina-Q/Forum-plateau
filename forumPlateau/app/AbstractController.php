@@ -5,6 +5,9 @@
 
         public function index(){}
         
+        /**
+         * redirect to the ctrl and action specified
+         */
         public function redirectTo($ctrl = null, $action = null, $id = null) {
             $url = "index.php?";
             $url.= $ctrl ? "ctrl=".$ctrl : "";
@@ -14,7 +17,21 @@
             header("Location: $url");
             die();
         }
+        
+        /**
+         * check if the id exist in the database
+        */
+        public function existInDatabase($id, $manager) {
+            if(empty($manager->findOneById($id))) {
+                $this->redirectTo("security", "index");
+            }
+            return;
+        }
 
+        /**
+         * check if the user is registered
+         * if he isn't the user is redirected to the home page
+         */
         public function restrictToRegistered() {
 
             if(!Session::getUser()) {
@@ -23,6 +40,9 @@
             return;
         }
 
+        /**
+         * restrict a method / page to specific role (currently ADMIN or USER)
+         */
         public function restrictTo($role) {
         
             if(!Session::getUser() || !Session::getUser()->hasRole($role)){
