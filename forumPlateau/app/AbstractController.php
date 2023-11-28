@@ -20,7 +20,7 @@
         
         /**
          * check if the id exist in the database
-        */
+         */
         public function existInDatabase($id, $manager) {
             if(empty($manager->findOneById($id))) {
                 $this->redirectTo("security", "index");

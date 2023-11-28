@@ -6,6 +6,7 @@
         protected function connect() {
             DAO::connect();
         }
+        
 
         /**
          * get all the records of a table, sorted by optionnal field and order

@@ -50,8 +50,7 @@
 
             //variables
             $currentDate = new \DateTime("now"); //for the creationDate of the account
-            $formErrors = [];
-            $formData = [];
+            $errorCheck = false; // wil become true is there is any problems in any form
             
             // regex: need at least 1 capital, 1 small, 1 number, 1 special char and 4 characters in total 
             //(the CNIL advise around 12 to be actually safe)
@@ -59,57 +58,67 @@
 
             // check that all inputs were completed
             if(empty($username)) {
-                $formErrors["username"] = "This field is mandatory!";
+                Session::addFlash("username", "This field is mandatory!");
+                $errorCheck = true;
             }
 
             if(empty($email)) {
-                $formErrors["email"] = "This field is mandatory!";
+                Session::addFlash("email", "This field is mandatory!");
+                $errorCheck = true;
             }
 
             if(empty($confirmEmail)) {
-                $formErrors["confirmEmail"] = "This field is mandatory!";
+                Session::addFlash("confirmEmail", "This field is mandatory!");
+                $errorCheck = true;
             }
 
             if(empty($password)) {
-                $formErrors["password"] = "This field is mandatory!";
+                Session::addFlash("password", "This field is mandatory!");
+                $errorCheck = true;
             }
 
             if(empty($confirmPassword)) {
-                $formErrors["confirmPassword"] = "This field is mandatory!";
+                Session::addFlash("confirmPassword", "This field is mandatory!");
+                $errorCheck = true;
             }
 
             // check regex password
             if(!preg_match($password_regex, $password)) {
-                $formErrors["password"] = "the password isn't safe";
+                Session::addFlash("password", "this password isn't safe!");
+                $errorCheck = true;
             }
 
             // check if the email and password are the same as their confirm counterpart
             if($email !== $confirmEmail) {
-                $formErrors["confirmEmail"] = "The emails are not the same";
+                Session::addFlash("confirmEmail", "The emails are not the same");
+                $errorCheck = true;
             }
 
             if($password !== $confirmPassword) {
-                $formErrors["confirmPassword"] = "The passwords are not the same";
+                Session::addFlash("confirmPassword", "The passwords are not the same");
+                $errorCheck = true;
             }
 
             // check if username and email aren't already used (both are unique)
             $usernames = $userManager->findUsername();
             $emails = $userManager->findEmail();
 
-            foreach($usernames as $everyUsername) {
-                if($everyUsername->getUsername() === $username) {
-                    $formErrors["username"] = "Username is invalid or already in use";
+            foreach($usernames as $databaseUsername) {
+                if($databaseUsername->getUsername() === $username) {
+                    Session::addFlash("username", "Username is invalid or already in use");
+                    $errorCheck = true;
                 }
             }
 
-            foreach($emails as $everyEmail) {
-                if($everyEmail->getEmail() === $email) {
-                    $formErrors["email"] = "Email is invalid or already in use";
+            foreach($emails as $databaseEmail) {
+                if($databaseEmail->getEmail() === $email) {
+                    Session::addFlash("email", "Email is invalid or already in use");
+                    $errorCheck = true;
                 }
             }
 
             // if there is no mistakes 
-            if (empty($formErrors)) {  
+            if (!$errorCheck) {  
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // password_default utilise l'algorithme considéré comme le plus efficace par php
 
                 $formData = [ // all of the data that is going to the database
@@ -119,25 +128,12 @@
                     "creationDate" => $currentDate->format("Y-m-d H:i:s")
                 ];
 
-                $userManager->add($formData); // add all of those data the user table (via the userManager)
-                
+                $userManager->add($formData); // add all of those data to the user table to create a new user (via the userManager)
+
                 $this->redirectTo("security", "login"); // send the user to the login page
                 
             } else { // mistake(s) were made in some of the input 
-
-                $fieldData = [ // used to show the data already written in the fields
-                    "username" => $username,
-                    "email" => $email
-                ];
-
-                return [
-                    "view" => VIEW_DIR."security/register.php",
-                    "data" => [
-                        "title" => "Register",
-                        "fieldData" => $fieldData, // used to put the previously written data in the inputs when there is an error 
-                        "formErrors" => $formErrors // used to show error messages
-                    ]
-                ];
+                $this->redirectTo("security", "register");
             }
 
         }
@@ -165,26 +161,32 @@
             $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL, FILTER_VALIDATE_EMAIL);
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+            $errorCheck = false;
+
             // check if the fields are empty
             if(empty($email)) {
-                $formErrors["email"] = "this field is mandatory";
+                Session::addFlash("email", "this field is mandatory");
+                $errorCheck = true;
             }
             
             if(empty($password)) {
-                $formErrors["password"] = "this field is mandatory";
+                Session::addFlash("password", "this field is mandatory");
+                $errorCheck = true;
             }
 
             //check if the var are valid
             if(!$email) {
-                $formErrors["email"] = "This field is invalid";
+                Session::addFlash("email", "This field is invalid");
+                $errorCheck = true;
             }
 
             if(!$password) {
-                $formErrors["password"] = "This field is invalid";
+                Session::addFlash("password", "This field is invalid");
+                $errorCheck = true;
             }
 
             // if any of the check get triggered nothing happens
-            if(empty($formErrors)) {
+            if(!$errorCheck) {
                 // we get the user class by filtering it by email in an SQL request (emails are unique)
                 $user = $userManager->findUser($email);
 
@@ -233,41 +235,50 @@
             $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $confirmPassword = filter_input(INPUT_POST, "confirmPassword", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+            $errorCheck = false;
+
             $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{4,}$/";
             
             // check if empty
             if(empty($email)) {
-                $formErrors["email"] = "this field is mandatory";
+                Session::addFlash("email", "this field is mandatory");
+                $errorCheck = true;
             }
 
             if(empty($password)) {
-                $formErrors["password"] = "this field is mandatory";
+                Session::addFlash("password", "this field is mandatory");
+                $errorCheck = true;
             }
             
             if(empty($confirmPassword)) {
-                $formErrors["confirmPassword"] = "this field is mandatory";
+                Session::addFlash("confirmPassword", "this field is mandatory");
+                $errorCheck = true;
             }
 
             // check if it is non-null
             if(!$email) {
-                $formErrors["email"] = "there was a mistake";
+                Session::addFlash("email", "there was a mistake");
+                $errorCheck = true;
             }
             
             //  check if email isn't already in the database
             if(!$user = $userManager->findUser($email)) {
-                $formErrors["email"] = "Email is invalid or already used";
+                Session::addFlash("email", "Email is invalid or already used");
+                $errorCheck = true;
             }
 
             if($password != $confirmPassword) {
-                $formErrors["password"] = "the passwords are not the same";
+                Session::addFlash("password", "the passwords are not the same");
+                $errorCheck = true;
             }
 
             // check regex password
             if(!preg_match($password_regex, $password)) {
-                $formErrors["password"] = "the password isn't safe";
+                Session::addFlash("password", "the password isn't safe enough");
+                $errorCheck = true;
             }
 
-            if(empty($formErrors)) {
+            if(!$errorCheck) {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
                 $user->setPassword($hashedPassword);

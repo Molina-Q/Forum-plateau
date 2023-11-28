@@ -25,8 +25,6 @@
             $topic = $topicManager->headerTopic($idTopic); // all the information displayed on the header of a topic
             $closed = $topicManager->closed($idTopic);
 
-            $formErrors = [];
-
             return [
                 "view" => VIEW_DIR."message/showMessages.php",
                 "data" => [
@@ -34,7 +32,6 @@
                     "messages" => $message, // return every messages from the topic ecxept the first one from the author
                     "topic" => $topic, // return the topic title and the first message that goes with it
                     "closed" => $closed,
-                    "formErrors" => $formErrors
                 ], 
                 "meta" => "List of messages from a topic ".$topic->getTitle()
             ];
@@ -49,13 +46,13 @@
             
             $topicManager = new TopicManager();
             $messageManager = new MessageManager();
-            $currentDate = new \DateTime("now");
-            $userId = $_SESSION["user"]->getId();
             
             $this->existInDatabase($idTopic, $topicManager);
             
-            $formErrors = [];
-            
+            $currentDate = new \DateTime("now");
+            $userId = $_SESSION["user"]->getId();
+            $errorCheck = false;
+
             $message = $messageManager->messagesResponse($idTopic);
             $topic = $topicManager->headerTopic($idTopic);
             
@@ -64,42 +61,26 @@
             }
 
             $text = filter_input(INPUT_POST, "text", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
             // if the field is empty
             if(empty($text)) {
-                $formErrors["text"] = "This field is mandatory!";
+                Session::addFlash("text", "This field is mandatory!");
+                $errorCheck = true;
             }
 
-            if(empty($formErrors)) {
-
-                if($userId) {
-                    $dataMessage = [
-                        "text" => $text,
-                        "creationDate" => $currentDate->format("Y-m-d H:i:s"),
-                        "topic_id" => $idTopic,
-                        "user_id" => $userId
-                    ];
-
-                } else {
-                    $this->redirectTo("message", "showMessages", $idTopic);
-                }
-                
-                $messageManager->add($dataMessage);
-
-                $this->redirectTo("message", "showMessages", $idTopic);
-
-            } else {
-
-                return [
-                    "view" => VIEW_DIR."message/showMessages.php",
-                    "data" => [
-                        "title" => "Topic details",
-                        "messages" => $message, // return every messages from the topic ecxept the first one from the author
-                        "topic" => $topic, // return the topic title and the first message that goes with it
-                        "formErrors" => $formErrors
-                    ], 
-                    "meta" => "Every messages from a topic ".$topic->getTitle()
+            if(!$errorCheck) {
+                // contains all of the data necessary to create a new message
+                $dataMessage = [
+                    "text" => $text,
+                    "creationDate" => $currentDate->format("Y-m-d H:i:s"),
+                    "topic_id" => $idTopic,
+                    "user_id" => $userId
                 ];
-            }
+
+                $messageManager->add($dataMessage);
+            } 
+
+            $this->redirectTo("message", "showMessages", $idTopic);
         }
 
         public function updateMessageForm($idMessage) {

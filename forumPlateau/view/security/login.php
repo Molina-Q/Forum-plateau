@@ -1,8 +1,7 @@
-<?php 
+<?php
+use App\Session; 
 use Service\FieldError;
-if(isset($formErrors)) {
-    $formErrors = $result["data"]["formErrors"];
-}
+
 ?>
 
 <div id="form-container">
@@ -14,7 +13,7 @@ if(isset($formErrors)) {
         <!-- email -->
         <label for="email">Email</label>
         <input type="email" name="email" id="email">
-        <?= isset($formErrors["email"]) ? FieldError::fieldError($formErrors["email"]) : "" //ternary to verify if an error is set than shows it ?>
+        <?= Session::getFlash("email") ?>
 
         <!-- password -->
         <div class="form-password">
@@ -22,7 +21,7 @@ if(isset($formErrors)) {
             <input type="password" name="password" id="password">
             <i class="fa-solid fa-eye" id="eyeCon"></i>
         </div>
-        <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?> 
+        <?= Session::getFlash("password") ?>
         
         <!-- forgot -->
         <a class="passForgot" href="index.php?ctrl=security&action=changePassword">

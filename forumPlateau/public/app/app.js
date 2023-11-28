@@ -1,5 +1,4 @@
-/* var */
-// chack if the menu is open or closed
+// check if the menu is open or closed
 function menuState(menu) {
 
     if(currentStyle.getPropertyValue("display") == "none") {
@@ -9,7 +8,7 @@ function menuState(menu) {
     }
 }
 /**
- *  close or open the menu depending of his current state
+ *  close or open the menu depending on his current state
  * @param {HTMLElement} menu 
  */
 function menuToggle(menu) {
@@ -22,7 +21,7 @@ function menuToggle(menu) {
 }
     
 /**
- * show or hide the password depending of his current state
+ * show or hide the password depending on his current state
  * @param {HTMLElement} passwordElement
  */
 function togglePassword(passwordElement) {

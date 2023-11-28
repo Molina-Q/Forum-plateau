@@ -14,10 +14,6 @@ if ($closedData->getClosed() == "true") {
     $closed = false;
 }
 
-if(isset($result["data"]["formErrors"])) {
-    $formErrors = $result["data"]["formErrors"];
-    // var_dump($formErrors);die;
-}
 ?>
 
 <?php if($topic) { ?>
@@ -85,7 +81,7 @@ if(isset($result["data"]["formErrors"])) {
         <label for="text">Say something</label>
         <textarea name="text" id="text" cols="15" rows="1" placeholder="Write something..."></textarea>
         <button type="submit">Send</button>
-        <?= isset($formErrors["text"]) ? FieldError::fieldError($formErrors["text"]) : "" ?>
+        <?= Session::getFlash("text") ?>
     </form>
 
 <?php } else if($closed) { ?>

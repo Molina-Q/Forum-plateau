@@ -8,7 +8,6 @@
     use Model\Managers\UserManager;
     use Model\Managers\TopicManager;
 
-    
     class UserController extends AbstractController implements ControllerInterface{
 
         public function index() {
@@ -16,7 +15,7 @@
         }
 
         public function profile() {
-            // only a connected user can acces call this method via get
+            // only a connected user can call this method via get
             if(!Session::getUser()) { 
                 $this->redirectTo("home", "index");
             }

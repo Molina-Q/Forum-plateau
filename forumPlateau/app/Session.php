@@ -6,19 +6,19 @@
         private static $categories = ['error', 'success'];
 
         /**
-        *   ajoute un message en session, dans la catégorie $categ
+        * add a messages to SESSION[$categ]
         */
         public static function addFlash($categ, $msg) {
             $_SESSION[$categ] = $msg;
         }
 
         /**
-        *   renvoie un message de la catégorie $categ, s'il y en a !
+        *   show the message previously given with addFlash
         */
         public static function getFlash($categ) {
             
             if(isset($_SESSION[$categ])) {
-                $msg = $_SESSION[$categ];  
+                $msg = "<p class='error'>$_SESSION[$categ]</p>";  
                 unset($_SESSION[$categ]);
             }
             else $msg = "";
