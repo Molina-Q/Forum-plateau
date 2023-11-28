@@ -90,7 +90,7 @@ if(Session::isAdmin()) {
                 </tbody>
 
             <?php } else { ?>
-                <p>You haven't posted any topics</p>
+                <tr><td colspan="4">You haven't posted any topics</td></tr>
             <?php } ?>
 
         </table>

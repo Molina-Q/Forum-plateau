@@ -28,10 +28,15 @@ $recentsTopic = $result["data"]["recents"];
 <?php } ?>
 
 <div id="homePageContent" class="grid-container">
+
     <div id="homePage-left">
+
         <div id="popularTopics" class="grid-item">
+
             <table>
+
                 <thead>
+
                     <tr>
                         <th class="author">Author</th>
                         <th>Popular topic</th>
@@ -39,11 +44,15 @@ $recentsTopic = $result["data"]["recents"];
                         <th>Tag</th>
                         <th>Date</th>
                     </tr>
+
                 </thead>
 
                 <tbody class="blocListPopular">
+
                     <?php foreach($topics as $topic) { ?>
+
                         <tr>
+
                             <td class="authorTopic">
                                 <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
                             </td>
@@ -51,7 +60,7 @@ $recentsTopic = $result["data"]["recents"];
                             <td>
                                 <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId()?>">
                                     <?= $topic->getTitle() ?>
-                                    <?= $topic->getClosed() == "true" ? "(Locked)" : "" ?>
+                                    <?= $topic->getClosed() == "true" ? "- Locked" : "" ?>
                                 </a>
                             </td>
 
@@ -71,24 +80,35 @@ $recentsTopic = $result["data"]["recents"];
                             </td>
                             
                         </tr>
+
                     <?php } ?>
+
                 </tbody>
+
             </table>
+
         </div>
     
         <div id="popularTags" class="grid-item">
+
             <table>
+
                 <thead>
+
                     <tr>
+
                         <th>Popular tags</th>
                         <th>Icon</th>
                         <th>Description</th>
                         <th>Topics</th>
                     </tr>
+
                 </thead>
 
                 <tbody class="blocListTags">
+
                     <?php foreach($tags as $tag) { ?>
+
                         <tr>
                             <td>
                                 <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
@@ -109,22 +129,33 @@ $recentsTopic = $result["data"]["recents"];
                             </td>
 
                         </tr>
+
                     <?php } ?>
+
                 </tbody>
+
             </table>
+
         </div>
+
     </div>
 
     <div id="homePage-right">
+
         <div id="statistics" class="grid-item">
+
             <table>
+
                 <thead>
+
                     <tr>
                         <th colspan="2">Statistics</th>
                     </tr>
+
                 </thead>
 
                 <tbody class="blocListStat">
+
                     <tr>
                         <td>Registered User</td>
 
@@ -136,7 +167,7 @@ $recentsTopic = $result["data"]["recents"];
                     </tr>
 
                     <tr>
-                        <td>Topics Written</td>
+                        <td>Topics Posted</td>
 
                         <td>
                             <?php foreach($statTopics as $stat) { 
@@ -154,21 +185,31 @@ $recentsTopic = $result["data"]["recents"];
                             } ?>
                         </td>
                     </tr>
+
                 </tbody>
+
             </table>
+            
         </div>
 
         <div id="recentTopics" class="grid-item">
+
             <table>
+
                 <thead>
+
                     <tr>
                         <th colspan="2">Recent topics</th>
                     </tr>
+
                 </thead>
 
                 <tbody class="blocListRecent">
+
                     <?php foreach($recentsTopic as $topic) { ?>
+
                         <tr>
+
                             <td>
                                 <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>">
                                     <?= $topic->getTag()->showIcon() ?>
@@ -179,14 +220,22 @@ $recentsTopic = $result["data"]["recents"];
                                 <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId() ?>">
                                     <?= $topic->getTitle() ?>
                                 </a>
+
                                 <span class="timeInterval">
                                     - <?= ConvertDate::convertDate($topic->getCreationDate()) ?>
                                 </span>
                             </td>
+
                         </tr>
+
                     <?php } ?>
+
                 </tbody>
+
             </table>
+
         </div>
+
     </div>
+
 </div>

@@ -1,7 +1,7 @@
 :root {
     --primary-color: #2979A6;
     --secondary-color: #FFFFFF; /* used for background, and text */
-    --tertiary-color: #E9E9E9; /* background color for the whole site*/
+    --background-color-general: #E9E9E9; /* background color for the whole site*/
 
     --table-highlight-color: #D9D9D9;
 
@@ -28,7 +28,7 @@ body {
 }
 
 #wrapper {
-    background-color: var(--tertiary-color);
+    background-color: var(--background-color-general);
 }
 
 #mainPage {
@@ -53,9 +53,10 @@ h1 { /* applies to all of my h1 title  */
 
 thead { /* color of every table's head */
     color: var(--secondary-color);
+    width: 100%;
 }
 
-.error { /* applies to all of the errors tied to formErrors */
+.error { /* applies to all of the errors tied to getFlash */
     color: red;
 }
 
@@ -68,7 +69,6 @@ a:has(> i) { /* :has(), css selector: target every <a> elements that has <i> has
 }
 
 textarea {
-    /* width: 100%; */
     min-height: 80px;
 
     padding: 15px;
@@ -159,7 +159,7 @@ nav {
     box-shadow: -2px 2px 8px gray;
 }
 
-.menuBurgerItem {
+.menuBurgerItem { /* the text inside the dropdown menu */
     color: black;
 }
 
@@ -172,8 +172,9 @@ nav {
 #popularTopics {
     width: 100%;
     height: auto;
-    box-shadow: 10px, 5px, 5px, black;
-    padding-bottom:25px ;
+
+    border: none;
+    padding-bottom: 25px ;
 }
 
 #popularTags table {
@@ -228,7 +229,7 @@ nav {
     padding: 8px 10px;
 
     background-color: var(--table-highlight-color);
-    border: 0;
+    border: none;
     font-size: 18px;
 }
 
@@ -305,7 +306,7 @@ form #password {
     color: var(--secondary-color);
 
     background-color: var(--primary-color);
-    border: 0 ;
+    border: none ;
     border-radius: 5px;
 }
 
@@ -319,7 +320,7 @@ form #password {
     color: var(--secondary-color);
 
     background-color: var(--primary-color);
-    border: 0 ;
+    border: none ;
     border-radius: 5px;
 }
 
@@ -334,7 +335,6 @@ form #password {
 #form-search {
     display: flex;
     flex-direction: row;
-
 }
 
 #form-search input  {
@@ -343,7 +343,7 @@ form #password {
     padding: 0 5px;
 
     font-size: 16px;
-    border: 0;
+    border: none;
 }
 
 #form-search input:focus-visible { /* nativ outline */
@@ -354,7 +354,7 @@ form #password {
     width: 70px;
     height: 35px;
     font-size: 15px;
-    border: 0;
+    border: none;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -448,7 +448,7 @@ form button {
     font-size: 15px;
     color: var(--primary-color);
     background-color: var(--table-highlight-color);
-    border: 0;
+    border: none;
 }
 
 #profile-header form button {
@@ -459,7 +459,7 @@ form button {
     background-color: var(--table-highlight-color);
 
     border-radius: 5px;
-    border: 0;
+    border: none;
 }
 /********** pictureUser **********/
 .pictureUser { /* user pic is round */
@@ -492,11 +492,9 @@ main {
 
 }
 
-
 /******************** HomePage ********************/
 
 /******************** listTopics ********************/
-
 
 /******************** showMessages ********************/
 #detailsTopicHeader {
@@ -603,10 +601,14 @@ main {
 table {
     border-collapse: collapse;
     margin-bottom: 15px ;
+
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 thead {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color);  
 }
 
 th {
@@ -638,6 +640,7 @@ tbody tr:nth-child(odd) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .authorTopic figure {
@@ -660,7 +663,7 @@ footer {
 }
 
 /**************************************** responsive ****************************************/
-/******************** tablet ********************/
+/************************* tablet *************************/
 @media only screen
 and (max-device-width : 1200px) {
 
@@ -669,10 +672,50 @@ and (max-device-width : 1200px) {
         padding: 0 5%;
     }
 
+    #form-search {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    #form-search input  {
+        width: 150px;
+        height: 35px;
+        padding: 0 5px;
+    
+        font-size: 16px;
+        border: none;
+    }
 
 /******************** main ********************/
     main {
         margin: 0 5%;
+    }
+
+/******************** homePageContent ********************/
+    #homePageContent {
+        width: 100%;
+        display: initial;
+    }
+
+    #homePage-left {
+        padding-right: 0;
+    }
+
+    #homePage-right {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-right: 0;
+    }
+
+    #popularTopics {
+        width: 100%;
+        height: auto;
+        padding-bottom: 0;
+    }
+
+    #statistics {
+        padding-bottom: 0;
+        width: 100%;
     }
 
 /******************** showMessages ********************/
@@ -684,7 +727,7 @@ and (max-device-width : 1200px) {
 
 }
 
-/******************** phone ********************/
+/************************* phone *************************/
 @media only screen
 and (max-device-width : 645px) {
 
@@ -696,6 +739,29 @@ and (max-device-width : 645px) {
     main {
         margin: 0;
     }
+
+/******************** homePageContent ********************/
+    #homePageContent {
+        width: 100%;
+        display: initial;
+    }
+
+    #homePage-left {
+        padding-right: 0;
+    }
+
+    #popularTopics {
+        width: 100%;
+        height: auto;
+        padding-bottom: 0;
+    }
+
+    #statistics {
+        display: none;
+        padding-bottom: 0;
+        width: 100%;
+    }
+
 
 /******************** showMessages ********************/
  
