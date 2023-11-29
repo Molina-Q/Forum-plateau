@@ -27,23 +27,19 @@
                             <input id="search-bar" type="text" name="search-bar">
                             <button id="search-bar" type="submit">Search</button>
                         </form>
-
-                        <?php if(App\Session::isAdmin()){ ?>
-                            <a href="index.php?ctrl=home&action=users">List users</a>
-                        <?php } ?>
                     </div>
 
                     <div id="nav-right">
 
                         <?php if(App\Session::getUser()) { ?>
-                            <a href="index.php?ctrl=tag&action=listTags">List of tags</a>
-                            <a href="index.php?ctrl=user&action=profile"><i class="fas fa-user"></i>&nbsp;<?= App\Session::getUser() ?></a>
+
+                            <a href="index.php?ctrl=user&action=profile">
+                                <i class="fas fa-user"></i>
+                                &nbsp;
+                                <?= App\Session::getUser() ?>
+                            </a>
                             <a href="index.php?ctrl=security&action=logout">Sign out</a>
                         <?php } else { ?>
-                            <a href="index.php?ctrl=tag&action=listTags">
-                                <p>List of tags</p>
-                            </a>
-
                             <a href="index.php?ctrl=security&action=register">
                                 <p>Sign in</p>
                             </a>   
@@ -55,8 +51,29 @@
                         <div id="blocBurger">
                             <i class="fa-solid fa-bars" id="iconBurger"></i>
                         </div>
-                    </div>
+                    </div>                    
                 </nav>
+
+                <div id="sub-nav">
+                    
+                    <a href="index.php?ctrl=topic&action=listTopics">
+                        <p>List of topics</p>
+                    </a>
+                
+                    <a href="index.php?ctrl=tag&action=listTags">
+                        <p>List of tags</p>
+                    </a>
+
+                    <?php if(App\Session::getUser()) { ?>
+
+                        <a href="index.php?ctrl=home&action=users">
+                            <p>List of users</p>
+                        </a>
+                        
+                    <?php } ?>
+                
+                </div>
+
             </header>
             
             <main id="forum">

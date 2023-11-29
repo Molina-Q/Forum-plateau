@@ -55,7 +55,9 @@ if ($closedData->getClosed() == "true") {
         <div id="detailsTopicAuthor">
 
             <?= $topic->getUser()->showPicture() ?>
-            <p><?= $topic->getUser()->getUsername() ?></p>
+            <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?=$topic->getUser()->getId() ?>">
+                <p><?= $topic->getUser()->getUsername() ?></p>
+            </a>
             <p class="timeInterval"><?= ConvertDate::convertDate($topic->getCreationDate()) ?></p>
 
         </div>
@@ -109,7 +111,11 @@ if ($closedData->getClosed() == "true") {
             <?php foreach($messages as $message) { ?>
 
                 <tr>
-                    <td class="authorTopic"><?= $message->getUser()->showPicture() ?><?= $message->getUser()->getUsername() ?></td>
+                    <td class="authorTopic">
+                        <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $message->getUser()->getId() ?>">
+                            <?= $message->getUser()->showPicture() ?><?= $message->getUser()->getUsername() ?>
+                        </a>
+                    </td>
                     <td><?= $message->getText() ?></td>
                     <td><?= ConvertDate::convertDate($message->getCreationDate()) ?></td>
 

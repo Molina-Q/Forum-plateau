@@ -272,12 +272,13 @@
                 $errorCheck = true;
             }
 
-            // check regex password
+            // check if password respect the regex 
             if(!preg_match($password_regex, $password)) {
                 Session::addFlash("password", "the password isn't safe enough");
                 $errorCheck = true;
             }
 
+            // if there was even a single error above this isn't executed
             if(!$errorCheck) {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
