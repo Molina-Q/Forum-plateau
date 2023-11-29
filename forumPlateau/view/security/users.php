@@ -23,7 +23,9 @@ $users = $result["data"]['users'];
                 </td>
 
                 <td>
-                    <?= $user->getUsername() ?>
+                    <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $user->getId() ?>">
+                        <?= $user->getUsername() ?>
+                    </a>
                 </td>
 
                 <td>

@@ -52,6 +52,18 @@ const listItems = [
         label: "List of topics",
         ctrl: "topic",
         action: "listTopics" 
+    },
+
+    { // List tags
+        label: "List of tags",
+        ctrl: "tag",
+        action: "listTags" 
+    },
+
+    { // List users
+        label: "List users",
+        ctrl: "home",
+        action: "users" 
     }
 ]
 
@@ -67,11 +79,9 @@ blocBurger.appendChild(menuBurger);
 
 // contentMenuBurger
 const linkItemBurger = document.createElement("a");
-linkItemBurger.setAttribute("href", "index.php?ctrl=topic&action=listTopics");
 
 const itemMenuBurger = document.createElement("P");
 itemMenuBurger.classList.add("menuBurgerItem");
-itemMenuBurger.textContent = "List Topics";
 
 currentStyle = window.getComputedStyle(menuBurger);
 

@@ -28,8 +28,28 @@
             return [
                 "view" => VIEW_DIR."user/profile.php",
                 "data" => [
-                    "title" => "User profile",
+                    "title" => "Your profile",
                     "topics" => $topics
+                ]
+            ];
+        }
+
+        public function detailsUserProfile($userId) {
+            if(!Session::getUser()) { 
+                $this->redirectTo("home", "index");
+            }
+            $topicManager = new TopicManager();
+            $userManager = new UserManager();
+
+            $topics = $topicManager->postedTopics($userId);
+            $user = $userManager->findOneById($userId);
+
+            return [
+                "view" => VIEW_DIR."user/detailsUserProfile.php",
+                "data" => [
+                    "title" => "User profile",
+                    "topics" => $topics,
+                    "user" => $user
                 ]
             ];
         }

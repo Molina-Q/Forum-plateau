@@ -2,64 +2,46 @@
 use Service\FieldError;
 use App\Session;
 
-$userRole = "";
 $topics = $result["data"]["topics"];
-$isAdmin = null;
-$isUser = null;
-$current = "(CURRENT ROLE)";
-
-if(isset($formErrors)) {
-    $formErrors = $result["data"]["formErrors"];
-}
-
-if(Session::isAdmin()) {
-    $isAdmin = "selected";
-} else {
-    $isUser = "selected";
-}
-
 ?>
 
 <div id="form-register-container">
+
     <div id="form-register-header">
         <h1>Profile</h1>
     </div>
 
     <div id="profile">
+
         <div id="profile-header">
+
             <div class="profile-pic">
                 <?= $_SESSION["user"]->showPicture() ?>
             </div>
 
             <div class="profile-info">
+
                 <p>Username</p>
                 <p class="username"><?= $_SESSION["user"]->getUsername() ?></p>
 
                 <p>Email</p>
                 <p class="email"><?= $_SESSION["user"]->getEmail() ?></p>
 
-                <?php if(Session::isAdmin()) { ?>
-                    <form action="index.php?ctrl=user&action=updateUser" method="post">
-                        <label for="role">Role</label>
-                        <select name="role" id="role">
-                            <option value="ROLE_ADMIN" <?= $isAdmin ?>>ADMIN <?= isset($isAdmin) ? $current : "" ?></option>
-                            <option value="ROLE_USER" <?= $isUser ?>>USER <?= isset($isUser) ? $current : "" ?></option>
-                        </select>
-
-                        <button type="submit">Change</button>
-                    </form>
-                <?php } ?> 
             </div>
+
         </div>
 
         <table>
+
             <thead>
+
                 <tr>
                     <th>Topic posted</th>
                     <th>Tag</th>
                     <th>messages</th>
                     <th>date</th>
                 </tr>
+
             </thead>
 
             <?php if(isset($topics)) { ?>
@@ -90,7 +72,11 @@ if(Session::isAdmin()) {
                 </tbody>
 
             <?php } else { ?>
-                <tr><td colspan="4">You haven't posted any topics</td></tr>
+
+                <tr>
+                    <td colspan="4">You haven't posted any topics</td>
+                </tr>
+
             <?php } ?>
 
         </table>
