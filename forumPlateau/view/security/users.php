@@ -8,7 +8,7 @@ $users = $result["data"]['users'];
 <table>
     <thead>
         <tr>
-            <th colspan="2">Username</th>
+            <th class="tableTitle" colspan="2">Username</th>
             <th>Email</th>
             <th>Role</th>
             <th>Date of creation</th>

@@ -61,7 +61,7 @@ if(Session::isAdmin()) {
 
                 <thead>
                     <tr>
-                        <th>Topic posted</th>
+                        <th class="tableTitle">Topic posted</th>
                         <th>Tag</th>
                         <th>messages</th>
                         <th>date</th>

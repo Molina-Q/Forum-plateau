@@ -39,7 +39,7 @@ $recentsTopic = $result["data"]["recents"];
 
                     <tr>
                         <th class="author">Author</th>
-                        <th>Popular topic</th>
+                        <th class="tableTitle">Popular topic</th>
                         <th>Post</th>
                         <th>Tag</th>
                         <th>Date</th>
@@ -57,7 +57,7 @@ $recentsTopic = $result["data"]["recents"];
                                 <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
                             </td>
 
-                            <td>
+                            <td class="titleTopic">
                                 <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId()?>">
                                     <?= $topic->getTitle() ?>
                                     <?= $topic->getClosed() == "true" ? "- Locked" : "" ?>
@@ -65,8 +65,8 @@ $recentsTopic = $result["data"]["recents"];
                             </td>
 
                             
-                            <td>
-                                <?= $topic->getNbMessages() ?> 
+                            <td class="nbMessages">
+                                <p><?= $topic->getNbMessages() ?><span class="show-phone">&nbsp;posts</span></p>
                             </td>
                             
                             <td>
@@ -96,9 +96,7 @@ $recentsTopic = $result["data"]["recents"];
                 <thead>
 
                     <tr>
-
-                        <th>Popular tags</th>
-                        <th>Icon</th>
+                        <th class="tableTitle">Popular tags</th>
                         <th>Description</th>
                         <th>Topics</th>
                     </tr>
@@ -112,12 +110,8 @@ $recentsTopic = $result["data"]["recents"];
                         <tr>
                             <td>
                                 <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
-                                    <?= $tag->getLabel() ?>
+                                    <?= $tag->showIcon() ?>&nbsp;<?= $tag->getLabel() ?>
                                 </a>
-                            </td>
-
-                            <td>
-                                <?= $tag->showIcon() ?>
                             </td>
 
                             <td>
@@ -125,7 +119,7 @@ $recentsTopic = $result["data"]["recents"];
                             </td>
 
                             <td>
-                                <?= $tag->getNbTopics() ?>
+                                <?= $tag->getNbTopics() ?><span class="show-phone">&nbsp;topics</span>
                             </td>
 
                         </tr>
@@ -199,7 +193,7 @@ $recentsTopic = $result["data"]["recents"];
                 <thead>
 
                     <tr>
-                        <th colspan="2">Recent topics</th>
+                        <th colspan="2" class="tableTitle">Recent topics</th>
                     </tr>
 
                 </thead>

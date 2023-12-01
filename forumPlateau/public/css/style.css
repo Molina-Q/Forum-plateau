@@ -679,6 +679,10 @@ tbody tr:nth-child(odd) {
     background-color: white;
 }
 
+.show-phone { /* will only appear when in phone */
+    display: none;
+}
+
 /********** authorPicture **********/
 .authorTopic { /* target the <td> that contains the username and picture */
     display: flex;
@@ -780,41 +784,110 @@ and (max-device-width : 1200px) {
 @media only screen
 and (max-device-width : 645px) {
 
+/******************** general ********************/
+    small {
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
 /******************** header ********************/
     header {
-        padding: 0;
+        padding: 0 10px;
     }
 /******************** main ********************/
     main {
         margin: 0;
     }
 
-/******************** table ********************/
-    table, thead, tbody, tr, td, td {
+/******************** table Popular ********************/
+    table, thead, tbody, th { /* remove the table inital display */
         display: block;
     } 
-
-    table {
-        border-collapse: collapse;
-        margin-bottom: 15px ;
-        
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    }
-    
-    thead {
-        background-color: var(--primary-color);  
-    }
-    
-    th {
-        text-transform:uppercase; 
-        font-weight:bold; 
-        padding: 10px; 
-        text-align:left;
-    }
     
     td {
-        padding: 12px; 
-        text-align:left;
+        padding: 12px 8px; 
+    }
+
+    thead tr th:not(.tableTitle) {
+        display: none
+    }
+
+    #popularTopics tbody tr td:nth-child(n + 3) {
+        width: 30%;
+        text-align: center;
+    }
+    
+    tr {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    tr .authorTopic { /* td pic user */
+        width: 25%;
+    }
+
+    #popularTopics .authorTopic figure {
+        width: calc(var(--size-user-picture) - 5px);
+        height: calc(var(--size-user-picture) - 5px);
+    }
+
+    tr .titleTopic { /* td ttile */
+        width: 75%;
+        font-size: 19px;
+    }
+
+    .nbMessages {
+    }
+    
+    .nbMessages p {
+        min-width: fit-content;
+        width: 80%;
+        border: 2px solid var(--primary-color);
+        border-radius: 110px;
+        text-align: center;
+    }
+
+    .show-phone {
+        display: initial;
+    }
+/******************** table popular tags ********************/
+    .blocListTags tr {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .blocListTags tr td {
+        width: 100%;
+        text-align: center;
+    }
+
+    .blocListTags tr td:first-child {
+        font-size: 20px;
+    }
+
+/******************** table listTopics ********************/
+    #listTopics tbody tr td:first-child {
+        display: block;
+        height: 100%;
+    }
+
+    #listTopics tbody tr td:not(:first-child) {
+        display: inline;
+        height: 30%;
+    }
+
+    #listTopics tbody tr {
+        display: flex;
+
     }
 
 /******************** homePageContent ********************/
@@ -836,8 +909,12 @@ and (max-device-width : 645px) {
     #statistics {
         display: none;
         padding-bottom: 0;
-        width: 100%;
     }
+
+    #recentTopics {
+        display: none;
+    }
+
 
 /******************** showMessages ********************/
  

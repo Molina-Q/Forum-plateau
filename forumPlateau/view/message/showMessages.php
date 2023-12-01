@@ -101,7 +101,7 @@ if ($closedData->getClosed() == "true") {
     <thead>
         <tr>
             <th class="author">Author</th>
-            <th>Responses</th>
+            <th class="tableTitle">Responses</th>
             <th colspan="2">Dates</th>
         </tr>
     </thead>

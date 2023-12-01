@@ -5,11 +5,11 @@ $topics = $result["data"]['topics'];
 ?>
 
 <h1>Posted Topics</h1>
-<table>
+<table id="listTopics">
     <thead>
         <tr>
             <th class="author">Author</th>
-            <th>Topics</th>
+            <th class="tableTitle">Topics</th>
             <th>Tag</th>
             <th>Date</th>
         </tr>

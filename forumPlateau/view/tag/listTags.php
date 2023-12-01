@@ -8,8 +8,7 @@ $tags = $result["data"]['tags'];
 <table>
     <thead>
         <tr>
-            <th>Tags</th>
-            <th>Icon</th>
+            <th class="tableTitle">Tags</th>
             <th>Description</th>
             <th>Topics</th>
         </tr>
@@ -20,12 +19,8 @@ $tags = $result["data"]['tags'];
             <tr>
                 <td>
                     <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
-                        <?= $tag->getLabel() ?>
+                    <?= $tag->showIcon() ?><?= $tag->getLabel() ?>
                     </a>
-                </td>
-
-                <td>
-                    <?= $tag->showIcon() ?>
                 </td>
 
                 <td>

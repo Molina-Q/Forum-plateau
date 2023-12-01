@@ -20,7 +20,7 @@ $tag = $result['data']['tag'];
     <thead>
         <tr>
             <th class="author">Author</th>
-            <th>Topics</th>
+            <th class="tableTitle">Topics</th>
             <th>Date</th>
             <th>Messages</th>
         </tr>

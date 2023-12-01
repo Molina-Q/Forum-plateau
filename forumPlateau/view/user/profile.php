@@ -8,7 +8,7 @@ $topics = $result["data"]["topics"];
 <div id="form-register-container">
 
     <div id="form-register-header">
-        <h1>Profile</h1>
+        <h1>Profile update</h1>
     </div>
 
     <div id="profile">
@@ -36,7 +36,7 @@ $topics = $result["data"]["topics"];
             <thead>
 
                 <tr>
-                    <th>Topic posted</th>
+                    <th class="tableTitle">Topic posted</th>
                     <th>Tag</th>
                     <th>messages</th>
                     <th>date</th>
