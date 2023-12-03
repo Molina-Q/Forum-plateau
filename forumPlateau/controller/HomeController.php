@@ -34,7 +34,9 @@
         }       
    
         public function users() {
-            $this->restrictTo("ROLE_ADMIN");
+            if(!Session::getUser()) {
+                $this->redirectTo("home", "index");
+            }
 
             $userManager = new UserManager();
             $users = $userManager->findAll(['creationDate', 'ASC']);

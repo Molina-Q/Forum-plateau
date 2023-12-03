@@ -1,15 +1,20 @@
 <?php
 use Service\ConvertDate;
+use App\Session;
 $users = $result["data"]['users'];
     
 ?>
 
 <h1>Every user</h1>
-<table>
+<table id="table-users">
     <thead>
         <tr>
             <th class="tableTitle" colspan="2">Username</th>
-            <th>Email</th>
+
+            <?php if(Session::isAdmin()) { ?>
+                <th>Email</th>
+            <?php } ?>
+
             <th>Role</th>
             <th>Date of creation</th>
         </tr>
@@ -28,16 +33,18 @@ $users = $result["data"]['users'];
                     </a>
                 </td>
 
-                <td>
-                    <?= $user->getEmail() ?>
-                </td>
+                <?php if(Session::isAdmin()) { ?>
+                    <td>
+                        <?= $user->getEmail() ?>
+                    </td>
+                <?php } ?>
 
                 <td>
                     <?= $user->getRole() ?>
                 </td>
 
                 <td>
-                    <?= $user->getFormattedDate("Y/m/d, H:i:s") ?> - <span class="timeInterval"><?= ConvertDate::convertDate($user->getCreationDate()) ?></span>
+                    <?= $user->getFormattedDate("Y/m/d") ?>
                 </td>
 
             </tr>

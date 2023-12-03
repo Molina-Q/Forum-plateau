@@ -797,6 +797,11 @@ and (max-device-width : 645px) {
     header {
         padding: 0 10px;
     }
+
+    #form-search {
+        
+    }
+
 /******************** main ********************/
     main {
         margin: 0;
@@ -818,6 +823,10 @@ and (max-device-width : 645px) {
     #popularTopics tbody tr td:nth-child(n + 3) {
         width: 30%;
         text-align: center;
+    }
+
+    tbody tr td:nth-child(n + 2) {
+        width: 50%;
     }
     
     tr {
@@ -856,6 +865,16 @@ and (max-device-width : 645px) {
     .show-phone {
         display: initial;
     }
+
+    #table-users tbody tr {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #table-users tbody tr td {
+        text-align: center;
+    }
+
 /******************** table popular tags ********************/
     .blocListTags tr {
         display: flex;

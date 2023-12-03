@@ -28,7 +28,7 @@ $tags = $result["data"]['tags'];
                 </td>
 
                 <td>
-                    <?= $tag->getNbtopics() ?>
+                    <?= $tag->getNbtopics() ?><span class="show-phone">&nbsp;topics</span>
                 </td>
 
             </tr>
