@@ -26,7 +26,7 @@ $tag = $result['data']['tag'];
         </tr>
     </thead>
     
-    <tbody class="blocListTags">
+    <tbody class="blocDetailsTag">
         <?php foreach($topics as $topic) { ?>
             <tr>
                 <td class="authorTopic">
@@ -42,7 +42,7 @@ $tag = $result['data']['tag'];
                 </td>
 
                 <td>
-                    <?= $topic->getNbMessages() ?>
+                    <?= $topic->getNbMessages() ?><span class="show-phone">&nbsp;messages</span>
                 </td>
 
             </tr>

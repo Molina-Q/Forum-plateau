@@ -771,8 +771,6 @@ and (max-device-width : 1200px) {
         width: 100%;
     }
 
-/******************** showMessages ********************/
-
 /******************** footer ********************/
     footer {
         padding: 0 5%;
@@ -793,14 +791,37 @@ and (max-device-width : 645px) {
         text-align: center;
     }
 
+    #wrapper textarea {
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 100%;
+    }
+
 /******************** header ********************/
     header {
         padding: 0 10px;
     }
 
     #form-search {
+        display: none;
         
     }
+
+    nav {
+        justify-content: flex-end;
+    }
+
+    #nav-left {
+        width: 40%;
+
+        /* flex: 1; */
+    }
+
+    #nav-right {
+        width: 55%;
+       /* flex: 1;  */
+    }
+
 
 /******************** main ********************/
     main {
@@ -852,6 +873,7 @@ and (max-device-width : 645px) {
     }
 
     .nbMessages {
+
     }
     
     .nbMessages p {
@@ -866,6 +888,7 @@ and (max-device-width : 645px) {
         display: initial;
     }
 
+/******************** table listUser ********************/
     #table-users tbody tr {
         flex-direction: column;
         text-align: center;
@@ -875,7 +898,7 @@ and (max-device-width : 645px) {
         text-align: center;
     }
 
-/******************** table popular tags ********************/
+/******************** table tags ********************/
     .blocListTags tr {
         display: flex;
         flex-direction: row;
@@ -893,7 +916,28 @@ and (max-device-width : 645px) {
         font-size: 20px;
     }
 
+    .blocDetailsTag tr {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .blocDetailsTag tr td {
+        /* width: 100%; */
+        text-align: center;
+    }
+
+    .blocDetailsTag tr td:first-child {
+        font-size: 20px;
+    }
+
 /******************** table listTopics ********************/
+    #listTopics tbody tr {
+        display: flex;
+    }
+
     #listTopics tbody tr td:first-child {
         display: block;
         height: 100%;
@@ -904,9 +948,13 @@ and (max-device-width : 645px) {
         height: 30%;
     }
 
-    #listTopics tbody tr {
-        display: flex;
+/******************** show messages ********************/
+    #detailsTopicHeader {
+        flex-direction: column;
+    }
 
+    .authorTopic a {
+        text-align: center;
     }
 
 /******************** homePageContent ********************/
@@ -935,13 +983,29 @@ and (max-device-width : 645px) {
     }
 
 
-/******************** showMessages ********************/
- 
+/******************** profile ********************/
+    #profile-header {
+        height: 430px;
+        padding: 15px 0;
+        margin-bottom: 25px 0;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    #profile tbody tr td {
+       text-align: center;
+       padding: 8px;
+    }
+
+    #profile tbody tr td:first-child {
+        width: 100%;
+    }
+    
 /******************** footer ********************/
     footer {
         padding: 0;
-    }
 
+    }
 }
 
 

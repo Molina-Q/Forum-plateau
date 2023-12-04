@@ -35,7 +35,6 @@
 
                             <a href="index.php?ctrl=user&action=profile">
                                 <i class="fas fa-user"></i>
-                                &nbsp;
                                 <?= App\Session::getUser() ?>
                             </a>
                             <a href="index.php?ctrl=security&action=logout">Sign out</a>

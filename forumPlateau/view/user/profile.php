@@ -63,7 +63,7 @@ $topics = $result["data"]["topics"];
                                 </a>
                             </td>
 
-                            <td><?= $topic->getNbMessages() ?></td>
+                            <td><?= $topic->getNbMessages() ?><span class="show-phone">&nbsp;messages</span></td>
                             <td><?= $topic->getFormattedDate("Y-m-d") ?></td>
                         </tr>
 
