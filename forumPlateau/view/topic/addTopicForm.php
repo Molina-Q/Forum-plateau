@@ -1,13 +1,14 @@
 <?php 
-use Service\FieldError;
-
-if(isset($result["data"]["fieldData"])&&isset($result["data"]["formErrors"])) { // initialize the variables only if they are set
-    $fieldData = $result["data"]["fieldData"];
-    $formErrors = $result["data"]["formErrors"];
-}
+use App\Session;
 
 $tags = $result["data"]["tags"];
-$idTag = $result["data"]["idTag"];
+
+if(isset($result["data"]["idTag"])) {
+    $idTag = $result["data"]["idTag"];
+} else {
+    $idTag = "";
+}
+
 ?>
 
 <div id="form-container">
@@ -19,20 +20,28 @@ $idTag = $result["data"]["idTag"];
         <!-- title -->
         <label for="title">Title</label>
         <input id="title" type="text" name="title" value=<?= isset($fieldData) ? $fieldData["title"] : ""//ternary in value to show data previously written ?>>
-        <?= isset($formErrors["title"]) ? FieldError::fieldError($formErrors["title"]) : "" //ternary to verify if an error is set than shows it ?>
+        <?= Session::getFlash("title") ?>
         
         <!-- tag -->
         <label for="tag">Tag</label>
         <select name="tag" id="tag">
+
             <?php foreach($tags as $tag) { ?>
-                <option value="<?= $tag->getId() ?>" <?= $tag->getId() == $idTag ? "selected" : "" ?> ><?= $tag->getLabel() ?></option>
+
+                <option value="<?= $tag->getId() ?>" <?= $tag->getId() == $idTag ? "selected" : "" ?>>
+
+                    <?= $tag->getLabel() ?>
+
+                </option>
+
             <?php  } ?>
+
         </select>
 
         <!-- text -->
         <label for="text">Topic's content</label>
         <textarea name="text" id="text" cols="60" rows="5"></textarea>
-        <?= isset($formErrors["text"]) ? FieldError::fieldError($formErrors["text"]) : "" ?>
+        <?= Session::getFlash("text") ?>
 
 
         <button type="submit">submit</button>

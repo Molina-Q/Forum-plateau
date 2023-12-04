@@ -27,7 +27,17 @@ $recentsTopic = $result["data"]["recents"];
 
 <?php } ?>
 
+<?php if(isset($_SESSION["user"])) { ?>
+
+    <a href="index.php?ctrl=topic&action=addTopicForm">
+        Create a new topic!
+        <i class="fa-solid fa-plus"></i>
+    </a> 
+
+<?php } ?>
+
 <div id="homePageContent" class="grid-container">
+
 
     <div id="homePage-left">
 

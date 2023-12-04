@@ -1,6 +1,5 @@
 <?php 
 use App\Session;
-use Service\FieldError;
 
 ?>
 

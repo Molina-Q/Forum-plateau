@@ -25,7 +25,7 @@
         
         }
 
-        public function addTopicForm($tagId) { 
+        public function addTopicForm($tagId = null) { 
             //in case someone who isn't registered try to manipulate the url he cannot access the page
             if(!Session::getUser()) { 
                 $this->redirectTo("home", "index");
@@ -34,16 +34,30 @@
             $tagManager = new TagManager();
             $tags = $tagManager->findAll();
 
-            $this->existInDatabase($tagId, $tagManager);
+            if(isset($tagId)) {
+                $this->existInDatabase($tagId, $tagManager);
 
-            return [
-                "view" => VIEW_DIR."topic/addTopicForm.php",
-                "data" => [
-                    "title" => "Topic creation",
-                    "idTag" => $tagId,
-                    "tags" => $tags
-                ]
-            ];
+                return [
+                    "view" => VIEW_DIR."topic/addTopicForm.php",
+                    "data" => [
+                        "title" => "Topic creation",
+                        "idTag" => $tagId,
+                        "tags" => $tags
+                    ]
+                ];
+
+            } else {
+
+                return [
+                    "view" => VIEW_DIR."topic/addTopicForm.php",
+                    "data" => [
+                        "title" => "Topic creation",
+                        "tags" => $tags
+                    ]
+                ];
+                
+            }
+
         }
 
         public function addTopic() {

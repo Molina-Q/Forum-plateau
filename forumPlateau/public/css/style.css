@@ -84,7 +84,6 @@ textarea {
     outline: none;
 }
 
-
 .blocListTopics tr td a:has(> figure) { /* when the cell of the table in listTopics has a figure as a child */
     display: flex;
     flex-direction: column;
@@ -92,7 +91,12 @@ textarea {
 }
 
 strong {
-    font-size: 20px;
+    display: block;
+    padding-top: 15px;
+    font-size: 24px;
+    text-align: left;
+
+    color: rgb(0, 0, 0);
 }
 
 small {
@@ -699,10 +703,10 @@ tbody tr:nth-child(odd) {
 /******************** footer ********************/
 footer {
     padding: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
+    height: 75px;
+
     background-color: var(--background-color-footer);
     color: var(--secondary-color);
-
-    height: 75px;
 
     display: flex;
     flex-direction: row;
@@ -716,6 +720,15 @@ footer {
 and (max-device-width : 1200px) {
 
 /******************** general ********************/
+    .authorTopic a {
+        text-align: center;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
     small {
         text-align: center;
     }
@@ -797,6 +810,10 @@ and (max-device-width : 645px) {
         width: 100%;
     }
 
+    strong {
+        text-align: center;
+    }
+
 /******************** header ********************/
     header {
         padding: 0 10px;
@@ -805,6 +822,10 @@ and (max-device-width : 645px) {
     #form-search {
         display: none;
         
+    }
+
+    #profileName {
+        display: none;
     }
 
     nav {
@@ -821,7 +842,6 @@ and (max-device-width : 645px) {
         width: 55%;
        /* flex: 1;  */
     }
-
 
 /******************** main ********************/
     main {
@@ -898,7 +918,7 @@ and (max-device-width : 645px) {
         text-align: center;
     }
 
-/******************** table tags ********************/
+/******************** table listTags / detailsTag ********************/
     .blocListTags tr {
         display: flex;
         flex-direction: row;
@@ -925,7 +945,6 @@ and (max-device-width : 645px) {
     }
 
     .blocDetailsTag tr td {
-        /* width: 100%; */
         text-align: center;
     }
 
