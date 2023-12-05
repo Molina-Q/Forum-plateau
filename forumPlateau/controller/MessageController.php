@@ -53,10 +53,10 @@
             $userId = $_SESSION["user"]->getId();
             $errorCheck = false;
 
-            $message = $messageManager->messagesResponse($idTopic);
+            // $message = $messageManager->messagesResponse($idTopic);
             $topic = $topicManager->headerTopic($idTopic);
             
-            if(!$message || !$topic) {
+            if(!$topic) {
                 $this->redirectTo("security", "index");
             }
 
@@ -100,7 +100,8 @@
                 "data" => [
                     "title" => "Update message",
                     "message" => $message
-                ]
+                ],
+                "meta" => "Update an existing message"
             ];
         }
 
