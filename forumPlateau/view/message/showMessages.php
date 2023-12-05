@@ -75,8 +75,6 @@ if ($closedData->getClosed() == "true") {
 
     </div>
 
-<?php } ?>
-
 <?php if(Session::getUser() && !$closed) { ?>
 <!-- form to create a message -->
     <form id="form-add-message" action="index.php?ctrl=message&action=addMessage&id=<?= $topic->getId() ?>" method="post">
@@ -85,6 +83,8 @@ if ($closedData->getClosed() == "true") {
         <button type="submit">Send</button>
         <?= Session::getFlash("text") ?>
     </form>
+    
+<?php } ?>
 
 <?php } else if($closed) { ?>
 

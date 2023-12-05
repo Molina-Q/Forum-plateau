@@ -19,7 +19,7 @@ $topics = $result["data"]['topics'];
         <?php foreach($topics as $topic) { ?>
             <tr>
                 <td>
-                    <a>
+                    <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $topic->getUser()->getId() ?>">
                         <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
                     </a>
                 </td>

@@ -64,7 +64,9 @@ $recentsTopic = $result["data"]["recents"];
                         <tr>
 
                             <td class="authorTopic">
-                                <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
+                                <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $topic->getUser()->getId() ?>">
+                                    <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
+                                </a>
                             </td>
 
                             <td class="titleTopic">

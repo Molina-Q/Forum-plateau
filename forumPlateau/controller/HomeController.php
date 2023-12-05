@@ -29,7 +29,8 @@
                     "statUsers" => $userManager->countElem(),
                     "statTopics" => $topicManager->countElem(),
                     "statMessages" => $messageManager->countElem()
-                ]
+                ],
+                "meta" => "home page of the forum constructed with an home made framework"
             ];
         }       
    
@@ -46,7 +47,8 @@
                 "data" => [
                     "users" => $users,
                     "title" => "List of users"
-                ]
+                ],
+                "List of every user currently registered on the website"
             ];
         }
 

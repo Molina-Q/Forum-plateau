@@ -1,5 +1,5 @@
 <?php 
-use Service\FieldError;
+use App\Session;
 
 if(isset($result["data"]["formErrors"])) { // initialize the variables only if they are set
     $formErrors = $result["data"]["formErrors"];
@@ -18,13 +18,13 @@ $topic = $result["data"]["topic"];
         <form id="form-content" action="index.php?ctrl=topic&action=updateTopic&id=<?= $topic->getId() ?>" method="post">
             <!-- title -->
             <label for="title">Title</label>
-            <input id="title" type="text" name="title" value="<?= $topic->getTitle() ?>">
-            <?= isset($formErrors["title"]) ? FieldError::fieldError($formErrors["title"]) : "" //ternary to verify if an error is set then shows it ?>
+            <input id="title" type="title" name="title" value="<?= $topic->getTitle() ?>">
+            <?= Session::getFlash("title") ?>
 
             <!-- text -->
             <label for="text">Topic's content</label>
             <textarea name="text" id="text" cols="60" rows="5"><?= $topic->getMessageAuthor() ?></textarea>
-            <?= isset($formErrors["text"]) ? FieldError::fieldError($formErrors["text"]) : "" ?>
+            <?= Session::getFlash("text") ?>
 
             <button type="submit">submit</button>
         </form>

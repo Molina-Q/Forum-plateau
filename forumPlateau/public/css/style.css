@@ -383,7 +383,9 @@ form #password {
 }
 
 #form-search {
-    display: flex;
+    /* display: flex; */
+    display: none;
+
     flex-direction: row;
 }
 
@@ -688,7 +690,7 @@ tbody tr:nth-child(odd) {
 }
 
 /********** authorPicture **********/
-.authorTopic { /* target the <td> that contains the username and picture */
+.authorTopic a { /* target the <td> that contains the username and picture */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -739,7 +741,8 @@ and (max-device-width : 1200px) {
     }
 
     #form-search {
-        display: flex;
+        /* display: flex; */
+        display: none;
         flex-direction: row;
     }
     

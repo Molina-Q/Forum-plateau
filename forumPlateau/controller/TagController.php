@@ -13,17 +13,7 @@
 
         public function index() {
           
-           $TagManager = new TagManager();
-           
-            return [
-                "view" => VIEW_DIR."tag/listTags.php",
-                "data" => [
-                    "title" => "List of tags",
-                    "tags" => $TagManager->infoTags()
-                    // "tags" => $TagManager->findAll(["id_tag", "ASC"])
-                ]
-            ];
-        
+
         }
 
         public function listTags() {
@@ -36,7 +26,8 @@
                     "title" => "List of tags",
                     "tags" => $TagManager->infoTags()
                     // "tags" => $TagManager->findAll(["id_tag", "ASC"])
-                ]
+                ],
+                "meta" => "list of every tag that can be applied on the site"
             ];
         }
 
@@ -44,20 +35,18 @@
 
             $tagManager = new TagManager();
             $topicManager = new TopicManager();
-
+            $tag = $tagManager->findOneById($tagId);
             $this->existInDatabase($tagId, $tagManager);
 
             return [
                 "view" => VIEW_DIR."tag/detailsTag.php",
                 "data" => [
                     "title" => "Details of a tag",
-                    "tag" => $tagManager->findOneById($tagId),
+                    "tag" => $tag,
                     "topics" => $topicManager->topicsByTag($tagId)
-                ]
+                ],
+                "meta" => "every topic tied to a specific tag ".$tag->getLabel()
             ];
         }
-
-        
-
 
     }

@@ -85,7 +85,7 @@ $topics = $result["data"]["topics"];
             <label for="picture">Upload a picture for your profile!</label>
             <input type="hidden" name="MAX_FILE_SIZE" value="10000"/>
             <input type="file" name="picture" id="picture">
-            <?= isset($formErrors["picture"]) ? FieldError::fieldError($formErrors["picture"]) : "" ?>
+            <?= Session::getFlash("picture") ?>
 
             <button type="submit">Upload</button>
         </form>

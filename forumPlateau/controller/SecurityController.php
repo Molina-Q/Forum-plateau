@@ -18,7 +18,8 @@
                 "view" => VIEW_DIR."/security/error.php",
                 "data" => [
                     "title" => $title
-                ]
+                ],
+                "meta" => "there was a mistake this page doesn't exist"
             ];
         }
 
@@ -32,7 +33,8 @@
                 "view" => VIEW_DIR."security/register.php",
                 "data" => [
                     "title" => "Register"
-                ]
+                ],
+                "meta" => "Form to create an account"
             ];
         }
 
@@ -148,7 +150,8 @@
                 "view" => VIEW_DIR."security/login.php",
                 "data" => [
                     "title" => "Login"
-                ]
+                ],
+                "meta" => "log into an account by entering it's email and password"
             ];
             
         }
@@ -223,7 +226,8 @@
                 "data" => [
                     "title" => "Change password",
                     "formErrors" => $formErrors
-                ]
+                ],
+                "meta" => "change the password of an account"
             ];
         }
 

@@ -20,7 +20,8 @@
                 "data" => [
                     "title" => "List of topics",
                     "topics" => $topicManager->findAll(["creationDate", "DESC"])
-                ]
+                ],
+                "meta" => "list of every topics on the site"
             ];
         
         }
@@ -43,7 +44,8 @@
                         "title" => "Topic creation",
                         "idTag" => $tagId,
                         "tags" => $tags
-                    ]
+                    ],
+                    "meta" => "creation form used to create topics"
                 ];
 
             } else {
@@ -53,7 +55,8 @@
                     "data" => [
                         "title" => "Topic creation",
                         "tags" => $tags
-                    ]
+                    ],
+                    "meta" => "creation form used to create topics"
                 ];
                 
             }
@@ -123,7 +126,8 @@
                 "data" => [
                     "title" => "Topic update",
                     "topic" => $topic
-                ]
+                ],
+                "meta" => "update an existing topi"
             ];
         }
 

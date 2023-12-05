@@ -30,7 +30,8 @@
                 "data" => [
                     "title" => "Your profile",
                     "topics" => $topics
-                ]
+                ],
+                "meta" => "the profile of connected user"
             ];
         }
 
@@ -50,7 +51,8 @@
                     "title" => "User profile",
                     "topics" => $topics,
                     "user" => $user
-                ]
+                ],
+                "meta" => "public profile of users visible to anyone with an account"
             ];
         }
 
@@ -130,14 +132,7 @@
                 $this->redirectTo("user", "profile");
             } 
 
-            return [
-                "view" => VIEW_DIR."user/profile.php",
-                "data" => [
-                    "title" => "User profile",
-                    "topics" => $topics,
-                    "formErrors" => $formErrors
-                ]
-            ];
+            $this->redirectTo("user", "profile");
 
         }
     }

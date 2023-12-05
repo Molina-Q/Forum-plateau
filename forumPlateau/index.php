@@ -29,7 +29,7 @@
     }
 
     //on construit le namespace de la classe Controller à appeller
-    $ctrlNS = "controller\\".ucfirst($ctrlname)."Controller";
+    $ctrlNS = "controller\\".ucfirst($ctrlname)."Controller"; // propre a php donc pas besoin du DS
 
     //on vérifie que le namespace pointe vers une classe qui existe
     if(!class_exists($ctrlNS)) {

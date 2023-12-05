@@ -12,7 +12,7 @@ abstract class ConvertDate {
 
         // is used to check if the interval is in years, months or days
         $formatProperties = [
-                "%Y" => "year",
+                "%y" => "year",
                 "%m" => "month",
                 "%d" => "day", 
                 "%h" => "hour",
@@ -23,7 +23,7 @@ abstract class ConvertDate {
         foreach($formatProperties as $properties => $stringFormat) {
                 $intervalProperties = $timeInterval->format($properties); 
 
-                if($stringFormat == "day" && $intervalProperties >= "7") { // check if the interval is in days and if its longer than 7 days(a week)
+                if($stringFormat == "day" && $intervalProperties >= "7") { // check if the interval is in days and if it is longer than 7 days(a week)
                         $formatedTime = floor($intervalProperties / 7); // is used to check how many week(s) it is by rounding down the division
 
                         if($formatedTime > "1") { // if it is more than a week (minimum 14 days) there will be an "s" at the end

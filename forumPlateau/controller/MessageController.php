@@ -53,7 +53,6 @@
             $userId = $_SESSION["user"]->getId();
             $errorCheck = false;
 
-            // $message = $messageManager->messagesResponse($idTopic);
             $topic = $topicManager->headerTopic($idTopic);
             
             if(!$topic) {
