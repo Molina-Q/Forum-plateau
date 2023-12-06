@@ -53,21 +53,15 @@ if ($closedData->getClosed() == "true") {
 
         <div id="detailsTopicAuthor">
 
-            <?= $topic->getUser() == null ? "" : $topic->getUser()->showPicture() ?>
+            <?= $topic->getUser()->showPicture() ?>
 
-            <?php if($topic->getUser() == null) { ?>
-
-                <a href="#">
-                    <p>[deleted]</p>
-                </a>
-                
-            <?php } else { ?>
+        
                     
                 <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?=$topic->getUser()->getId() ?>">
                     <p><?= $topic->getUser()->getUsername() ?></p>
                 </a>
 
-            <?php } ?>
+           
             
             <p class="timeInterval"><?= ConvertDate::convertDate($topic->getCreationDate()) ?></p>
 
@@ -91,7 +85,7 @@ if ($closedData->getClosed() == "true") {
     <form id="form-add-message" action="index.php?ctrl=message&action=addMessage&id=<?= $topic->getId() ?>" method="post">
         <label for="text">Say something</label>
         <textarea name="text" id="text" cols="15" rows="1" placeholder="Write something..."></textarea>
-        <button type="submit">Send</button>
+        <button type="submit"><i class="fa-solid fa-reply"></i></button>
         <?= Session::getFlash("text") ?>
     </form>
     

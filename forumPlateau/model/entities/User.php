@@ -18,8 +18,17 @@
         private $nbUser;
         private $countIteration; // the number of this entity in the database
 
-        public function __construct($data){         
-            $this->hydrate($data);        
+        public function __construct($data, $isDeletedUser = false) {         
+            // si l'utilisateur a été supprimé
+            if ($isDeletedUser) {
+                $this->id = null;
+                $this->username = "[ <i>deleted_user</i> ]";
+                $this->picture = "deleted.jpg";
+            } else {
+                // sinon on garde le comportement par défaut
+                $this->hydrate($data);
+            }
+            
         }
  
         /**

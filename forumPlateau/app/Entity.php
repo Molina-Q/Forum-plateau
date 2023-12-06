@@ -1,6 +1,8 @@
 <?php
     namespace App;
 
+    use Model\Entities\User;
+
     abstract class Entity {
 
         protected function hydrate($data) {
@@ -17,6 +19,11 @@
                     
                     $man = new $FQCName();
                     $value = $man->findOneById($value);
+
+                    // si le user à été supprimé 
+                    if($field == "user_id" && !$value) {
+                        $value = new User(null, true);
+                    }
                 }
                 //fabrication du nom du setter à appeler (ex: setMarque)
                 $method = "set".ucfirst($fieldArray[0]);

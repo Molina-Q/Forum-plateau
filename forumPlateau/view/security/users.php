@@ -13,7 +13,7 @@ $users = $result["data"]['users'];
 
         <tr>
 
-            <th class="tableTitle" colspan="2">Username</th>
+            <th class="tableTitle" colspan="2">User</th>
 
             <?php if(Session::isAdmin()) { ?>
                 <th>Email</th>

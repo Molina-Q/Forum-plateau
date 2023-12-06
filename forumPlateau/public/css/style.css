@@ -397,6 +397,18 @@ textarea {
     flex-direction: row;
 }
 
+#tag {
+    width: 250px;
+    padding: 8px 10px;
+    background-color: var(--table-highlight-color);
+    border: none;
+    font-size: 18px;
+}
+
+#tag:focus-visible {
+    outline: none;
+}
+
 #form-search input  {
     width: 250px;
     height: 35px;
@@ -643,6 +655,8 @@ main {
 
     display: flex;
     flex-direction: column;
+
+    position: relative;
 }
 
 #form-add-message label {
@@ -650,7 +664,22 @@ main {
 }
 
 #form-add-message textarea {
+    padding-right:50px ;
+    height: fit-content;
+}
 
+#form-add-message button {
+    border: none;
+    position: absolute;
+    top: 40px;
+    right: 30px;
+}
+
+#form-add-message button i {
+    font-size: 20px;
+
+    color: var(--primary-color);
+    background-color: var(--table-highlight-color);
 }
 
 .replaceFormMessage {
@@ -824,8 +853,8 @@ and (max-device-width : 645px) {
     }
 
     #wrapper textarea {
-        padding-left: 10px;
-        padding-right: 10px;
+        /* padding-left: 10px;
+        padding-right: 10px; */
         width: 100%;
     }
 

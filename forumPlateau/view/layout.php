@@ -20,11 +20,11 @@
                     <div id="nav-left">
                         <a href="index.php">Home</a>
 
-                        <form id="form-search" action="index.php?" method="post">
-                            <label for="search-bar" ></label>
+                        <!-- <form id="form-search" action="index.php?" method="post">
+                            <label for="search-bar"></label>
                             <input id="search-bar" type="text" name="search-bar">
                             <button type="submit">Search</button>
-                        </form>
+                        </form> -->
                     </div>
 
                     <div id="nav-right">
