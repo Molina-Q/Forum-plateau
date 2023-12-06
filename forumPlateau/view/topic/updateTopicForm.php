@@ -11,6 +11,7 @@ $topic = $result["data"]["topic"];
 <?php if($topic) { ?>
 
     <div id="form-container">
+
         <div id="form-header">
             <h1>Update a topic</h1>
         </div>
@@ -28,6 +29,7 @@ $topic = $result["data"]["topic"];
 
             <button type="submit">submit</button>
         </form>
+        
     </div>
 
 <?php } ?>

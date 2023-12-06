@@ -135,4 +135,19 @@
             $this->redirectTo("user", "profile");
 
         }
+
+        public function deleteUser($idUser) {
+            $userManager = new UserManager;
+
+            if(!Session::isAuthorOrAdmin($idUser)) {
+                $this->redirectTo("home", "index");
+            }
+
+            $this->existInDatabase($idUser, $userManager);
+
+            $userManager->delete($idUser);
+
+            $this->redirectTo("home", "users");
+
+        }
     }

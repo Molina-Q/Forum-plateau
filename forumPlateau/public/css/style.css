@@ -8,6 +8,9 @@
 
     --table-highlight-color: #D9D9D9;
 
+    --hypertext-color: rgb(0, 129, 168);
+    --hypertext-color-hover: rgb(0, 43, 46) ;
+
     --primary-text: black ;
     --secondary-text: #5B5B5B ;
 
@@ -43,6 +46,15 @@ footer a, header a {
     text-decoration: none;
 }
 
+#forum a {
+    color: var(--hypertext-color);
+    text-decoration: none;
+}
+
+#forum a:hover {
+    color: var(--hypertext-color-hover);
+}
+
 .timeInterval { /* applies to some date interval */
     color: var(--secondary-text);
 }
@@ -69,19 +81,6 @@ thead { /* color of every table's head */
 
 a:has(> i) { /* :has(), css selector: target every <a> elements that has <i> has a child !!not native to firefox */
     text-decoration: none;
-}
-
-textarea {
-    min-height: 80px;
-
-    padding: 15px;
-
-    border: 0;
-    border-radius: 4px;
-    background-color: var(--table-highlight-color) ;
-    font-size: 16px;
-    resize: none;
-    outline: none;
 }
 
 .blocListTopics tr td a:has(> figure) { /* when the cell of the table in listTopics has a figure as a child */
@@ -327,8 +326,17 @@ form #password {
     right: 6px;
 }
 
-#form-content input[type=file] {
-    
+textarea {
+    min-height: 80px;
+
+    padding: 15px;
+
+    border: 0;
+    border-radius: 4px;
+    background-color: var(--table-highlight-color) ;
+    font-size: 16px;
+    resize: none;
+    outline: none;
 }
 
 .form-password {
@@ -622,6 +630,10 @@ main {
     color: var(--primary-color);
 }
 
+.blocListUser tr td a i { /* trash can icon in users */
+    color: var(--primary-color);
+}
+
 /******************** addMessage ********************/
 #form-add-message {
     padding: 5px;
@@ -671,6 +683,10 @@ th {
 td {
     padding: 12px; 
     text-align:left;
+}
+
+tr td p { /* align for [deleted] */
+    text-align: center;
 }
 
 .author { /* <tr> */

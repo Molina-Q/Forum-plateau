@@ -1,5 +1,4 @@
 <?php 
-use Service\FieldError;
 use App\Session;
 
 $topics = $result["data"]["topics"];
@@ -63,7 +62,11 @@ $topics = $result["data"]["topics"];
                                 </a>
                             </td>
 
-                            <td><?= $topic->getNbMessages() ?><span class="show-phone">&nbsp;messages</span></td>
+                            <td>
+                                <?= $topic->getNbMessages() ?>
+                                <span class="show-phone">&nbsp;messages</span>
+                            </td>
+                            
                             <td><?= $topic->getFormattedDate("Y-m-d") ?></td>
                         </tr>
 

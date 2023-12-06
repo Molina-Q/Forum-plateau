@@ -6,9 +6,13 @@ $users = $result["data"]['users'];
 ?>
 
 <h1>Every user</h1>
+
 <table id="table-users">
+
     <thead>
+
         <tr>
+
             <th class="tableTitle" colspan="2">Username</th>
 
             <?php if(Session::isAdmin()) { ?>
@@ -16,12 +20,17 @@ $users = $result["data"]['users'];
             <?php } ?>
 
             <th>Role</th>
-            <th>Date of creation</th>
+
+            <th colspan="2">Date of creation</th>
+
         </tr>
+
     </thead>
 
     <tbody class="blocListUser">
+
         <?php foreach($users as $user) { ?>
+
             <tr>
                 <td>
                     <?= $user->showPicture() ?>
@@ -43,11 +52,22 @@ $users = $result["data"]['users'];
                     <?= $user->getRole() ?>
                 </td>
 
-                <td>
+                <td >
                     <?= $user->getFormattedDate("Y/m/d") ?>
                 </td>
 
+                <td>    
+                    <?php if(Session::isAuthorOrAdmin($user->getId())) { ?>
+                        <a class="deleteIcon" href="index.php?ctrl=user&action=deleteUser&id=<?= $user->getId() ?>">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    <?php } ?>
+                        
+                </td>
             </tr>
+
         <?php } ?>
+
     </tbody>
+
 </table>

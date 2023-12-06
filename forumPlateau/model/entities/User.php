@@ -235,7 +235,7 @@
             
             echo "
             <figure class='$classPic'>
-                <img src='./public/img/uploads/$picture' alt='$picture'></img>
+                <img src='./public/img/uploads/$picture' alt='$picture'>
             </figure>
             ";
         }

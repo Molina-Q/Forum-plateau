@@ -12,11 +12,15 @@ if(isset($result["data"]["idTag"])) {
 ?>
 
 <div id="form-container">
+
     <div id="form-header">
+
         <h1>Create a topic</h1>
+
     </div>
     
     <form id="form-content" action="index.php?ctrl=topic&action=addTopic" method="post">
+
         <!-- title -->
         <label for="title">Title</label>
         <input id="title" type="text" name="title" value=<?= isset($fieldData) ? $fieldData["title"] : ""//ternary in value to show data previously written ?>>
@@ -45,5 +49,7 @@ if(isset($result["data"]["idTag"])) {
 
 
         <button type="submit">submit</button>
+
     </form>
+    
 </div>

@@ -72,7 +72,7 @@ $recentsTopic = $result["data"]["recents"];
                             <td class="titleTopic">
                                 <a href="index.php?ctrl=message&action=showMessages&id=<?= $topic->getId()?>">
                                     <?= $topic->getTitle() ?>
-                                    <?= $topic->getClosed() == "true" ? "- Locked" : "" ?>
+                                    <?= $topic->getClosed() == "true" ? "<span>[Locked]</span>" : "" ?>
                                 </a>
                             </td>
 
@@ -82,7 +82,7 @@ $recentsTopic = $result["data"]["recents"];
                             </td>
                             
                             <td>
-                                <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>">
+                                <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>" aria-label="Have more info about the <?= $topic->getTag()->getLabel() ?> tag">
                                     <?= $topic->getTag()->showIcon() ?><?= $topic->getTag()->getLabel() ?>
                                 </a>
                             </td>
@@ -112,7 +112,7 @@ $recentsTopic = $result["data"]["recents"];
                         <th>Description</th>
                         <th>Topics</th>
                     </tr>
-
+                        
                 </thead>
 
                 <tbody class="blocListTags">

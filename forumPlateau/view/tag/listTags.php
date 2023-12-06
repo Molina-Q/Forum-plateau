@@ -1,22 +1,28 @@
 <?php
-
 $tags = $result["data"]['tags'];
     
 ?>
 
 <h1>List of Tags</h1>
+
 <table>
+
     <thead>
+
         <tr>
             <th class="tableTitle">Tags</th>
             <th>Description</th>
             <th>Topics</th>
         </tr>
+
     </thead>
 
     <tbody class="blocListTags">
+
         <?php foreach($tags as $tag) { ?>
+
             <tr>
+
                 <td>
                     <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
                     <?= $tag->showIcon() ?><?= $tag->getLabel() ?>
@@ -32,8 +38,11 @@ $tags = $result["data"]['tags'];
                 </td>
 
             </tr>
+
         <?php } ?>
+
     </tbody>
+    
 </table>
 
   

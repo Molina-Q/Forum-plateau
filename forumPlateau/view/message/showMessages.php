@@ -1,7 +1,6 @@
 <?php
 use App\Session;
 use Service\ConvertDate;
-use Service\FieldError;
 
 $messages = $result["data"]['messages'];
 $topic = $result["data"]["topic"];
@@ -20,7 +19,7 @@ if ($closedData->getClosed() == "true") {
 
     <div id="detailsTopicHeader">
 
-        <?php if($userSession) { ?>
+        <?php if($userSession && $topic->getUser() != null) { ?>
 
             <?php if(($userSession->getId() == $topic->getUser()->getId() && !$closed) || Session::isAdmin()) { ?>
 
@@ -54,10 +53,22 @@ if ($closedData->getClosed() == "true") {
 
         <div id="detailsTopicAuthor">
 
-            <?= $topic->getUser()->showPicture() ?>
-            <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?=$topic->getUser()->getId() ?>">
-                <p><?= $topic->getUser()->getUsername() ?></p>
-            </a>
+            <?= $topic->getUser() == null ? "" : $topic->getUser()->showPicture() ?>
+
+            <?php if($topic->getUser() == null) { ?>
+
+                <a href="#">
+                    <p>[deleted]</p>
+                </a>
+                
+            <?php } else { ?>
+                    
+                <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?=$topic->getUser()->getId() ?>">
+                    <p><?= $topic->getUser()->getUsername() ?></p>
+                </a>
+
+            <?php } ?>
+            
             <p class="timeInterval"><?= ConvertDate::convertDate($topic->getCreationDate()) ?></p>
 
         </div>
@@ -112,24 +123,41 @@ if ($closedData->getClosed() == "true") {
 
                 <tr>
                     <td class="authorTopic">
-                        <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $message->getUser()->getId() ?>">
-                            <?= $message->getUser()->showPicture() ?><?= $message->getUser()->getUsername() ?>
-                        </a>
+                        <?php if($message->getUser() == null ) { ?>
+
+                            <a href="#">
+                                [deleted]
+                            </a>
+
+                        <?php } else { ?>
+
+                            <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $message->getUser()->getId() ?>">
+                                <?= $message->getUser()->showPicture() ?><?= $message->getUser()->getUsername() ?>
+                            </a>
+
+                        <?php } ?>
                     </td>
+
                     <td><?= $message->getText() ?></td>
+
                     <td><?= ConvertDate::convertDate($message->getCreationDate()) ?></td>
 
                     <td>
-                        <?php if((isset($_SESSION["user"])&&($_SESSION["user"]->getId() == $message->getUser()->getId()) || Session::isAdmin())) { ?>
-                            <a href="index.php?ctrl=message&action=updateMessageForm&id=<?= $message->getId() ?>">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
+                        <?php if($message->getUser() != null) { ?>
 
-                            <a class="deleteIcon" href="index.php?ctrl=message&action=deleteMessage&id=<?= $message->getId() ?>">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
+                            <?php if((isset($_SESSION["user"]) && ($_SESSION["user"]->getId() == $message->getUser()->getId()) || Session::isAdmin())) { ?>
+                                <a href="index.php?ctrl=message&action=updateMessageForm&id=<?= $message->getId() ?>">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+
+                                <a class="deleteIcon" href="index.php?ctrl=message&action=deleteMessage&id=<?= $message->getId() ?>">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            <?php } ?>
+
                         <?php } ?>
                     </td>
+
                 </tr>
 
             <?php } ?>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?= $meta_description ?>">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href=".<?= PUBLIC_DIR ?>/css/style.css">
     <title><?= $title ?></title>
@@ -13,10 +12,9 @@
 </head>
 <body>
     <div id="wrapper"> 
+
         <div id="mainPage">
-            <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
-            <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
-            <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
+
             <header>
                 <nav>
                     <div id="nav-left">
@@ -25,7 +23,7 @@
                         <form id="form-search" action="index.php?" method="post">
                             <label for="search-bar" ></label>
                             <input id="search-bar" type="text" name="search-bar">
-                            <button id="search-bar" type="submit">Search</button>
+                            <button type="submit">Search</button>
                         </form>
                     </div>
 

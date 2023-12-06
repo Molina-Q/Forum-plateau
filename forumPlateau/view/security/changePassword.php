@@ -1,5 +1,6 @@
 <?php 
-use Service\FieldError;
+use App\Session;
+
 if(isset($formErrors)) {
     $formErrors = $result["data"]["formErrors"];
 }
@@ -14,18 +15,18 @@ if(isset($formErrors)) {
     <form id="form-content" action="index.php?ctrl=security&action=changePasswordUser" method="post">
         <label for="email">Email</label>
         <input type="email" name="email" id="email">
-        <?= isset($formErrors["email"]) ? FieldError::fieldError($formErrors["email"]) : "" ?> 
+        <?= Session::getFlash("email") ?>
 
         <div class="form-password">
             <label for="password">New password*</label>
             <input type="password" name="password" id="password">
             <i class="fa-solid fa-eye" id="eyeCon"></i>
-            <?= isset($formErrors["password"]) ? FieldError::fieldError($formErrors["password"]) : "" ?> 
+            <?= Session::getFlash("password") ?>
         </div>
 
         <label for="confirmPassword">Confirm password</label>
         <input type="password" name="confirmPassword" id="confirmPassword">
-        <?= isset($formErrors["confirmPassword"]) ? FieldError::fieldError($formErrors["confirmPassword"]) : "" ?> 
+        <?= Session::getFlash("confirmPassword") ?>
 
         <button type="submit">Confirm</button>
 
