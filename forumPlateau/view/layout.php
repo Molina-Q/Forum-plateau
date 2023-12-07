@@ -35,8 +35,11 @@
                                 <i class="fas fa-user"></i>
                                 <span id="profileName"><?= App\Session::getUser() ?></span>
                             </a>
+
                             <a href="index.php?ctrl=security&action=logout">Sign out</a>
+
                         <?php } else { ?>
+
                             <a href="index.php?ctrl=security&action=register">
                                 <p>Sign in</p>
                             </a>   
@@ -44,11 +47,17 @@
                             <a href="index.php?ctrl=security&action=login">
                                 <p>Login</p>
                             </a>
+
                         <?php } ?>
+                        
+                        <i class="fa-solid fa-circle-half-stroke" id="toggleTheme"></i>
+
                         <div id="blocBurger">
                             <i class="fa-solid fa-bars" id="iconBurger"></i>
                         </div>
-                    </div>                    
+
+                    </div>        
+
                 </nav>
 
                 <div id="sub-nav">

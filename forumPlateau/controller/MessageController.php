@@ -16,10 +16,12 @@
         }
         
         public function showMessages($idTopic) {
+
             $messageManager = new MessageManager();
             $topicManager = new TopicManager();
             
             $this->existInDatabase($idTopic, $topicManager);
+
             
             $message = $messageManager->messagesResponse($idTopic); // the message posted on a topic (except the one the author wrote)
             $topic = $topicManager->headerTopic($idTopic); // all the information displayed on the header of a topic

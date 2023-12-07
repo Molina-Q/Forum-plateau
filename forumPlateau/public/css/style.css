@@ -1,20 +1,20 @@
 :root {
-    --primary-color: #2978a6;
+    --primary-color: rgb(41, 120, 166);
     --primary-color-lighter: rgb(50, 144, 199);
     --primary-color-darker: rgb(26, 76, 105);
 
-    --secondary-color: #FFFFFF; /* used for background, and text */
-    --background-color-general: #E9E9E9; /* background color for the whole site*/
+    --secondary-color: rgb(255, 255, 255); /* used for background, and text */
+    --background-color-general: rgb(232, 232, 232); /* background color for the whole site*/
 
-    --table-highlight-color: #D9D9D9;
+    --table-highlight-color: rgb(217, 217, 217);
 
-    --hypertext-color: rgb(0, 129, 168);
+    --hypertext-color: rgb(5, 50, 92);
     --hypertext-color-hover: rgb(0, 43, 46) ;
 
-    --primary-text: black ;
-    --secondary-text: #5B5B5B ;
+    --primary-text: rgb(0, 0, 0) ;
+    --secondary-text: rgb(92, 92, 92) ;
 
-    --background-color-footer: #252525;
+    --background-color-footer: rgb(38, 38, 38);
 
     --title-font-size: 32px;
     --p-font-size: 16px;
@@ -30,7 +30,6 @@
 
 body {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    
 }
 
 #wrapper {
@@ -94,7 +93,6 @@ strong {
     padding-top: 15px;
     font-size: 24px;
     text-align: left;
-
     color: rgb(0, 0, 0);
 }
 
@@ -120,7 +118,6 @@ nav {
 
 #nav-left {
     width: 45%;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -129,7 +126,6 @@ nav {
 
 #nav-right {
     width: 45%;
-
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -153,10 +149,8 @@ nav {
 #sub-nav a {
     width: 100%;
     padding: 10px;
-
     text-align: center;
     text-decoration: none;
-
     transition: 0.3s;
 }
 
@@ -195,16 +189,12 @@ nav {
 .menuBurger { /* div menu burger */
     width: 335px;
     height: 200px;
-
     padding: 15px 20px;
-
     position: absolute;
     top: 30px;
     right: 0px;
-
     background-color: white;
     display: none;
-
     box-shadow: -2px 2px 8px gray;
 }
 
@@ -271,6 +261,10 @@ nav {
 
 #form-content input:focus-visible { /* nativ outline */
     outline-style:none;
+}
+
+#role:focus-visible {
+    outline-style: none;
 }
 /********** input **********/
 #form-content input {
@@ -343,9 +337,7 @@ textarea {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     text-align: center;
-
     position: relative;
 }
 
@@ -391,9 +383,7 @@ textarea {
 }
 
 #form-search {
-    /* display: flex; */
     display: none;
-
     flex-direction: row;
 }
 
@@ -413,7 +403,6 @@ textarea {
     width: 250px;
     height: 35px;
     padding: 0 5px;
-
     font-size: 16px;
     border: none;
 }
@@ -436,12 +425,6 @@ form button {
 }
 
 /******************** User profile ********************/
-[class*='picture'] {
-    width: var(--size-user-picture);
-    height: var(--size-user-picture);
-    margin-bottom: 5px;
-}
-
 #form-content-profile {
     margin: 25px 0;
     padding: 15px 0;
@@ -533,10 +516,19 @@ form button {
     border-radius: 5px;
     border: none;
 }
+
+/******************** picture ********************/
+[class*='picture'] {
+    width: var(--size-user-picture);
+    height: var(--size-user-picture);
+    margin-bottom: 5px;
+}
+
 /********** pictureUser **********/
 .pictureUser { /* user pic is round */
     border: 5px solid var(--primary-color);
     border-radius: 50%;
+    transform: scale(1);
 }
 
 .pictureUser img {
@@ -544,6 +536,7 @@ form button {
     height: 100%;
     object-fit:cover;
     border-radius: 50%;
+    background-color: var(--secondary-color);
 }
 
 /********** pictureAdmin **********/
@@ -761,6 +754,18 @@ footer {
     align-items: center;
 }
 
+/******************** footer ********************/
+#errorPage p {
+    font-size: 35px;
+    padding: 15px 0;
+}
+
+#errorPage p:first-child {
+   color: var(--primary-color);
+   text-transform: uppercase;
+   font-weight: 500;
+}
+
 /**************************************** responsive ****************************************/
 /************************* tablet *************************/
 @media only screen
@@ -774,7 +779,6 @@ and (max-device-width : 1200px) {
         flex-direction: column;
         align-items: center;
     }
-
 
     small {
         text-align: center;
@@ -882,13 +886,10 @@ and (max-device-width : 645px) {
 
     #nav-left {
         width: 40%;
-
-        /* flex: 1; */
     }
 
     #nav-right {
         width: 55%;
-       /* flex: 1;  */
     }
 
 /******************** main ********************/
@@ -916,6 +917,8 @@ and (max-device-width : 645px) {
 
     tbody tr td:nth-child(n + 2) {
         width: 50%;
+        display: block;
+        text-align: center;
     }
     
     tr {

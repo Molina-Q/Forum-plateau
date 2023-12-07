@@ -21,10 +21,10 @@ $topics = $result["data"]["topics"];
             <div class="profile-info">
 
                 <p>Username</p>
-                <p class="username"><?= $_SESSION["user"]->getUsername() ?></p>
+                <p class="username"><?= $_SESSION["user"]->getUsername() ?></p><span>change username</span>
 
                 <p>Email</p>
-                <p class="email"><?= $_SESSION["user"]->getEmail() ?></p>
+                <p class="email"><?= $_SESSION["user"]->getEmail() ?><span>change email</span></p>
 
             </div>
 

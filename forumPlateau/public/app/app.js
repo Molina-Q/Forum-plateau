@@ -109,7 +109,8 @@ iconBurger.addEventListener("click", () => menuToggle(menuBurger));
 
 //// confirm delete ////
 for (let i = 0; i < deleteIcon.length; i++) {
-    const openDelete = deleteIcon[i]; // openDelete is the <a href="" class="deleteIcon"> element i clicked
+    // openDelete is the <a href="" class="deleteIcon"> element i clicked
+    const openDelete = deleteIcon[i]; 
     
     openDelete.addEventListener("click", function() {
         // i store the string in his href
@@ -131,3 +132,33 @@ for (let i = 0; i < deleteIcon.length; i++) {
 
 //// showPassword //// 
 eyeCon.addEventListener("click", () => togglePassword(passwordInput));
+
+
+//// toggleTheme ////
+
+const toggleTheme = getElementById("toggleTheme");
+
+const colorSite = [
+    { // light theme
+        primary: "rgb(41, 120, 166)",
+        primaryLight: "rgb(50, 144, 199)",
+        primaryDark: "rgb(26, 76, 105)",
+    
+        secondary: "rgb(255, 255, 255)",
+        backgroundWhole: "rgb(232, 232, 232)",
+    
+        tableHighlight: "rgb(217, 217, 217)",
+
+        hypertext: "rgb(5, 50, 92)",
+        hypertextHover: "rgb(0, 43, 46)",
+    
+        primaryText: "rgb(0, 0, 0)",
+        secondaryText: "rgb(92, 92, 92)",
+    
+        backgroundFooter: "rgb(38, 38, 38)"
+    },
+
+    { // dark theme
+
+    }
+]

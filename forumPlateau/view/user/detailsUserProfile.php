@@ -41,7 +41,7 @@ if(Session::isAdmin()) {
 
                     <?php if(Session::isAdmin()) { ?>
 
-                        <form action="index.php?ctrl=user&action=updateUser" method="post">
+                        <form action="index.php?ctrl=user&action=updateRole&id=<?= $user->getId() ?>" method="post">
                             <label for="role">Role</label>
                             <select name="role" id="role">
                                 <option value="ROLE_ADMIN" <?= $user->getRole() == "ROLE_ADMIN" ? "selected" : "" ?> >ADMIN</option>

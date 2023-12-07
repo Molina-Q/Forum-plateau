@@ -19,16 +19,15 @@
         private $countIteration; // the number of this entity in the database
 
         public function __construct($data, $isDeletedUser = false) {         
-            // si l'utilisateur a été supprimé
+            // if the user was deleted and is null
             if ($isDeletedUser) {
                 $this->id = null;
-                $this->username = "[ <i>deleted_user</i> ]";
-                $this->picture = "deleted.jpg";
+                $this->username = "<i>[&nbsp;deleted_user&nbsp;]</i>";
+                $this->picture = "deleted.svg";
             } else {
-                // sinon on garde le comportement par défaut
+                // else we hydrate as it normaly would
                 $this->hydrate($data);
             }
-            
         }
  
         /**

@@ -19,8 +19,6 @@ if ($closedData->getClosed() == "true") {
 
     <div id="detailsTopicHeader">
 
-        <?php if($userSession && $topic->getUser() != null) { ?>
-
             <?php if(($userSession->getId() == $topic->getUser()->getId() && !$closed) || Session::isAdmin()) { ?>
 
                 <div class="icons">
@@ -46,23 +44,16 @@ if ($closedData->getClosed() == "true") {
                     <?php } ?>
         
                 </div>
-
-            <?php } ?>
-
         <?php } ?>
 
         <div id="detailsTopicAuthor">
 
             <?= $topic->getUser()->showPicture() ?>
 
-        
-                    
-                <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?=$topic->getUser()->getId() ?>">
-                    <p><?= $topic->getUser()->getUsername() ?></p>
-                </a>
+            <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?=$topic->getUser()->getId() ?>">
+                <p><?= $topic->getUser()->getUsername() ?></p>
+            </a>
 
-           
-            
             <p class="timeInterval"><?= ConvertDate::convertDate($topic->getCreationDate()) ?></p>
 
         </div>
@@ -73,7 +64,8 @@ if ($closedData->getClosed() == "true") {
                 <strong>This topic is locked</strong>
             <?php } ?>
 
-            <h1><?= $topic->getTitle() ?></h1> <!-- this as h1 because this seems like the most interesting part to be found with google search -->
+            <h1><?= $topic->getTitle() ?></h1>
+            
             <p><?= $topic->getMessageAuthor() ?></p>
 
         </div>
@@ -117,19 +109,9 @@ if ($closedData->getClosed() == "true") {
 
                 <tr>
                     <td class="authorTopic">
-                        <?php if($message->getUser() == null ) { ?>
-
-                            <a href="#">
-                                [deleted]
-                            </a>
-
-                        <?php } else { ?>
-
-                            <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $message->getUser()->getId() ?>">
-                                <?= $message->getUser()->showPicture() ?><?= $message->getUser()->getUsername() ?>
-                            </a>
-
-                        <?php } ?>
+                        <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $message->getUser()->getId() ?>">
+                            <?= $message->getUser()->showPicture() ?><?= $message->getUser()->getUsername() ?>
+                        </a>
                     </td>
 
                     <td><?= $message->getText() ?></td>
@@ -137,19 +119,17 @@ if ($closedData->getClosed() == "true") {
                     <td><?= ConvertDate::convertDate($message->getCreationDate()) ?></td>
 
                     <td>
-                        <?php if($message->getUser() != null) { ?>
+        
+                        <?php if((isset($_SESSION["user"]) && ($_SESSION["user"]->getId() == $message->getUser()->getId()) || Session::isAdmin())) { ?>
+                            <a href="index.php?ctrl=message&action=updateMessageForm&id=<?= $message->getId() ?>">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
 
-                            <?php if((isset($_SESSION["user"]) && ($_SESSION["user"]->getId() == $message->getUser()->getId()) || Session::isAdmin())) { ?>
-                                <a href="index.php?ctrl=message&action=updateMessageForm&id=<?= $message->getId() ?>">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-
-                                <a class="deleteIcon" href="index.php?ctrl=message&action=deleteMessage&id=<?= $message->getId() ?>">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                            <?php } ?>
-
+                            <a class="deleteIcon" href="index.php?ctrl=message&action=deleteMessage&id=<?= $message->getId() ?>">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
                         <?php } ?>
+
                     </td>
 
                 </tr>

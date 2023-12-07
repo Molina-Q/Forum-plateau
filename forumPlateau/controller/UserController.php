@@ -36,11 +36,19 @@
         }
 
         public function detailsUserProfile($userId) {
+
+            if($userId == null) {
+                Session::addFlash("wrongPage", "Error: This user no longer exist or never existed");
+                $this->redirectTo("security", "error");
+            }
+            
             if(!Session::getUser()) { 
                 $this->redirectTo("home", "index");
             }
             $topicManager = new TopicManager();
             $userManager = new UserManager();
+
+            $this->existInDatabase($userId, $userManager);
 
             $topics = $topicManager->postedTopics($userId);
             $user = $userManager->findOneById($userId);
@@ -86,7 +94,7 @@
             }
             
             // the extention of the file, by using the mime type we can precisely chose the files to accept
-            if ($_FILES["picture"]["type"] != "image/wepb" && $_FILES["picture"]["type"] != "image/jpeg" && $_FILES["picture"]["type"] != "image/png") {
+            if ($_FILES["picture"]["type"] != "image/wepb" && $_FILES["picture"]["type"] != "image/jpeg" && $_FILES["picture"]["type"] != "image/png" && $_FILES["picture"]["type"] != "image/svg+xml") {
                 $formErrors["picture"] = "Not the right format";
             }
 
@@ -95,7 +103,8 @@
                 $pictureTypes = [
                     "image/png" => ".png",
                     "image/jpeg" => ".jpg",
-                    "image/webp" => ".webp"
+                    "image/webp" => ".webp",
+                    "image/svg+xml" => ".svg"
                 ];
 
                 // i rename and apply the correct extension to the file name
@@ -149,5 +158,29 @@
 
             $this->redirectTo("home", "users");
 
+        }
+
+        public function updateRole($userId) {
+            if(!Session::isAdmin()) {
+                Session::addFlash("wrongPage", "You are not an admin, you cannot access this");
+                $this->redirectTo("security", "error");
+            }
+
+            $role = filter_input(INPUT_POST, "role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $userManager = new UserManager;
+
+            $user = $userManager->findOneById($userId);
+  
+            if($user->getRole() != $role) {
+                $data = [
+                    "id" => $userId,
+                    "role" => $role
+                ];
+
+                $userManager->update($data);
+
+                $this->redirectTo("user", "detailsUserProfile", $userId);
+            }
         }
     }

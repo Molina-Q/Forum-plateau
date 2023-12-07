@@ -27,7 +27,7 @@
                     "tags" => $TagManager->infoTags()
                     // "tags" => $TagManager->findAll(["id_tag", "ASC"])
                 ],
-                "meta" => "list of every tag that can be applied on the site"
+                "meta" => "list of every tags that can be applied on the site"
             ];
         }
 
@@ -45,7 +45,7 @@
                     "tag" => $tag,
                     "topics" => $topicManager->topicsByTag($tagId)
                 ],
-                "meta" => "every topic tied to a specific tag ".$tag->getLabel()
+                "meta" => "every topic tied to the tag ".$tag->getLabel()
             ];
         }
 

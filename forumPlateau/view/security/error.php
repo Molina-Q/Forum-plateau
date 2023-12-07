@@ -1,5 +1,13 @@
 <?php 
-
+use App\Session;
 ?>
 
-<p>There was a mistake this page doesn't exist</p>
+<div id="errorPage">
+    <p>There was a mistake</p>
+    
+    <?= Session::getFlash("wrongPage") ?>
+    
+    <p class="error">Error: This page does not exist</p>
+</div>
+
+

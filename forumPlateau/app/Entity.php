@@ -20,7 +20,7 @@
                     $man = new $FQCName();
                     $value = $man->findOneById($value);
 
-                    // si le user à été supprimé 
+                    // if the user was deleted 
                     if($field == "user_id" && !$value) {
                         $value = new User(null, true);
                     }

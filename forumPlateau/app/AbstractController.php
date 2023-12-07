@@ -1,5 +1,6 @@
 <?php
     namespace App;
+    use App\Session;
 
     abstract class AbstractController{
 
@@ -22,7 +23,8 @@
          * check if the id exist in the database
          */
         public function existInDatabase($id, $manager) {
-            if(empty($manager->findOneById($id))) {
+            if(empty($manager->findOneById($id)) ) {
+                Session::addFlash("database", "This page no longer exist, this user account was deleted");
                 $this->redirectTo("security", "index");
             }
             return;

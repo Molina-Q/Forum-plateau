@@ -217,9 +217,9 @@ $recentsTopic = $result["data"]["recents"];
                         <tr>
 
                             <td>
-                                <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>">
-                                    <?= $topic->getTag()->showIcon() ?>
-                                </a>
+ 
+                                <?= $topic->getTag()->showIcon() ?>
+                                
                             </td>
 
                             <td>

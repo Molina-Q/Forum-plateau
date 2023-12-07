@@ -40,21 +40,9 @@ $tag = $result['data']['tag'];
             <tr>
 
                 <td class="authorTopic">
-                    <?php if($topic->getUser() == null) { ?>
-
-                        <a href="#">
-                            <p>[deleted]</p>
-                        </a>
-
-                    <?php } else { ?>
-
-                        <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $topic->getUser()->getId() ?>">
-                            <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
-                        </a>
-
-                    <?php } ?>
-
-
+                    <a href="index.php?ctrl=user&action=detailsUserProfile&id=<?= $topic->getUser()->getId() ?>">
+                        <?= $topic->getUser()->showPicture() ?><?= $topic->getUser()->getUsername() ?>
+                    </a>
                 </td>
 
                 <td>
