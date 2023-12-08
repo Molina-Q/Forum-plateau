@@ -6,3 +6,7 @@
 <a href="https://trello.com/b/bdjOIPte/forum-plateau" target="_blank">
   <p>Organising, Trello</p>
 </a>
+
+A working forum with topics and messages.
+The ability to create an account, upload a profile picture.
+
