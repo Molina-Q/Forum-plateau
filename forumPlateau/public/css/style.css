@@ -1,9 +1,10 @@
 :root {
     --primary-color: rgb(32, 101, 192);
-    --primary-color-lighter: rgb(41, 123, 230);
-    --primary-color-darker: rgb(26, 86, 163);
+    --primary-color-lighter: rgb(41, 123, 230); /* mainly used with :hover */
+    --primary-color-darker: rgb(26, 86, 163); /* mainly used with :active */
 
-    --background-color-general: rgb(40, 45, 71); /* background color for the whole site*/
+    /* background color for the whole site*/
+    --background-color-general: rgb(40, 45, 71); 
     --background-color-footer: rgb(38, 38, 38);
 
     --table-background-odd: rgb(84, 93, 134);
@@ -12,7 +13,8 @@
     --hypertext-color: rgb(183, 238, 255);
     --hypertext-color-hover: rgb(50, 207, 255);
 
-    --primary-text-color: rgb(255, 255, 255); /* used for text */
+    /* used for text */
+    --primary-text-color: rgb(255, 255, 255); 
     --secondary-text-color: rgb(255, 255, 255);
     --tertiary-text-color: rgb(196, 220, 255);
 
@@ -42,6 +44,10 @@ body {
 
 #mainPage {
     min-height: calc(100vh - 75px );
+}
+
+#forum table { /* applies to all of my table */
+    width: 100%;
 }
 
 footer a, header a {
@@ -78,9 +84,6 @@ thead { /* color of every table's head */
     color: red;
 }
 
-#forum table { /* applies to all of my table */
-    width: 100%;
-}
 
 a:has(> i) { /* :has(), css selector: target every <a> elements that has <i> has a child !!not native to firefox */
     text-decoration: none;
@@ -168,8 +171,9 @@ nav {
     transition: 0.3s;
 }
 
-#sub-nav a p {
-
+/******************** main ********************/
+main {
+    margin: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
 }
 
 /******************** homePageContent ********************/
@@ -327,11 +331,11 @@ form #password {
 
 textarea {
     min-height: 80px;
-
     padding: 15px;
 
     border: 0;
     border-radius: 4px;
+    color: var(--primary-text-color);
     background-color: var(--table-background-even) ;
     font-size: 16px;
     resize: none;
@@ -434,6 +438,7 @@ form button {
     margin: 25px 0;
     padding: 15px 0;
     background-color: var(--table-background-odd);
+
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -472,18 +477,15 @@ form button {
     flex: 2;
 }
 
-#profile-header .username {
+#profile-header .username, #profile-header .email {
     width: 200px;
-    padding: 3px 5px;
-    color: var(--primary-color);
-    background-color: var(--table-background-even);
-}
 
-#profile-header .email {
-    width: 200px;
-    padding: 3px 5px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+
+    font-size: 22px;
     color: var(--primary-color);
-    background-color: var(--table-background-even);
+    background-color: var(--background-color-general);
 }
 
 #profile-header form {
@@ -540,8 +542,9 @@ form button {
     width: 100%;
     height: 100%;
     object-fit:cover;
-    border-radius: 50%;
+
     background-color: var(--table-background-odd);
+    border-radius: 50%;
 }
 
 /********** pictureAdmin **********/
@@ -555,16 +558,6 @@ form button {
     height: 100%;
     object-fit:cover;
 }
-
-/******************** main ********************/
-main {
-    margin: 0 10%; /* i repeat this in header/main/footer because it messes with the background-color otherwise */
-
-}
-
-/******************** HomePage ********************/
-
-/******************** listTopics ********************/
 
 /******************** showMessages ********************/
 #detailsTopicHeader {
@@ -616,32 +609,25 @@ main {
     right: 20px;
 }
 
-.fa-pen-to-square { /* update icon */
+.fa-pen-to-square,
+.fa-trash-can,
+.fa-lock,
+.fa-lock-open,
+.fa-circle-half-stroke { /* every white icons */
     color: var(--primary-text-color);
     font-size: 17px;
 }
 
-.fa-trash-can { /* delete icon */
-    color: var(--primary-text-color);
-    font-size: 17px;
-}
-
-.fa-lock { /* closed icon */
-    color: var(--primary-text-color);
-    font-size: 17px;
-}
-
-.fa-lock-open { /* open icon */
-    color: var(--primary-text-color);
-    font-size: 17px;
+.fa-circle-half-stroke {
+    cursor: pointer;
 }
 
 .blocMsgsFromTopic i {
-    color: var(--primary-color);
+    color: var(--tertiary-text-color);
 }
 
 .blocListUser tr td a i { /* trash can icon in users */
-    color: var(--primary-color);
+    color: var(--tertiary-text-color);
 }
 
 /******************** addMessage ********************/
@@ -662,8 +648,8 @@ main {
 }
 
 #form-add-message textarea {
-    padding-right:50px ;
     height: fit-content;
+    padding-right:50px ;
 }
 
 #form-add-message button {
@@ -728,7 +714,7 @@ tbody tr:nth-child(odd) {
     background-color: var(--table-background-odd);
 }
 
-.show-phone { /* will only appear when in phone */
+.show-phone { /* will only appear when the mediaQuery is used */
     display: none;
 }
 
@@ -771,7 +757,10 @@ footer {
    font-weight: 500;
 }
 
-/**************************************** responsive ****************************************/
+/******************************************************************************************************/
+/********************************************* Responsive *********************************************/
+/******************************************************************************************************/
+
 /************************* tablet *************************/
 @media only screen
 and (max-device-width : 1200px) {

@@ -52,7 +52,6 @@
                         
                         <i class="fa-solid fa-circle-half-stroke" id="toggleTheme"></i>
 
-
                         <div id="blocBurger">
                             <i class="fa-solid fa-bars" id="iconBurger"></i>
                         </div>

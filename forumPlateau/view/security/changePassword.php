@@ -21,8 +21,8 @@ if(isset($formErrors)) {
             <label for="password">New password*</label>
             <input type="password" name="password" id="password">
             <i class="fa-solid fa-eye" id="eyeCon"></i>
-            <?= Session::getFlash("password") ?>
         </div>
+        <?= Session::getFlash("password") ?>
 
         <label for="confirmPassword">Confirm password</label>
         <input type="password" name="confirmPassword" id="confirmPassword">

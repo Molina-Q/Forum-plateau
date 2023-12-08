@@ -284,7 +284,7 @@ for (let i = 0; i < deleteIcon.length; i++) {
 }
 
 //// showPassword //// 
-// eyeCon.addEventListener("click", () => togglePassword(passwordInput));
+eyeCon.addEventListener("click", () => togglePassword(passwordInput));
 
 
 

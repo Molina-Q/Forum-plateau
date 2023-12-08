@@ -21,10 +21,14 @@ $topics = $result["data"]["topics"];
             <div class="profile-info">
 
                 <p>Username</p>
-                <p class="username"><?= $_SESSION["user"]->getUsername() ?></p><span>change username</span>
-
+                <p class="username"><?= $_SESSION["user"]->getUsername() ?></p>
+                
                 <p>Email</p>
-                <p class="email"><?= $_SESSION["user"]->getEmail() ?></p><span>change email</span>
+                <p class="email"><?= $_SESSION["user"]->getEmail() ?></p>
+ 
+                <a href="index.php?ctrl=user&action=updateUserInfo">
+                    <p>Change information</p>
+                </a>
 
             </div>
 

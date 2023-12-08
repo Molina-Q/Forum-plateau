@@ -22,7 +22,7 @@
             // if the user was deleted and is null
             if ($isDeletedUser) {
                 $this->id = null;
-                $this->username = "<i>[&nbsp;deleted_user&nbsp;]</i>";
+                $this->username = "<i>[deleted_user]</i>";
                 $this->picture = "deleted.svg";
             } else {
                 // else we hydrate as it normaly would

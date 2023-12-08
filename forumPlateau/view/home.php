@@ -83,7 +83,7 @@ $recentsTopic = $result["data"]["recents"];
                             
                             <td>
                                 <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $topic->getTag()->getId() ?>" aria-label="Have more info about the <?= $topic->getTag()->getLabel() ?> tag">
-                                    <?= $topic->getTag()->showIcon() ?><?= $topic->getTag()->getLabel() ?>
+                                    <?= $topic->getTag()->showIcon() ?>&nbsp;<?= $topic->getTag()->getLabel() ?>
                                 </a>
                             </td>
                             

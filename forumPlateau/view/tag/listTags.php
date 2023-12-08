@@ -25,7 +25,7 @@ $tags = $result["data"]['tags'];
 
                 <td>
                     <a href="index.php?ctrl=tag&action=detailsTag&id=<?= $tag->getId() ?>">
-                        <?= $tag->showIcon() ?><?= $tag->getLabel() ?>
+                        <?= $tag->showIcon() ?>&nbsp;<?= $tag->getLabel() ?>
                     </a>
                 </td>
 
