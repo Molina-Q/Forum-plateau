@@ -1,20 +1,20 @@
 :root {
-    --primary-color: rgb(41, 120, 166);
-    --primary-color-lighter: rgb(50, 144, 199);
-    --primary-color-darker: rgb(26, 76, 105);
+    --primary-color: rgb(32, 101, 192);
+    --primary-color-lighter: rgb(41, 123, 230);
+    --primary-color-darker: rgb(26, 86, 163);
 
-    --secondary-color: rgb(255, 255, 255); /* used for background, and text */
-    --background-color-general: rgb(232, 232, 232); /* background color for the whole site*/
-
-    --table-highlight-color: rgb(217, 217, 217);
-
-    --hypertext-color: rgb(5, 50, 92);
-    --hypertext-color-hover: rgb(0, 43, 46) ;
-
-    --primary-text: rgb(0, 0, 0) ;
-    --secondary-text: rgb(92, 92, 92) ;
-
+    --background-color-general: rgb(40, 45, 71); /* background color for the whole site*/
     --background-color-footer: rgb(38, 38, 38);
+
+    --table-background-odd: rgb(84, 93, 134);
+    --table-background-even: rgb(57, 66, 99); 
+
+    --hypertext-color: rgb(183, 238, 255);
+    --hypertext-color-hover: rgb(50, 207, 255);
+
+    --primary-text-color: rgb(255, 255, 255); /* used for text */
+    --secondary-text-color: rgb(255, 255, 255);
+    --tertiary-text-color: rgb(196, 220, 255);
 
     --title-font-size: 32px;
     --p-font-size: 16px;
@@ -26,6 +26,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+td {
+    color: var(--secondary-text-color);
 }
 
 body {
@@ -55,7 +59,7 @@ footer a, header a {
 }
 
 .timeInterval { /* applies to some date interval */
-    color: var(--secondary-text);
+    color: var(--tertiary-text-color);
 }
 
 h1 { /* applies to all of my h1 title  */
@@ -66,7 +70,7 @@ h1 { /* applies to all of my h1 title  */
 }
 
 thead { /* color of every table's head */
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     width: 100%;
 }
 
@@ -137,7 +141,7 @@ nav {
     width: 100%;
     height: fit-content;
 
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     background-color: var(--primary-color);
 
     display: flex;
@@ -178,7 +182,7 @@ nav {
 /******************** menuBurger ********************/
 #iconBurger {
     display: none;
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     font-size: 20px;
 }
 
@@ -245,14 +249,14 @@ nav {
 }
 
 #form-header h1 {
-   color: var(--secondary-color);
+   color: var(--primary-text-color);
    font-size: calc(var(--title-font-size) - 5px);
    padding: 14px 0;
 }
 
 #form-content {
     padding: 15px 0;
-    background-color: var(--secondary-color);
+    background-color: var(--table-background-odd);
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -271,7 +275,8 @@ nav {
     width: 250px;
     padding: 8px 10px;
 
-    background-color: var(--table-highlight-color);
+    color: var(--secondary-text-color);
+    background-color: var(--table-background-even);
     border: none;
     font-size: 18px;
 }
@@ -327,7 +332,7 @@ textarea {
 
     border: 0;
     border-radius: 4px;
-    background-color: var(--table-highlight-color) ;
+    background-color: var(--table-background-even) ;
     font-size: 16px;
     resize: none;
     outline: none;
@@ -353,7 +358,7 @@ textarea {
     margin: 10px 0;
 
     font-size: 18px;
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
 
     background-color: var(--primary-color);
     border: none ;
@@ -367,7 +372,7 @@ textarea {
     margin-top: 15px;
 
     font-size: 15px;
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
 
     background-color: var(--primary-color);
     border: none ;
@@ -390,7 +395,7 @@ textarea {
 #tag {
     width: 250px;
     padding: 8px 10px;
-    background-color: var(--table-highlight-color);
+    background-color: var(--table-background-even);
     border: none;
     font-size: 18px;
 }
@@ -428,7 +433,7 @@ form button {
 #form-content-profile {
     margin: 25px 0;
     padding: 15px 0;
-    background-color: var(--secondary-color);
+    background-color: var(--table-background-odd);
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -448,7 +453,7 @@ form button {
 }
 
 #profile-header p  {
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     font-size: 20px;
 }
 
@@ -471,14 +476,14 @@ form button {
     width: 200px;
     padding: 3px 5px;
     color: var(--primary-color);
-    background-color: var(--table-highlight-color);
+    background-color: var(--table-background-even);
 }
 
 #profile-header .email {
     width: 200px;
     padding: 3px 5px;
     color: var(--primary-color);
-    background-color: var(--table-highlight-color);
+    background-color: var(--table-background-even);
 }
 
 #profile-header form {
@@ -488,7 +493,7 @@ form button {
 }
 
 #profile-header form label {
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     font-size: 20px;
     padding-right: 10px ;
 }
@@ -502,7 +507,7 @@ form button {
     
     font-size: 15px;
     color: var(--primary-color);
-    background-color: var(--table-highlight-color);
+    background-color: var(--table-background-even);
     border: none;
 }
 
@@ -511,7 +516,7 @@ form button {
     height: 30px;
 
     color: var(--primary-color);
-    background-color: var(--table-highlight-color);
+    background-color: var(--table-background-even);
 
     border-radius: 5px;
     border: none;
@@ -536,7 +541,7 @@ form button {
     height: 100%;
     object-fit:cover;
     border-radius: 50%;
-    background-color: var(--secondary-color);
+    background-color: var(--table-background-odd);
 }
 
 /********** pictureAdmin **********/
@@ -595,7 +600,7 @@ main {
 }
 
 #detailsTopicContent, #detailsTopicContent h1, #detailsTopicAuthor, #detailsTopicAuthor p {
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
 }
 
 /***** icons *****/
@@ -612,22 +617,22 @@ main {
 }
 
 .fa-pen-to-square { /* update icon */
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     font-size: 17px;
 }
 
 .fa-trash-can { /* delete icon */
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     font-size: 17px;
 }
 
 .fa-lock { /* closed icon */
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     font-size: 17px;
 }
 
 .fa-lock-open { /* open icon */
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     font-size: 17px;
 }
 
@@ -653,7 +658,7 @@ main {
 }
 
 #form-add-message label {
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
 }
 
 #form-add-message textarea {
@@ -672,11 +677,11 @@ main {
     font-size: 20px;
 
     color: var(--primary-color);
-    background-color: var(--table-highlight-color);
+    background-color: var(--table-background-even);
 }
 
 .replaceFormMessage {
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
     background-color: var(--primary-color);
 
     padding: 10px;
@@ -716,11 +721,11 @@ tr td p { /* align for [deleted] */
 }
 
 tr:nth-child(even) {
-    background-color: var(--table-highlight-color);
+    background-color: var(--table-background-even);
 }
 
 tbody tr:nth-child(odd) {
-    background-color: white;
+    background-color: var(--table-background-odd);
 }
 
 .show-phone { /* will only appear when in phone */
@@ -746,7 +751,7 @@ footer {
     height: 75px;
 
     background-color: var(--background-color-footer);
-    color: var(--secondary-color);
+    color: var(--primary-text-color);
 
     display: flex;
     flex-direction: row;

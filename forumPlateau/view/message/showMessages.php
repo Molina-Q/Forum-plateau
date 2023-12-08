@@ -19,7 +19,7 @@ if ($closedData->getClosed() == "true") {
 
     <div id="detailsTopicHeader">
 
-            <?php if(($userSession->getId() == $topic->getUser()->getId() && !$closed) || Session::isAdmin()) { ?>
+            <?php if((Session::getUser() && (Session::getUser()->getId() == $topic->getUser()->getId()) && !$closed) || Session::isAdmin()) { ?>
 
                 <div class="icons">
 

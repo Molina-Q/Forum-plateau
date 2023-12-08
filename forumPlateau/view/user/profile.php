@@ -24,7 +24,7 @@ $topics = $result["data"]["topics"];
                 <p class="username"><?= $_SESSION["user"]->getUsername() ?></p><span>change username</span>
 
                 <p>Email</p>
-                <p class="email"><?= $_SESSION["user"]->getEmail() ?><span>change email</span></p>
+                <p class="email"><?= $_SESSION["user"]->getEmail() ?></p><span>change email</span>
 
             </div>
 
