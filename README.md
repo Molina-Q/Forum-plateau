@@ -1,12 +1,13 @@
-# Forum-plateau
-<a  href="https://www.figma.com/file/Ep6MhJjLCYTJO4C13IG1zT/Forum-plateau?type=design&node-id=0-1&mode=design&t=nVnlFoJYW5BzQvEk-0" target="_blank">
-  <p>Web modeling, Figma</p>
-</a>
+# Symfony Forum 
 
-<a href="https://trello.com/b/bdjOIPte/forum-plateau" target="_blank">
-  <p>Organising, Trello</p>
-</a>
+This is a php base web application using a homemade framework that takes the form of a forum where you can create an account, post topic and answer to other topics
 
-A working forum with topics and messages.
-The ability to create an account, upload a profile picture.
+## Installation
 
+### Prerequisites
+
+- PHP
+
+### Setup
+
+No setup is needed, download or git clone the repo and you're good to go !
